@@ -8,7 +8,7 @@
 							<span class="brand-text">Exelinserv</span>
 						</a>
 					</div>
-				</div>	
+				</div>
 				<a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="zmdi zmdi-menu"></i></a>
 				<a id="toggle_mobile_search" data-toggle="collapse" data-target="#search_form" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-search"></i></a>
 				<a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
@@ -69,7 +69,7 @@
 											</a>
 										</li>
 									</ul>
-								</div>	
+								</div>
 							</li>
 							<li>
 								<div class="app-box-bottom-wrap">
@@ -115,7 +115,7 @@
 										<a href="javascript:void(0);">
 											<div class="pull-left">
 												<i class="zmdi zmdi-shopping-basket mr-20"></i><span class="right-nav-text">E-Commerce</span>
-											</div>	
+											</div>
 											<div class="pull-right"><span class="label label-success">hot</span>
 											</div>
 											<div class="clearfix"></div>
@@ -168,11 +168,11 @@
 											<a href="#">
 												<img src="dist/img/chair2.jpg" alt="chair">
 												<span>square chair</span>
-											</a>								
+											</a>
 										</div>
 									</li>
 								</ul>
-							</li>	
+							</li>
 						</ul>
 					</li>
 					<li class="dropdown alert-drp">
@@ -200,7 +200,7 @@
 												<div class="clearfix"></div>
 												<p class="truncate">Your customer subscribed for the basic plan. The customer will pay $25 per month.</p>
 											</div>
-										</a>	
+										</a>
 									</div>
 									<hr class="light-grey-hr ma-0"/>
 									<div class="sl-item">
@@ -214,7 +214,7 @@
 												<div class="clearfix"></div>
 												<p class="truncate">Some technical error occurred needs to be resolved.</p>
 											</div>
-										</a>	
+										</a>
 									</div>
 									<hr class="light-grey-hr ma-0"/>
 									<div class="sl-item">
@@ -228,7 +228,7 @@
 												<div class="clearfix"></div>
 												<p class="truncate"> The last payment for your G Suite Basic subscription failed.</p>
 											</div>
-										</a>	
+										</a>
 									</div>
 									<hr class="light-grey-hr ma-0"/>
 									<div class="sl-item">
@@ -242,7 +242,7 @@
 												<div class="clearfix"></div>
 												<p class="truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
 											</div>
-										</a>	
+										</a>
 									</div>
 									<hr class="light-grey-hr ma-0"/>
 									<div class="sl-item">
@@ -256,7 +256,7 @@
 												<div class="clearfix"></div>
 												<p class="truncate">consectetur, adipisci velit.</p>
 											</div>
-										</a>	
+										</a>
 									</div>
 								</div>
 							</li>
@@ -297,15 +297,15 @@
 									<li>
 										<a href="#"><i class="zmdi zmdi-minus-circle-outline text-danger"></i><span>offline</span></a>
 									</li>
-								</ul>	
+								</ul>
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="#"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
+								<a href="logout.php"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
 							</li>
 						</ul>
 					</li>
 				</ul>
-			</div>	
+			</div>
 		</nav>
 		<!-- /Top Menu Items -->

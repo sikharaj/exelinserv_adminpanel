@@ -2,7 +2,7 @@
 		<div class="fixed-sidebar-left">
 			<ul class="nav navbar-nav side-nav nicescroll-bar">
 				<li class="navigation-header">
-					<span>Service Bookings</span> 
+					<span>Service Bookings</span>
 					<i class="zmdi zmdi-more"></i>
 				</li>
 				<li>
@@ -28,6 +28,9 @@
 				<li>
 					<a href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><div class="pull-left"><i class="fa fa-user"></i><span class="right-nav-text">Customer Data</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i><!--<span class="label label-success">hot</span>--></div><div class="clearfix"></div></a>
 					<ul id="ecom_dr" class="collapse collapse-level-1">
+						<li>
+							<a href="customer-registration.php">Customer Register</a>
+						</li>
 						<li>
 							<a href="customer-details.php">Customer Details</a>
 						</li>
@@ -58,7 +61,7 @@
 				</li>
 				<li><hr class="light-grey-hr mb-10"/></li>
 				<li class="navigation-header">
-					<span>component</span> 
+					<span>component</span>
 					<i class="zmdi zmdi-more"></i>
 				</li>
 				<li>
@@ -264,7 +267,7 @@
 				</li>
 				<li><hr class="light-grey-hr mb-10"/></li>
 				<li class="navigation-header">
-					<span>featured</span> 
+					<span>featured</span>
 					<i class="zmdi zmdi-more"></i>
 				</li>
 				<li>

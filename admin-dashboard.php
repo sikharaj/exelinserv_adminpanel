@@ -1,3 +1,25 @@
+<?php
+    session_start(); // Start Session
+
+    include_once "includes/db_connect.php"; //DB Connection script
+
+    if(!isset($_SESSION['bazooka'])) { // if session not set
+        header('Location:index.php?message=Please Login and try.');
+
+    } else { // if set get the email
+        $email = $_SESSION['bazooka'];
+        $selectAdminQuery = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";
+        $selectAdminDataResult = $conn -> query($selectAdminQuery);
+        if ($selectAdminDataResult) { //Successfully execute SQL Query
+            $selectAdminData = $selectAdminDataResult->fetch_assoc();
+            $firstName = $selectAdminData['firstName'];
+            $lastName = $selectAdminData['lastName'];
+        } else { //couldn't execute SQL Query
+            session_destroy();
+            header('Location:index.php?Please Login Again!');
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +29,19 @@
 	<meta name="description" content="Philbert is a Dashboard & Admin Site Responsive Template by hencework." />
 	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Philbert Admin, Philbertadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
 	<meta name="author" content="hencework"/>
-	
+
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	
+
 	<!-- Morris Charts CSS -->
     <link href="vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
-	
+
 	<!-- Data table CSS -->
 	<link href="vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-	
+
 	<link href="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
-		
+
 	<!-- Custom CSS -->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
     <!-- Font Awesome -->
@@ -34,9 +56,9 @@
 	<!-- /Preloader -->
     <div class="wrapper theme-1-active pimary-color-green">
 		 <?php include "includes/header.php";?>
-		
+
 		<?php include "includes/nav.php";?>
-		
+
 		<!-- Right Sidebar Menu -->
 		<div class="fixed-sidebar-right">
 			<ul class="right-sidebar">
@@ -54,7 +76,7 @@
 										<div class="add-friend">
 											<a href="javascript:void(0)" class="inline-block txt-grey">
 												<i class="zmdi zmdi-more"></i>
-											</a>	
+											</a>
 											<span class="inline-block txt-dark">users</span>
 											<a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-plus"></i></a>
 											<div class="clearfix"></div>
@@ -183,7 +205,7 @@
 												<div class="goto-back">
 													<a  id="goto_back" href="javascript:void(0)" class="inline-block txt-grey">
 														<i class="zmdi zmdi-chevron-left"></i>
-													</a>	
+													</a>
 													<span class="inline-block txt-dark">ryan</span>
 													<a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-more"></i></a>
 													<div class="clearfix"></div>
@@ -203,7 +225,7 @@
 																		</div>
 																	</div>
 																	<div class="clearfix"></div>
-																</div>	
+																</div>
 															</li>
 															<li class="self mb-10">
 																<div class="self-msg-wrap">
@@ -213,7 +235,7 @@
 																		</div>
 																	</div>
 																	<div class="clearfix"></div>
-																</div>	
+																</div>
 															</li>
 															<li class="self">
 																<div class="self-msg-wrap">
@@ -223,19 +245,19 @@
 																		</div>
 																	</div>
 																	<div class="clearfix"></div>
-																</div>	
+																</div>
 															</li>
 															<li class="friend">
 																<div class="friend-msg-wrap">
 																	<img class="user-img img-circle block pull-left"  src="dist/img/user.png" alt="user"/>
-																	<div class="msg pull-left"> 
+																	<div class="msg pull-left">
 																		<p>Not too bad.</p>
 																		<div class="msg-per-detail  text-right">
 																			<span class="msg-time txt-grey">2:35 pm</span>
 																		</div>
 																	</div>
 																	<div class="clearfix"></div>
-																</div>	
+																</div>
 															</li>
 														</ul>
 													</div>
@@ -264,13 +286,13 @@
 									</div>
 								</div>
 							</div>
-								
+
 							<div id="messages_tab" class="tab-pane fade" role="tabpanel">
 								<div class="message-box-wrap">
 									<div class="msg-search">
 										<a href="javascript:void(0)" class="inline-block txt-grey">
 											<i class="zmdi zmdi-more"></i>
-										</a>	
+										</a>
 										<span class="inline-block txt-dark">messages</span>
 										<a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-search"></i></a>
 										<div class="clearfix"></div>
@@ -384,7 +406,7 @@
 									<div class="add-todo">
 										<a href="javascript:void(0)" class="inline-block txt-grey">
 											<i class="zmdi zmdi-more"></i>
-										</a>	
+										</a>
 										<span class="inline-block txt-dark">todo list</span>
 										<a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-plus"></i></a>
 										<div class="clearfix"></div>
@@ -457,9 +479,9 @@
 			</ul>
 		</div>
 		<!-- /Right Sidebar Menu -->
-		
-		
-		
+
+
+
 		<!-- Right Sidebar Backdrop -->
 		<div class="right-sidebar-backdrop"></div>
 		<!-- /Right Sidebar Backdrop -->
@@ -483,7 +505,7 @@
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
 													<i class="icon-user-following data-right-rep-icon txt-light-grey"></i>
 												</div>
-											</div>	
+											</div>
 										</div>
 									</div>
 								</div>
@@ -504,7 +526,7 @@
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
 													<i class="icon-control-rewind data-right-rep-icon txt-light-grey"></i>
 												</div>
-											</div>	
+											</div>
 										</div>
 									</div>
 								</div>
@@ -525,7 +547,7 @@
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
 													<i class="icon-layers data-right-rep-icon txt-light-grey"></i>
 												</div>
-											</div>	
+											</div>
 										</div>
 									</div>
 								</div>
@@ -546,7 +568,7 @@
 												<div class="col-xs-6 text-center  pl-0 pr-0 pt-25  data-wrap-right">
 													<div id="sparkline_4" style="width: 100px; overflow: hidden; margin: 0px auto;"></div>
 												</div>
-											</div>	
+											</div>
 										</div>
 									</div>
 								</div>
@@ -555,7 +577,7 @@
 					</div>
 				</div>
 				<!-- /Row -->
-				
+
 				<!-- Row -->
 				<div class="row">
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -566,8 +588,8 @@
 								</div>
 								<div class="pull-right">
 									<span class="no-margin-switcher">
-										<input type="checkbox" checked id="morris_switch"  class="js-switch" data-color="#2ecd99" data-secondary-color="#dedede" data-size="small"/>	
-									</span>	
+										<input type="checkbox" checked id="morris_switch"  class="js-switch" data-color="#2ecd99" data-secondary-color="#dedede" data-size="small"/>
+									</span>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -598,7 +620,7 @@
 						<div class="panel panel-default card-view">
 							<div class="panel-wrapper collapse in">
                                 <div class="panel-body sm-data-box-1">
-									<span class="uppercase-font weight-500 font-14 block text-center txt-dark">customer satisfaction</span>	
+									<span class="uppercase-font weight-500 font-14 block text-center txt-dark">customer satisfaction</span>
 									<div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 										<span class="counter-anim">93.13</span><span>%</span>
 									</div>
@@ -668,7 +690,7 @@
 										<span class="label label-primary pull-right">10%</span>
 										<div class="clearfix"></div>
 									</div>
-								</div>	
+								</div>
 							</div>
 						</div>
 					</div>
@@ -700,7 +722,7 @@
 								<div class="panel-body">
 									<div>
 										<canvas id="chart_6" height="191"></canvas>
-									</div>	
+									</div>
 									<hr class="light-grey-hr row mt-10 mb-15"/>
 									<div class="label-chatrs">
 										<div class="">
@@ -728,13 +750,13 @@
 											<div class="clearfix"></div>
 										</div>
 									</div>
-								</div>	
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /Row -->
-				
+
 				<!-- Row -->
 				<div class="row">
 					<div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
@@ -837,8 +859,8 @@
 												</tbody>
 											</table>
 										</div>
-									</div>	
-								</div>	
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -870,7 +892,7 @@
 								<div class="panel-body">
 									<div>
 										<canvas id="chart_2" height="253"></canvas>
-									</div>	
+									</div>
 									<div class="label-chatrs mt-30">
 										<div class="inline-block mr-15">
 											<span class="clabels inline-block bg-yellow mr-5"></span>
@@ -879,20 +901,20 @@
 										<div class="inline-block mr-15">
 											<span class="clabels inline-block bg-blue mr-5"></span>
 											<span class="clabels-text font-12 inline-block txt-dark capitalize-font">Closed</span>
-										</div>	
+										</div>
 										<div class="inline-block">
 											<span class="clabels inline-block bg-green mr-5"></span>
 											<span class="clabels-text font-12 inline-block txt-dark capitalize-font">Hold</span>
-										</div>											
+										</div>
 									</div>
 								</div>
-							</div>	
-						</div>	
-					</div>	
-				</div>	
+							</div>
+						</div>
+					</div>
+				</div>
 				<!-- Row -->
 			</div>
-			
+
 			<!-- Footer -->
 			<footer class="footer container-fluid pl-30 pr-30">
 				<div class="row">
@@ -902,56 +924,56 @@
 				</div>
 			</footer>
 			<!-- /Footer -->
-			
+
 		</div>
         <!-- /Main Content -->
 
     </div>
     <!-- /#wrapper -->
-	
+
 	<!-- JavaScript -->
-	
+
     <!-- jQuery -->
     <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    
+
 	<!-- Data table JavaScript -->
 	<script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-	
+
 	<!-- Slimscroll JavaScript -->
 	<script src="dist/js/jquery.slimscroll.js"></script>
-	
+
 	<!-- simpleWeather JavaScript -->
 	<script src="vendors/bower_components/moment/min/moment.min.js"></script>
 	<script src="vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
 	<script src="dist/js/simpleweather-data.js"></script>
-	
+
 	<!-- Progressbar Animation JavaScript -->
 	<script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
 	<script src="vendors/bower_components/jquery.counterup/jquery.counterup.min.js"></script>
-	
+
 	<!-- Fancy Dropdown JS -->
 	<script src="dist/js/dropdown-bootstrap-extended.js"></script>
-	
+
 	<!-- Sparkline JavaScript -->
 	<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
-	
+
 	<!-- Owl JavaScript -->
 	<script src="vendors/bower_components/owl.carousel/dist/owl.carousel.min.js"></script>
-	
+
 	<!-- ChartJS JavaScript -->
 	<script src="vendors/chart.js/Chart.min.js"></script>
-	
+
 	<!-- Morris Charts JavaScript -->
     <script src="vendors/bower_components/raphael/raphael.min.js"></script>
     <script src="vendors/bower_components/morris.js/morris.min.js"></script>
     <script src="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
-	
+
 	<!-- Switchery JavaScript -->
 	<script src="vendors/bower_components/switchery/dist/switchery.min.js"></script>
-	
+
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>
 	<script src="dist/js/dashboard-data.js"></script>
