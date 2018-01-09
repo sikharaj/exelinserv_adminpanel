@@ -20,7 +20,6 @@
         $createdOn = $now;
         $lastUpdatedOn = $now;
 
-
         //Get data from POST method and update variables
         if (isset($_POST['email'])){ //get Username
 
@@ -94,7 +93,8 @@
                 $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`) VALUES ('$firstname','$lastname','$phone','$email','INACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1')";
                 $insertCustomerDataResult =$conn -> query($insertCustomerData);
 
-                  if ($insertCustomerDataResult){//If "Insertion Successful";
+                  if ($insertCustomerDataResult){//If Insertion Successful;
+                      $last_id = $conn->insert_id;
                       if(strlen($phone)==10) {
                           $phone="91".$phone;
                       }
@@ -105,7 +105,7 @@
                               $response = file_get_contents('https://control.msg91.com/api/sendhttp.php?authkey=165253Ajtf4e50P59687f4a&mobiles='.$phone.'&message='.$encodedMessage.'&sender=EXLSRV&route=4&country=91');
 
                               $message = "Customer registered successfully";
-                              header('Location:../customer-registration.php?message=' . $message);
+                              header('Location:../customer-registered.php?customerid='.$last_id);
                   }  else {
 
                        $message = "Insertion Failed! Please Try Again Later";

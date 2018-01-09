@@ -1,3 +1,28 @@
+<?php
+    session_start(); // Start Session
+
+    include_once "includes/db_connect.php"; //DB Connection script
+
+    if(!isset($_SESSION['bazooka'])) { // if session not set
+        header('Location:index.php?message=Please Login and try.');
+
+    } else { // if set get the email
+        $email = $_SESSION['bazooka'];
+        $selectAdminQuery = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";
+        $selectAdminDataResult = $conn -> query($selectAdminQuery);
+        if ($selectAdminDataResult) { //Successfully execute SQL Query
+            $selectAdminData = $selectAdminDataResult->fetch_assoc();
+            $firstName = $selectAdminData['firstName'];
+            $lastName = $selectAdminData['lastName'];
+        } else { //couldn't execute SQL Query
+            session_destroy();
+            header('Location:index.php?Please Login Again!');
+        }
+    }
+
+		$selectInsertCustomerData = "SELECT * FROM `customerdetails` WHERE `customerID` = '$last_id'";
+		$selectCustomerDataResult = $conn -> query($selectInsertCustomerData);
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -40,6 +65,7 @@
 								<li role="presentation" class=""><a  data-toggle="tab" id="messages_tab_btn" role="tab" href="#messages_tab" aria-expanded="false">messages</a></li>
 								<li role="presentation" class=""><a  data-toggle="tab" id="todo_tab_btn" role="tab" href="#todo_tab" aria-expanded="false">todo</a></li>
 							</ul>
+
 							<div class="tab-content" id="right_sidebar_content">
 								<div  id="chat_tab" class="tab-pane fade active in" role="tabpanel">
 									<div class="chat-cmplt-wrap">
@@ -899,80 +925,176 @@
 																			<div class="panel panel-default card-view">
 																				<div class="panel-heading">
 																					<div class="pull-left">
-																						<h6 class="panel-title txt-dark">Customer Registration</h6>
+																						<h6 class="panel-title txt-dark">Customer Informations</h6>
 																					</div>
 																					<div class="clearfix"></div>
 																				</div>
 																			<!--<div class="form-wrap">
 																				<form>-->
+																				<?php
+																					if(isset($_GET['customerid']) && $_GET['customerid'] != "") {
+																							echo"Customer Registered Successfully";
+																							$customerId = $_GET['customerid'];
+																						 $selectCustomers = "SELECT * FROM `customerdetails` WHERE `customerID` = $customerId";
+																							$selectCustomersResults = $conn -> query($selectCustomers);
+																							if($selectCustomersResults) { // if Executed
+																									$selectCustomerData = $selectCustomersResults -> fetch_assoc();
+
+																					?>
 																				<div class="panel-wrapper collapse in">
 																					<div class="panel-body">
 																						<div class="row">
 																							<div class="col-sm-12 col-xs-12">
 																								<div class="form-wrap">
-																									<form method="POST" action="includes/customer-validate.php">
-																										<div class="form-group">
+
+																										<div class="form-group col-sm-6 col-xs-6">
 																											<label class="control-label mb-10" for="exampleInputuname_1">First Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="firstName" class="form-control" id="exampleInputuname_1" placeholder="Enter firstname">
+																													<input type="text" name="firstName" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['firstName'];?>" placeholder="Enter firstname">
 																												</div>
 																											</div>
 																											<div class="form-group">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Last Name</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-user"></i></div>
-																														<input type="text" name="lastName" class="form-control" id="exampleInputuname_1" placeholder="Enter lastname">
+																														<input type="text" name="lastName" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['lastName'];?>" placeholder="Enter lastname">
 																													</div>
 																												</div>
-																											<div class="form-group">
+																											<div class="form-group col-sm-6 col-xs-6">
 																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																													<input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email">
+																													<input type="email" name="email" class="form-control" id="exampleInputEmail_1" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email">
 																												</div>
 																											</div>
 																											<div class="form-group">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" placeholder="Enter phone number">
+																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phoneNumber'];?>" placeholder="Enter phone number">
 																													</div>
 																												</div>
-																											<div class="form-group">
-																												<label class="control-label mb-10" for="exampleInputpwd_1">Password</label>
+																											<div class="form-group col-sm-6 col-xs-6">
+																												<label class="control-label mb-10" for="exampleInputpwd_1">User Status</label>
 																												<div class="input-group">
-																													<div class="input-group-addon"><i class="icon-lock"></i></div>
-																													<input type="password" name="password" class="form-control" id="exampleInputpwd_1" placeholder="Enter password">
-																												</div>
+																													<div class="input-group-addon"><i class="icon-info"></i></div>
+																														<select name="status" type="dropdown"class="form-control" id="exampleInputpwd_1">
+																														<option value="<?=$selectCustomerData['status'];?>"><?=$selectCustomerData['status'];?></option>
+																														<option value="NULL">--SELECT--</option>
+																														<option value="INACTIVE">Inactive</option>
+																														<option value="ACTIVE">Active</option>
+																													</select>
+																													</div>
 																											</div>
 																											<div class="form-group">
-																												<label class="control-label mb-10">Gender</label>
+																												<label class="control-label mb-10" for="exampleInputpwd_1">Vehicle Type</label>
+																												<div class="input-group">
+																													<div class="input-group-addon"><i class="icon-bike"></i></div>
+																														<select name="status" type="dropdown"class="form-control" id="exampleInputpwd_1">
+																														<option value="NULL">--SELECT--</option>
+																														<option value="BIKE">Bike</option>
+																														<option value="CAR">Car</option>
+																													</select>
+																													</div>
+																											</div>
 
-																														<div class="radio">
 
-																																<input type="radio" name="radio1" id="radio_1" value="Male" checked="">
-																																<label for="radio_2">
-																																		M
-																																	</label>
-																																</div>
-																																	<div class="radio">
-																																<input type="radio" name="radio1" id="radio_2" value="Female" checked="">
-																																<label for="radio_2">
-																																	F
-																																</label>
+
+																											<div class="row">
+																												<div class="col-md-12">
+																													<div class="panel panel-default card-view">
+																														<div class="panel-heading">
+																															<div class="pull-left">
+																																<h6 class="panel-title txt-dark">Order Informations</h6>
+																															</div>
+																															<div class="clearfix"></div>
 																														</div>
+																													<!--<div class="form-wrap">
+																														<form>-->
 
-																											</div>
-																											<div class="form-group">
-																												<div class="checkbox checkbox-success">
-																													<input id="checkbox_1" type="checkbox" checked>
-																													<label for="checkbox_1"> Remember me </label>
-																												</div>
-																											</div>
+																														<div class="panel-wrapper collapse in">
+																															<div class="panel-body">
+																																<div class="row">
+																																	<div class="col-sm-12 col-xs-12">
+																																		<div class="form-wrap">
+
+																																			<div class="form-group col-sm-6 col-xs-6">
+																																				<label class="control-label mb-10" for="exampleInputpwd_1">Vehicle Brand</label>
+																																				<div class="input-group">
+																																					<div class="input-group-addon"><i class="icon-bike"></i></div>
+																																						<select name="status" type="dropdown"class="form-control" id="exampleInputpwd_1">
+																																						<option value="NULL">--SELECT--</option>
+																																						<option value="BIKE">Bike</option>
+																																						<option value="CAR">Car</option>
+																																					</select>
+																																					</div>
+																																			</div>
+																																					<div class="form-group">
+																																						<label class="control-label mb-10" for="exampleInputuname_1">Pick-up Date</label>
+																																							<div class="input-group">
+																																								<div class="input-group-addon"><i class="icon-user"></i></div>
+																																								<input type="text" name="lastName" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['lastName'];?>" placeholder="Enter lastname">
+																																							</div>
+																																						</div>
+																																					<div class="form-group col-sm-6 col-xs-6">
+																																						<label class="control-label mb-10" for="exampleInputEmail_1">Drop-off Date</label>
+																																						<div class="input-group">
+																																							<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+																																							<input type="email" name="email" class="form-control" id="exampleInputEmail_1" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email">
+																																						</div>
+																																					</div>
+
+																																					<div class="form-group">
+																																						<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
+																																							<div class="input-group">
+																																								<div class="input-group-addon"><i class="icon-phone"></i></div>
+																																								<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phoneNumber'];?>" placeholder="Enter phone number">
+																																							</div>
+																																						</div>
+
+																																					<div class="form-group col-sm-6 col-xs-6">
+																																						<label class="control-label mb-10" for="exampleInputpwd_1">Oder Status</label>
+																																						<div class="input-group">
+																																							<div class="input-group-addon"><i class="icon-info"></i></div>
+																																								<select name="status" type="dropdown"class="form-control" id="exampleInputpwd_1">
+																																										<option value="<?=$selectCustomerData['status'];?>"><?=$selectCustomerData['status'];?></option>
+																																										<option value="NULL">--SELECT--</option>
+																																										<option value="PLACED">Placed</option>
+																																										<option value="UNCONFIRMED">Unconfirmed</option>
+																																										<option value="CONFIRMED">Confirmed</option>
+																																										<option value="PICKED-UP/WALK-IN">Picked-up / Walk-in</option>
+																																										<option value="INPROGRESS">Inprogress</option>
+																																										<option value="COMPLETED">Completed</option>
+																																										<option value="DELIVERED">Delivered</option>
+																																							</select>
+																																							</div>
+																																					</div>
+																																					<div class="form-group col-sm-6 col-xs-6">
+																																						<label class="control-label mb-10" for="exampleInputpwd_1">Service Type</label>
+																																						<div class="input-group">
+																																							<div class="input-group-addon"><i class="icon-info"></i></div>
+																																								<select name="status" type="dropdown"class="form-control" id="exampleInputpwd_1">
+																																								<option value="<?=$selectCustomerData['status'];?>"><?=$selectCustomerData['status'];?></option>
+																																								<option value="NULL">--SELECT--</option>
+																																								<option value="BIKE">Bike</option>
+																																								<option value="CAR">Car</option>
+																																							</select>
+																																							</div>
+																																					</div>
+
+
+
+
 																											<button type="submit" class="btn btn-success mr-10">Submit</button>
 																											<button type="submit" class="btn btn-default">Cancel</button>
 																										</form>
+																										<?php
+																                        }
+																                    } else { //if didn't execute
+																                        echo "Unable to process Please try again later";
+																                    }
+																                    ?>
 																									</div>
 																								</div>
 																							</div>
@@ -980,6 +1102,16 @@
 																					</div>
 																					</div>
 																					</div>
+																				</div>
+																				</div>
+																				</div>
+																			</div>
+																			</div>
+																			</div>
+																		</div>
+																	</div>
+
+
 															<!--/Row-->
 
 

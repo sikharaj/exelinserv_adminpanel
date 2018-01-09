@@ -911,7 +911,7 @@
 																							<div class="col-sm-12 col-xs-12">
 																								<div class="form-wrap">
 																									<form method="POST" action="includes/customer-validate.php">
-																										<div class="form-group">
+																										<div class="form-group col-sm-6 col-xs-6">
 																											<label class="control-label mb-10" for="exampleInputuname_1">First Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
@@ -925,7 +925,7 @@
 																														<input type="text" name="lastName" class="form-control" id="exampleInputuname_1" placeholder="Enter lastname">
 																													</div>
 																												</div>
-																											<div class="form-group">
+																											<div class="form-group col-sm-6 col-xs-6">
 																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
@@ -939,7 +939,7 @@
 																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" placeholder="Enter phone number">
 																													</div>
 																												</div>
-																											<div class="form-group">
+																											<div class="form-group col-sm-6 col-xs-6">
 																												<label class="control-label mb-10" for="exampleInputpwd_1">Password</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-lock"></i></div>
@@ -964,14 +964,9 @@
 																														</div>
 
 																											</div>
-																											<div class="form-group">
-																												<div class="checkbox checkbox-success">
-																													<input id="checkbox_1" type="checkbox" checked>
-																													<label for="checkbox_1"> Remember me </label>
-																												</div>
-																											</div>
-																											<button type="submit" class="btn btn-success mr-10">Submit</button>
-																											<button type="submit" class="btn btn-default">Cancel</button>
+
+																											<button type="submit" class="btn btn-success mr-10">Create Customer</button>
+																											<button type="reset" class="btn btn-default">Reset</button>
 																										</form>
 																									</div>
 																								</div>

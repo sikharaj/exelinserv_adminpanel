@@ -48,13 +48,13 @@
                     <td>$320,800</td>
                   </tr>-->
                   <tr>
-                    <td>EXCU<?=$selectAllCustomersData['customerID'];?></td>
-                    <td><?=$selectAllCustomersData['firstName'];?> <?=$selectAllCustomersData['lastName'];?></td>
-                    <td><?=$selectAllCustomersData['phoneNumber'];?></td>
-                    <td><a href="mailto:<?=$selectAllCustomersData['email'];?>" target="_blank"><?=$selectAllCustomersData['email'];?></a></td>
-                    <td><?=$selectAllCustomersData['createdOn'];?></td>
-                    <td><?=$selectAllCustomersData['lastUpdatedOn'];?></td>
-                    <td><a href="createContract.php?customerId=<?=$selectAllCustomersData['customerID'];?>"><input type="button" class="btn btn-success" value="Ceate Contract"></a></td>
+                    <td style="color:black;">EXCU<?=$selectAllCustomersData['customerID'];?></td>
+                    <td style="color:black;"><?=$selectAllCustomersData['firstName'];?> <?=$selectAllCustomersData['lastName'];?></td>
+                    <td style="color:black;"><?=$selectAllCustomersData['phoneNumber'];?></td>
+                    <td style="color:black;"><a href="mailto:<?=$selectAllCustomersData['email'];?>" target="_blank"><?=$selectAllCustomersData['email'];?></a></td>
+                    <td style="color:black;"><?=$selectAllCustomersData['createdOn'];?></td>
+                    <td style="color:black;"><?=$selectAllCustomersData['lastUpdatedOn'];?></td>
+                    <td style="color:black;"><a href="createContract.php?customerId=<?=$selectAllCustomersData['customerID'];?>"><input type="button" class="btn btn-success" value="Ceate Contract"></a></td>
                   </tr>
                   <?php
                       }
