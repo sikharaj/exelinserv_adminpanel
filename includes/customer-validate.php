@@ -105,7 +105,7 @@
                               $response = file_get_contents('https://control.msg91.com/api/sendhttp.php?authkey=165253Ajtf4e50P59687f4a&mobiles='.$phone.'&message='.$encodedMessage.'&sender=EXLSRV&route=4&country=91');
 
                               $message = "Customer registered successfully";
-                              header('Location:../customer-registered.php?customerid='.$last_id);
+                              header('Location:../order-creation.php?customerid='.$last_id);
                   }  else {
 
                        $message = "Insertion Failed! Please Try Again Later";
