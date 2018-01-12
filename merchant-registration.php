@@ -27,6 +27,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 }
 ?>
 <!DOCTYPE html>
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -492,22 +493,22 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 					<!-- Title -->
 					<div class="row heading-bg">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h5 class="txt-dark">Admin Panel</h5>
+							<h5 class="txt-dark">form layout</h5>
 						</div>
 
 						<!-- Breadcrumb -->
 						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 							<ol class="breadcrumb">
 								<li><a href="index.html">Dashboard</a></li>
-								<li><a href="#"><span>Customer</span></a></li>
-								<li class="active"><span>Registration</span></li>
+								<li><a href="#"><span>Vedor</span></a></li>
+								<li class="active"><span>Vendor Creation</span></li>
 							</ol>
 						</div>
 						<!-- /Breadcrumb -->
 
-						</div>
-						<!-- /Title -->
-								<!--Row-->
+					</div>
+					<!-- /Title -->
+															<!--Row-->
 															<!--<div class="panel-wrapper collapse in">
 																<div class="panel-body">-->
 																	<div class="row">
@@ -515,8 +516,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																			<div class="panel panel-default card-view">
 																				<div class="panel-heading">
 																					<div class="pull-left">
-																						<h6 class="panel-title txt-dark">Customer Registration</h6><br/>
-																						<h4 class="panel-title txt-dark"><font color="#A9A9A9">Customer Informations</font></h4>
+																						<h6 class="panel-title txt-dark">Vendor Registration</h6>
 																					</div>
 																					<div class="clearfix"></div>
 																				</div>
@@ -556,7 +556,58 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" placeholder="Enter phone number">
 																													</div>
 																												</div>
-																											<div class="form-group col-sm-6 col-xs-6">
+                                                        <div class="form-group col-sm-3 col-xs-3">
+  																												<label class="control-label mb-10" for="exampleInputuname_1">Country</label>
+  																													<div class="input-group">
+  																														<div class="input-group-addon"><i class="icon-phone"></i></div>
+                                                              <select name="country" id="country" class="form-control">
+                                                                <option value="NULL">SELECT COUNTRY</option>
+                                                                <?php
+                                                                      $electCountry = mysqli_query($conn,"SELECT * FROM `country`");
+                                                                      while($electCountryData = mysqli_fetch_array($electCountry)){
+                                                                ?>
+                                                                <option value="<?php echo $electCountryData['countryID'];?>"><?php echo $electCountryData['countryName'];?></option>
+                                                                <?php
+                                                                        }
+                                                                ?>
+                                                                </select>
+  																														</div>
+  																												</div>
+                                                        <div class="form-group col-sm-3 col-xs-3">
+  																												<label class="control-label mb-10" for="exampleInputuname_1">State</label>
+  																													<div class="input-group">
+  																														<div class="input-group-addon"><i class="icon-phone"></i></div>
+                                                              <select name="state" id="state" class="form-control">
+                                                                <option value="NULL">SELECT STATE</option>
+                                                                <?php
+                                                                      $electState = mysqli_query($conn,"SELECT * FROM `state`");
+                                                                      while($selectStateData = mysqli_fetch_array($electState)){
+                                                                ?>
+                                                                <option value="<?php echo $selectStateData['stateID'];?>"><?php echo $selectStateData['stateName'];?></option>
+                                                                <?php
+                                                                        }
+                                                                ?>
+                                                                </select>
+  																														</div>
+  																												</div>
+                                                      <div class="form-group col-sm-3 col-xs-3">
+  																												<label class="control-label mb-10" for="exampleInputuname_1">City</label>
+  																													<div class="input-group">
+  																														<div class="input-group-addon"><i class="icon-phone"></i></div>
+                                                              <select name="city" id="city" class="form-control">
+                                                                <option value="NULL">SELECT CITY</option>
+                                                                <?php
+                                                                      $electCity = mysqli_query($conn,"SELECT * FROM `city`");
+                                                                      while($electCityData = mysqli_fetch_array($electCity)){
+                                                                ?>
+                                                                <option value="<?php echo $electCityData['cityID'];?>"><?php echo $electCityData['cityName'];?></option>
+                                                                <?php
+                                                                        }
+                                                                ?>
+                                                                </select>
+  																														</div>
+  																												</div>
+                                                    	<div class="form-group col-sm-3 col-xs-3">
 																												<label class="control-label mb-10" for="exampleInputpwd_1">Password</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-lock"></i></div>
@@ -579,114 +630,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																	F
 																																</label>
 																														</div>
-																													</div>
-																													<div class="row">
-																														<div class="col-md-12">
-																															<div class="panel panel-default card-view">
-																																<div class="panel-heading">
-																																	<div class="pull-left">
-																																		<h4 class="panel-title txt-dark"><font color="#A9A9A9">Customer Address</font></h4>
-																																	</div>
-																																	<div class="clearfix"></div>
-																																</div>
-																															<!--<div class="form-wrap">
-																																<form>-->
-																																<div class="panel-wrapper collapse in">
-																																	<div class="panel-body">
-																																		<div class="row">
-																																			<div class="col-sm-12 col-xs-12">
-																																				<div class="form-wrap">
-                                                                        	<div class="form-group col-sm-3 col-xs-3">
-									  																												<label class="control-label mb-10" for="exampleInputuname_1">Country</label>
-									  																													<div class="input-group">
-									  																														<div class="input-group-addon"><i class="icon-layers "></i></div>
-									                                                              <select name="country" id="country" class="form-control">
-									                                                                <option value="NULL">SELECT COUNTRY</option>
-									                                                                <?php
-									                                                                      $electCountry = mysqli_query($conn,"SELECT * FROM `country`");
-									                                                                      while($electCountryData = mysqli_fetch_array($electCountry)){
-									                                                                ?>
-									                                                                <option value="<?php echo $electCountryData['countryName'];?>"><?php echo $electCountryData['countryName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
-									                                                                </select>
-									  																														</div>
-									  																												</div>
-									                                                        <div class="form-group col-sm-3 col-xs-3">
-									  																												<label class="control-label mb-10" for="exampleInputuname_1">State</label>
-									  																													<div class="input-group">
-									  																														<div class="input-group-addon"><i class="icon-directions"></i></div>
-									                                                              <select name="state" id="state" class="form-control">
-									                                                                <option value="NULL">SELECT STATE</option>
-									                                                                <?php
-									                                                                      $electState = mysqli_query($conn,"SELECT * FROM `state`");
-									                                                                      while($selectStateData = mysqli_fetch_array($electState)){
-									                                                                ?>
-									                                                                <option value="<?php echo $selectStateData['stateName'];?>"><?php echo $selectStateData['stateName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
-									                                                                </select>
-									  																														</div>
-									  																												</div>
-									                                                      <div class="form-group col-sm-3 col-xs-3">
-									  																												<label class="control-label mb-10" for="exampleInputuname_1">City</label>
-									  																													<div class="input-group">
-									  																														<div class="input-group-addon"><i class="icon-direction"></i></div>
-									                                                              <select name="city" id="city" class="form-control">
-									                                                                <option value="NULL">SELECT CITY</option>
-									                                                                <?php
-									                                                                      $electCity = mysqli_query($conn,"SELECT * FROM `city`");
-									                                                                      while($electCityData = mysqli_fetch_array($electCity)){
-									                                                                ?>
-									                                                                <option value="<?php echo $electCityData['cityName'];?>"><?php echo $electCityData['cityName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
-									                                                                </select>
-									  																														</div>
-									  																												</div>
-							                                                    			<div class="form-group col-sm-3 col-xs-3">
-																																						<label class="control-label mb-10" for="exampleInputuname_1">Pincode</label>
-																																							<div class="input-group">
-																																								<div class="input-group-addon"><i class="icon-location-pin"></i></div>
-																																								<input type="nuumber" name="pincode" class="form-control" required pattern="[0-9]{6}" id="pincode" placeholder="Enter your pin">
-																																							</div>
-																																						</div>
-                                                                            <div class="form-group col-sm-3 col-xs-3">
-  									  																												<label class="control-label mb-10" for="exampleInputuname_1">Address</label>
-  									  																													<div class="input-group">
-  									  																														<div class="input-group-addon"><i class="icon-home "></i></div>
-  									                                                              <select name="addressType" id="addressType" class="form-control">
-  									                                                                <option value="NULL">SELECT ADDRESS TYPE</option>
-  									                                                                <option Value="SELF">Self</option>
-                                                                                    <option value="REFERENCE">Some one else</option>
-  									                                                                </select>
-  									  																														</div>
-  									  																												</div>
-																																							<div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputEmail_1">Street Address</label>
-																																								<div class="input-group">
-																																									<div class="input-group-addon"><i class="icon-home"></i></div>
-																																									<input type="text" name="streetAddress" class="form-control" id="streetAddress" required placeholder="Enter streetaddress">
-																																								</div>
-																																							</div>
-                                                                              <div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputEmail_1">Area</label>
-																																								<div class="input-group">
-																																									<div class="input-group-addon"><i class="icon-paper-plane"></i></div>
-																																									<input type="text" name="area" class="form-control" id="area" placeholder="area" required>
-																																								</div>
-																																							</div>
-																																							<div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputuname_1">Temperary Phone Number</label>
-																																									<div class="input-group">
-																																										<div class="input-group-addon"><i class="icon-phone"></i></div>
-																																										<input type="tel" name="temphone" class="form-control" id="temphone" placeholder="Enter a temperary phone number">
-																																									</div>
-																																								</div>
-																																							<button type="submit" class="btn btn-success mr-10">Create Customer</button>
+
+																											</div>
+
+																											<button type="submit" class="btn btn-success mr-10">Create Vendor</button>
 																											<button type="reset" class="btn btn-default">Reset</button>
 																										</form>
 																									</div>
@@ -696,21 +643,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																					</div>
 																					</div>
 																					</div>
-                                        </div>
-                                      </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
-                            </div>
 															<!--/Row-->
-
-
-
-				<!-- Footer -->
+			<!-- Footer -->
 				<footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
 						<div class="col-sm-12">

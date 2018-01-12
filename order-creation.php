@@ -20,8 +20,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
     $selectAdminDataResult = $conn -> query($selectAdminQuery);
     if ($selectAdminDataResult) { //Successfully execute SQL Query
         $selectAdminData = $selectAdminDataResult->fetch_assoc();
-        $firstName = $selectAdminData['firstName'];
-        $lastName = $selectAdminData['lastName'];
     } else { //couldn't execute SQL Query
         session_destroy();
         header('Location:index.php?Please Login Again!');
@@ -37,9 +35,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
     $selectAllCarsResult = $conn -> query($selectAllCars);
     $selectAllBikesResult = $conn -> query($selectAllBikes);
     $selectAllCustomersResult = $conn -> query($selectAllCustomers);
-if(isset($_GET['issue'])) {
-    $issue = $_GET['issue'];
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -74,6 +70,7 @@ if(isset($_GET['issue'])) {
         }
     }
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	</head>
 
@@ -541,6 +538,7 @@ if(isset($_GET['issue'])) {
 											<!--Row-->
 															<!--<div class="panel-wrapper collapse in">
 																<div class="panel-body">-->
+                                  <form name="ordercreation" method="POST" action="includes/create-order.php">
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="panel panel-default card-view">
@@ -562,7 +560,7 @@ if(isset($_GET['issue'])) {
 																									$selectCustomerData = $selectCustomersResults -> fetch_assoc();
 
 																					?>
-																				<div class="panel-wrapper collapse in">
+                                          <div class="panel-wrapper collapse in">
 																					<div class="panel-body">
 																						<div class="row">
 																							<div class="col-sm-12 col-xs-12">
@@ -572,21 +570,21 @@ if(isset($_GET['issue'])) {
 																											<label class="control-label mb-10" for="exampleInputuname_1">First Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="firstName" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['firstName'];?>" placeholder="Enter firstname" disabled>
+																													<input type="text" name="firstname" class="form-control" value="<?=$selectCustomerData['firstName'];?>" placeholder="Enter firstname" disabled>
 																												</div>
 																											</div>
 																											<div class="form-group">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Last Name</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-user"></i></div>
-																														<input type="text" name="lastName" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['lastName'];?>" placeholder="Enter lastname" disabled>
+																														<input type="text" name="lastname" class="form-control" value="<?=$selectCustomerData['lastName'];?>" placeholder="Enter lastname" disabled>
 																													</div>
 																												</div>
 																											<div class="form-group col-sm-6 col-xs-6">
 																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																													<input type="email" name="email" class="form-control" id="exampleInputEmail_1" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email" disabled>
+																													<input type="email" name="email" class="form-control" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email" disabled>
 																												</div>
 																											</div>
 																											<div class="form-group">
@@ -600,7 +598,7 @@ if(isset($_GET['issue'])) {
 																												<label class="control-label mb-10" for="exampleInputpwd_1">User Status</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-info"></i></div>
-																														<select name="status" class="form-control" id="exampleInputpwd_1">
+																														<select name="userstatus" class="form-control" id="exampleInputpwd_1">
 																														<option value="<?=$selectCustomerData['status'];?>"><?=$selectCustomerData['status'];?></option>
                                                             <option value="ACTIVE">ACTIVE</option>
 																													</select>
@@ -610,7 +608,7 @@ if(isset($_GET['issue'])) {
 																												<label class="control-label mb-10" for="exampleInputuname_1">Oder Created On</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-calender"></i></div>
-																														<input type="datetime" name="createdon" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['createdOn'];?>" placeholder="Enter phone number" disabled>
+																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectCustomerData['createdOn'];?>" placeholder="Enter phone number" disabled>
 																													</div>
 																												</div>
 
@@ -630,13 +628,26 @@ if(isset($_GET['issue'])) {
 																																<div class="row">
 																																	<div class="col-sm-12 col-xs-12">
 																																		<div class="form-wrap">
-                                                                      <div class="form-group col-sm-6 col-xs-6">
-                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">SSOMETEXT</label>
+                                                                      <div class="form-group col-sm-3 col-xs-3">
+                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Booking For</label>
                                                                         <div class="input-group">
-                                                                          <div class="input-group-addon"><i class="icon-docs"></i></div>
-                                                                            <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
-                                                                            <option value="NULL">SELECT</option>
-                                                                            <option value=""></option></select>
+                                                                          <div class="input-group-addon"><i class="icon-user"></i></div>
+                                                                            <select name="bookigFor" class="form-control" id="exampleInputpwd_1">
+                                                                            <option value="NULL">SELECT YOUR BOOKING TYPE</option>
+                                                                            <option value="SELF">SELF</option>
+                                                                            <option value="REFERENCE">SOME ONE ELSE</option>
+                                                                          </select>
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="form-group col-sm-3 col-xs-3">
+                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Address</label>
+                                                                        <div class="input-group">
+                                                                          <div class="input-group-addon"><i class="icon-home"></i></div>
+                                                                            <select name="address" class="form-control" id="address">
+                                                                            <option value="NULL">SELECT YOUR BOOKING TYPE</option>
+                                                                            <option value="SELF">SELF</option>
+                                                                            <option value="REFERENCE">SOME ONE ELSE</option>
+                                                                          </select>
                                                                           </div>
                                                                       </div>
                                                                       <div class="form-group">
@@ -671,9 +682,9 @@ if(isset($_GET['issue'])) {
                                                                               <div class="input-group-addon"><i class="icon-list"></i></div>
                                                                               <select name="vehiclecolor" class="form-control" id="exampleInputpwd_1">
                                                                               <option value="NULL">SELECT VEHICLE COLOR</option>
-                                                                              <option value="Cash">Air Force blue</option>
-                                                                              <option value="Paytm">Alice blue</option>
-                                                                              <option value="Online">Alizarin crimson</option>
+                                                                              <option value="Air Force blue">Air Force blue</option>
+                                                                              <option value="Alice blue">Alice blue</option>
+                                                                              <option value="Alizarin crimson">Alizarin crimson</option>
                                                                               <option value="Cash">Almond</option>
                                                                               <option value="Paytm">Amaranth</option>
                                                                               <option value="Online">Amber</option>
@@ -690,7 +701,7 @@ if(isset($_GET['issue'])) {
                                                                         <label class="control-label mb-10" for="exampleInputpwd_1">Fuel Variant</label>
                                                                         <div class="input-group">
                                                                           <div class="input-group-addon"><i class="icon-drop"></i></div>
-                                                                            <select name="fueltype" class="form-control">
+                                                                            <select name="fuelvariant" class="form-control">
                                                                             <option value="NULL">SELECT FUEL VARIANT</option>
                                                                             <option value="Petrol">Petrol</option>
                                                                             <option value="Diesel">Diesel</option>
@@ -747,21 +758,20 @@ if(isset($_GET['issue'])) {
 																																						<label class="control-label mb-10" for="exampleInputuname_1">Pick-up Date</label>
 																																							<div class="input-group">
 																																								<div class="input-group-addon"><i class="icon-calender"></i></div>
-																																								<input type="datetime-local" name="pickUpDate" class="form-control" id="exampleInputuname_1" value="" placeholder="">
+																																								<input type="datetime-local" name="pickUpDate" class="form-control" id="pickupdate" value="" placeholder="">
                                                                               </div>
 																																						</div>
 																																					<div class="form-group col-sm-6 col-xs-6">
-																																						<label class="control-label mb-10" for="exampleInputEmail_1">Drop-off Date</label>
-																																						<div class="input-group">
+																																						<label class="control-label mb-10 text-left">Drop-off Date</label>
+																																						<div class="input-group date' id='datetimepicker1'">
 																																							<div class="input-group-addon"><i class="icon-calender"></i></div>
-																																							<input type="datetime-local" name="dropDate" class="form-control" id="exampleInputEmail_1" value="" placeholder="">
-																																						</div>
+                                                                              <input type="datetime-local" name="dropDate" class="form-control" id="dropdate" value="" placeholder="">  </div>
 																																					</div>
                                                                           <div class="form-group">
-																																						<label class="control-label mb-10" for="exampleInputpwd_1">Service Type</label>
+																																						<label class="control-label mb-10" for="servicetype">Service Type</label>
 																																						<div class="input-group">
 																																							<div class="input-group-addon"><i class="icon-wrench"></i></div>
-																																								<select name="servicetype" class="form-control">
+																																								<select name="servicetype" id="servicetype" class="form-control">
 																																								<option value="NULL">SELECT SERVICE TYPE</option>
 																																								<option value="Regular Checkup">Regular Check-up</option>
 																																								<option value="General Diagnostics">General Diagnostics</option>
@@ -774,24 +784,24 @@ if(isset($_GET['issue'])) {
 																																							</div>
 																																					</div>
                                                                           <div class="form-group col-sm-6 col-xs-6">
-																																						<label class="control-label mb-10" for="exampleInputuname_1">Issue</label>
+																																						<label class="control-label mb-10" for="issue">Issue</label>
 																																							<div class="input-group">
 																																								<div class="input-group-addon"><i class="icon-note"></i></div>
-																																								<input type="text" name="issue" class="form-control" id="exampleInputuname_1" value="" placeholder="Enter an issue">
+																																								<input type="text" name="issue" class="form-control" id="issue" value="" placeholder="Enter an issue">
 																																							</div>
 																																						</div>
                                                                             <div class="form-group col-sm-3 col-xs-3">
   																																						<label class="control-label mb-10" for="exampleInputuname_1">Total Payment</label>
   																																							<div class="input-group">
   																																								<div class="input-group-addon"><i class="icon-wallet"></i></div>
-  																																								<input type="text" name="totalpayment" class="form-control" id="exampleInputuname_1" value="" placeholder="Advance payment if any">
+  																																								<input type="number" name="totalpayment" class="form-control" id="totalPayment" value="" placeholder="Total Estimated amount">
   																																							</div>
   																																					</div>
                                                                             <div class="form-group">
     																																						<label class="control-label mb-10" for="exampleInputuname_1">Advance Payment</label>
     																																							<div class="input-group">
     																																								<div class="input-group-addon"><i class="icon-wallet"></i></div>
-    																																								<input type="text" name="advncpayment" class="form-control" id="exampleInputuname_1" value="" placeholder="Due payment if any">
+    																																								<input type="number" name="advancedpayment" class="form-control" id="advancedPayment" value="" placeholder="Due payment if any">
     																																							</div>
     																																				</div>
                                                                             <div class="form-group col-sm-3 col-xs-3">
@@ -802,9 +812,9 @@ if(isset($_GET['issue'])) {
   																																								<option value="NULL">SELECT PAYMENT MODE</option>
   																																								<option value="Cash">Cash</option>
   																																								<option value="Paytm">Paytm</option>
-                                                                                  <option value="Cash">UPI</option>
+                                                                                  <option value="UPI">UPI</option>
                                                                                   <option value="Online">Online(Bank/Payment Gateway)</option>
-                                                                                  <option value="Cash">Debit/Credit Card</option>
+                                                                                  <option value="Debit/Credit Card">Debit/Credit Card</option>
   																																							</select>
   																																							</div>
   																																					</div>
@@ -812,7 +822,7 @@ if(isset($_GET['issue'])) {
     																																						<label class="control-label mb-10" for="exampleInputuname_1">Payment Due</label>
     																																							<div class="input-group">
     																																								<div class="input-group-addon"><i class="icon-wallet"></i></div>
-    																																								<input type="text" name="duepayment" class="form-control" id="exampleInputuname_1" value="" placeholder="Due payment if any">
+    																																								<input type="number" name="paymentDue" readonly class="form-control" id="paymentDue" value="" placeholder="Due payment if any">
     																																							</div>
     																																				</div>
                                                                             <div class="form-group col-sm-3 col-xs-3">
@@ -823,21 +833,21 @@ if(isset($_GET['issue'])) {
       																																						</div>
     																																				</div>
                                                                             <div class="form-group">
-    																																						<label class="control-label mb-10" for="exampleInputuname_1">Transaction ID</label>
+    																																						<label class="control-label mb-10" for="exampleInputuname_1">Last Updatedon</label>
     																																							<div class="input-group">
-                                                                                    <div class="input-group-addon"><i class="icon-wallet"></i></div>
-                                                                                        <input type="text" name="transID" class="form-control" id="exampleInputuname_1" value="" placeholder="#EXPMNT8547896">
-      																																						</div>
+                                                                                    <div class="input-group-addon"><i class="icon-calender"></i></div>
+                                                                                    <input type="datetime-local" name="lastupdates" class="form-control" id="dropdate" value="" placeholder="">  </div>
+      																																					</div>
     																																				</div>
                                                                             <div class="form-group col-sm-6 col-xs-6">
   																																						<label class="control-label mb-10" for="exampleInputpwd_1">Garage</label>
   																																						<div class="input-group">
   																																							<div class="input-group-addon"><i class="icon-magnet"></i></div>
-  																																								<select name="garages" class="form-control" id="exampleInputpwd_1">
+  																																								<select name="garages" id="garages" class="form-control" id="exampleInputpwd_1">
   																																								<option value="NULL">SELECT GARAGE</option>
-  																																								<option value="Cash"></option>
-  																																								<option value="Paytm"></option>
-                                                                                  <option value="Online"></option>
+  																																								<option value=""></option>
+  																																								<option value=""></option>
+                                                                                  <option value=""></option>
   																																							</select>
   																																							</div>
   																																					</div>
@@ -845,7 +855,7 @@ if(isset($_GET['issue'])) {
     																																						<label class="control-label mb-10" for="exampleInputuname_1">Pickup / Drop-off Boy</label>
     																																							<div class="input-group">
     																																								<div class="input-group-addon"><i class="icon-user-follow"></i></div>
-                                                                                    <select name="deliveryboy" class="form-control" id="exampleInputpwd_1">
+                                                                                    <select name="deliveryboy" class="form-control" id="pickupboy">
     																																								<option value="NULL">SELECT PICKUP/DROP-OFF BOY</option>
     																																								<option value=""></option>
     																																								<option value=""></option>
@@ -853,30 +863,31 @@ if(isset($_GET['issue'])) {
     																																							</select>
                                                                                 </div>
     																																				</div>
-                                                    	<button type="submit" class="btn btn-success mr-10">Submit</button>
-																											<button type="submit" class="btn btn-default">Cancel</button>
-																										</form>
-																										<?php
+                                                      <input type="hidden" name="customerId" value="<?=$selectCustomerData['customerID'];?>">
+                                                    	<button type="submit" name="submit" class="btn btn-success mr-10">Submit
+																											<button type="reset" class="btn btn-default">Cancel</button>
+                                                      <?php
 																                        }
 																                    } else { //if didn't execute
 																                        echo "Unable to process Please try again later";
 																                    }
 																                    ?>
+                                                    </form>
 																									</div>
 																								</div>
 																							</div>
 																						</div>
-																					</div>
-																					</div>
-																					</div>
-																				</div>
-																				</div>
-																				</div>
-																			</div>
-																			</div>
-																			</div>
-																		</div>
-																	</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
 
 															<!--/Row-->
@@ -922,5 +933,26 @@ if(isset($_GET['issue'])) {
 
 		<!-- Init JavaScript -->
 		<script src="dist/js/init.js"></script>
+
+    <!--Script for Payment Calculations.-->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#totalPayment').on('keyup',function(){
+
+                  $('#advancedPayment').val(0);
+
+                    $('#advancedPayment').on('keyup',function(){
+
+                        var totalPayment = $('#totalPayment').val();
+                        var advancedPayment = $('#advancedPayment').val();
+                        var amnt = totalPayment - advancedPayment;
+                        // alert(amnt);
+                        $('#paymentDue').val(amnt);
+
+                  });
+
+            });
+        });
+    </script>
 	</body>
 </html>

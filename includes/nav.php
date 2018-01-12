@@ -46,6 +46,9 @@
 					<a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><div class="pull-left"><i class="fa fa-info"></i><span class="right-nav-text">Vendor Information </span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
 					<ul id="app_dr" class="collapse collapse-level-1">
 						<li>
+							<a href="merchant-registration.php">Merchant Register</a>
+						</li>
+						<li>
 							<a href="registered-merchants.php">Registered Merchants</a>
 						</li>
 						<li>

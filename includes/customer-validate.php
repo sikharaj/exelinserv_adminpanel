@@ -9,116 +9,109 @@
     } else {
         session_start();
 
-        //Define Variables
-        $firstname = "";
-        $lastname = "";
-        $phone = "91".$phone;
-        $email = "";
-        $password = "";
-        $gender = "";
+        //Define Variables & Get data from POST method and update variables
+        $firstname = $_POST['firstName'];
+        $lastname = $_POST['lastName'];
+        $phone = $_POST['phone'];
+        //"91".$phone;phone
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $gender = $_POST['radio1'];
         $now =  date('d-m-Y H:i');
         $createdOn = $now;
         $lastUpdatedOn = $now;
-
-        //Get data from POST method and update variables
-        if (isset($_POST['email'])){ //get Username
-
-            $email = $_POST['email'];
-
-        } else {
-
-            $email ="";
-        }
-
-        if (isset($_POST['phone'])){ //get Username
-
-            $phone = $_POST['phone'];
-
-        } else {
-
-            $phone ="";
-        }
-
-        if (isset($_POST['password'])){ //get Password
-
-            $password = $_POST['password'];
-
-        } else {
-
-            $password = "";
-
-        }
-
-        if (isset($_POST['firstName'])) { //get Username
-
-            $firstname = $_POST['firstName'];
-
-        } else {
-
-            $firstname = "";
-
-        }
-
-        if (isset($_POST['lastName'])) { //get Username
-
-            $lastname = $_POST['lastName'];
-
-        } else {
-
-            $lastname = "";
-
-        }
-
-        if (isset($_POST['radio1'])) { //get Username
-
-            $gender = $_POST['radio1'];
-
-        } else {
-
-            $gender = "";
-
-        }
+        $country = $_POST['country'];
+        $state = $_POST['state'];
+        $city = $_POST['city'];
+        $pincode = $_POST['pincode'];
+        $addressType = $_POST['addressType'];
+        $streetAddress = $_POST['streetAddress'];
+        $temperaryPhNumber = $_POST['temphone'];
+        $area = $_POST['area'];
 
 
-
-        if ($email != "" && $password !="" && $firstname != "" && $lastname !="" && $phone !="" && $gender !="") { //check if the fields are not blank
-
-            $selectEmailId = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";// check if the email ID already Existing or not
-            $selectEmailIDResult = $conn->query($selectEmailId);
-            if ($selectEmailIDResult->num_rows > 0)  {//If email already exist
-                header('Location:../customer-registration.php?message=User with same mail ID is already registered with us.');
-            } else  {
-              //  $salt = md5(uniqid());
-              //  $newPassword = md5(md5($password) . $salt);
-                $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`) VALUES ('$firstname','$lastname','$phone','$email','INACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1')";
+        if (!empty($_POST)){
+          echo $addressType;
+          $phone = "91".$phone;
+          $temperaryPhNumber = "91".$temperaryPhNumber;
+          if ($addressType == 'SELF'){
+              $selectEmailId = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";// check if the email ID already Existing or not
+              $selectEmailIDResult = $conn -> query($selectEmailId);
+              if ($selectEmailIDResult->num_rows > 0)  {//If email already exist
+                  header('Location:../customer-registration.php?message=User with same mail ID is already registered with us.');
+              } else {
+                $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`, `gender`) VALUES ('$firstname','$lastname','$phone','$email','INACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1','$gender')";
                 $insertCustomerDataResult =$conn -> query($insertCustomerData);
 
-                  if ($insertCustomerDataResult){//If Insertion Successful;
-                      $last_id = $conn->insert_id;
-                      if(strlen($phone)==10) {
-                          $phone="91".$phone;
-                      }
+                  if ($insertCustomerDataResult) { //If insertion successful
+                    $last_id = $conn->insert_id;
+                    $getCustomerId = "SELECT * FROM `customerdetails` WHERE `phoneNumber` = '$phone' AND `email` = '$email'";
+                    $getCustomerIdResult = $conn -> query($getCustomerId);
+                          if ($getCustomerIdResult) { //If phone no and email id exist
 
-                              $message = "Greetings from Exelinserv.Thank you for registered with us $firstname! Welcome onboard, we are looking forward to serve you.You may login with us by your username : $email and password : Exelinserv#1";
-                              $encodedMessage = urlencode($message);
+                             $last_id = $conn->insert_id;
 
-                              $response = file_get_contents('https://control.msg91.com/api/sendhttp.php?authkey=165253Ajtf4e50P59687f4a&mobiles='.$phone.'&message='.$encodedMessage.'&sender=EXLSRV&route=4&country=91');
+                                    $customerData = $getCustomerIdResult -> fetch_assoc();
+                                      $customerId = $customerData['customerID']; //select customer ID
+                                        //insert Address data to address Table
 
-                              $message = "Customer registered successfully";
-                              header('Location:../order-creation.php?customerid='.$last_id);
-                  }  else {
+                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `streetAddress`, `city`, `state`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$area','$pincode','$addressType')";
+                                        $insertAddressDataResult = $conn -> query($insertAddressData);
+                                        if ($insertAddressDataResult) {
+                                          $message = "Customer registered successfully";
+                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                        } else {
+                                          $message = "Registration failed";
+                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                        }
+                          }
+                        } else {
+                          $message = "Insertion Failed! Please Try Again Later";
+                          header('Location:customer-registration.php?message' . $message);
+                        }
 
-                       $message = "Insertion Failed! Please Try Again Later";
-                       header('Location:customer-registration.php?message' . $message);
+                }
+            }else if ($addressType == 'REFERENCE') {
+              $selectEmailId = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";// check if the email ID already Existing or not
+              $selectEmailIDResult = $conn -> query($selectEmailId);
+              if ($selectEmailIDResult->num_rows > 0)  {//If email already exist
+                  header('Location:../customer-registration.php?message=User with same mail ID is already registered with us.');
+              } else {
+                $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`, `gender`) VALUES ('$firstname','$lastname','$phone','$email','INACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1','$gender')";
+                $insertCustomerDataResult =$conn -> query($insertCustomerData);
 
+                  if ($insertCustomerDataResult) { //If insertion successful
+                    $last_id = $conn->insert_id;
+                    $getCustomerId = "SELECT * FROM `customerdetails` WHERE `phoneNumber` = '$phone' AND `email` = '$email'";
+                    $getCustomerIdResult = $conn -> query($getCustomerId);
+                          if ($getCustomerIdResult) { //If phone no and email id exist
+
+                            $last_id = $conn->insert_id;
+
+                                    $customerData = $getCustomerIdResult -> fetch_assoc();
+                                      $customerId = $customerData['customerID']; //select customer ID
+                                        //insert Address data to address Table
+
+                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `tempCusAddress`, `city`, `state`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$area','$pincode','$addressType')";
+                                        $insertAddressDataResult = $conn -> query($insertAddressData);
+                                        if ($insertAddressDataResult) {
+                                          $message = "Customer registered successfully";
+                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                        } else {
+                                          $message = "Registration failed";
+                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                        }
+
+                              }
+
+                          } else {
+                            $message = "Insertion Failed! Please Try Again Later";
+                            header('Location:customer-registration.php?message' . $message);
+                          }
                   }
 
-            }
-
-
-        }  else {
-
+          } else {
             header('Location:../customer-registration.php?message=Please Fill in all the data.');
-
         }
-    }
+}
+}
