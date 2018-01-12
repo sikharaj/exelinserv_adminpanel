@@ -10,12 +10,13 @@
         session_start();
 
         //Define Variables and assigning values received via POST
-
+        //print_r($_POST);
+        //exit;
         $now =  date('d-m-Y H:i');
         $pickupDate ="$now";
         $dropoffDate = "$now";
         $lastUpdatedOn = "$now";
-        $orderCreatedOn = $_POST['createdon'];
+        $createdOn = $_POST['createdon'];
         $firstName = $_POST['firstname'];
         $lastName = $_POST['lastname'];
         $email = $_POST['email'];
@@ -49,7 +50,8 @@
           }else {
             $dropoffDate = $dropoffDate;
           }
-          $insertOrderData = "INSERT INTO `orders`(`customerID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`) VALUES('$customerid','$firstName','$vehicleBrand','$pickupDate','$dropoffDate','$orderCreatedOn','$orderStatus','$userStatus','$issue','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
+          $insertOrderData = "INSERT INTO `orders`(`customerID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`)
+           VALUES('$customerid','$firstName $lastName','$vehicleBrand','$pickupDate','$dropoffDate','$orderCreatedOn','$orderStatus','$userStatus','$issue','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
           $insertOrderDataResult = $conn->query($insertOrderData);
             if ($insertOrderDataResult){// If Insertion successful
               $message = "Oder Created Successfully";

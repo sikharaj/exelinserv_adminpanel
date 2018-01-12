@@ -563,27 +563,23 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																													<input type="password" name="password" class="form-control" id="exampleInputpwd_1" placeholder="Enter password">
 																												</div>
 																											</div>
-                                                      <div class="row">
-                                                        <div class="form-group mb-30">
-                                  													<label class="control-label mb-10 text-left">Radio</label>
-                                                            <div class="form-group col-sm-6 col-xs-12">
-                                                            <div class="radio radio-info">
-                                  														<input type="radio" name="radio" id="radio1" value="option1" checked="">
-                                  														<label for="radio1">
-                                  															M
-                                  														</label>
-                                  													</div>
-                                                          </div>
-                                                              <div class="form-group col-sm-6 col-xs-12">
-                                                              <div class="radio radio-info">
-                                                                <input type="radio" name="radio" id="radio1" value="option1" checked="">
-                                                                <label for="radio1">
-                                                                  M
-                                                                </label>
-                                                              </div>
-                                                            </div>
-                                  												</div>
-                                                        </div>
+																											<div class="form-group">
+																												<label class="control-label mb-10">Gender</label>
+
+																														<div class="radio">
+
+																																<input type="radio" name="radio1" id="radio_1" value="Male" checked="">
+																																<label for="radio_2">
+																																		M
+																																	</label>
+																																</div>
+																																	<div class="radio">
+																																<input type="radio" name="radio1" id="radio_2" value="Female" checked="">
+																																<label for="radio_2">
+																																	F
+																																</label>
+																														</div>
+																													</div>
 																													<div class="row">
 																														<div class="col-md-12">
 																															<div class="panel panel-default card-view">

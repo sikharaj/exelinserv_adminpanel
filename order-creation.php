@@ -570,28 +570,28 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																											<label class="control-label mb-10" for="exampleInputuname_1">First Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="firstname" class="form-control" value="<?=$selectCustomerData['firstName'];?>" placeholder="Enter firstname" disabled>
+																													<input type="text" name="firstname" class="form-control" value="<?=$selectCustomerData['firstName'];?>" placeholder="Enter firstname" readonly>
 																												</div>
 																											</div>
 																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Last Name</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-user"></i></div>
-																														<input type="text" name="lastname" class="form-control" value="<?=$selectCustomerData['lastName'];?>" placeholder="Enter lastname" disabled>
+																														<input type="text" name="lastname" class="form-control" value="<?=$selectCustomerData['lastName'];?>" placeholder="Enter lastname" readonly>
 																													</div>
 																												</div>
 																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																													<input type="email" name="email" class="form-control" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email" disabled>
+																													<input type="email" name="email" class="form-control" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email" readonly>
 																												</div>
 																											</div>
 																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phoneNumber'];?>" placeholder="Enter phone number" disabled>
+																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phoneNumber'];?>" placeholder="Enter phone number" readonly>
 																													</div>
 																												</div>
 																											<div class="form-group col-sm-4 col-xs-4">
@@ -608,7 +608,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																												<label class="control-label mb-10" for="exampleInputuname_1">Oder Created On</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-calender"></i></div>
-																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectCustomerData['createdOn'];?>" placeholder="Enter phone number" disabled>
+																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectCustomerData['createdOn'];?>" placeholder="Enter phone number" readonly>
 																													</div>
 																												</div>
 
