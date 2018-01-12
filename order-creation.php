@@ -520,15 +520,15 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 					<!-- Title -->
 					<div class="row heading-bg">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h5 class="txt-dark">form layout</h5>
+							<h5 class="txt-dark">Admin Panel</h5>
 						</div>
 
 						<!-- Breadcrumb -->
 						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 							<ol class="breadcrumb">
 								<li><a href="index.html">Dashboard</a></li>
-								<li><a href="#"><span>form</span></a></li>
-								<li class="active"><span>form-layout</span></li>
+								<li><a href="#"><span>Create</span></a></li>
+								<li class="active"><span>Order</span></li>
 							</ol>
 						</div>
 						<!-- /Breadcrumb -->
@@ -566,45 +566,45 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																							<div class="col-sm-12 col-xs-12">
 																								<div class="form-wrap">
 
-																										<div class="form-group col-sm-6 col-xs-6">
+																										<div class="form-group col-sm-4 col-xs-4">
 																											<label class="control-label mb-10" for="exampleInputuname_1">First Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
 																													<input type="text" name="firstname" class="form-control" value="<?=$selectCustomerData['firstName'];?>" placeholder="Enter firstname" disabled>
 																												</div>
 																											</div>
-																											<div class="form-group">
+																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Last Name</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-user"></i></div>
 																														<input type="text" name="lastname" class="form-control" value="<?=$selectCustomerData['lastName'];?>" placeholder="Enter lastname" disabled>
 																													</div>
 																												</div>
-																											<div class="form-group col-sm-6 col-xs-6">
+																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
 																													<input type="email" name="email" class="form-control" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email" disabled>
 																												</div>
 																											</div>
-																											<div class="form-group">
+																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-phone"></i></div>
 																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phoneNumber'];?>" placeholder="Enter phone number" disabled>
 																													</div>
 																												</div>
-																											<div class="form-group col-sm-6 col-xs-6">
+																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputpwd_1">User Status</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-info"></i></div>
 																														<select name="userstatus" class="form-control" id="exampleInputpwd_1">
 																														<option value="<?=$selectCustomerData['status'];?>"><?=$selectCustomerData['status'];?></option>
-                                                            <option value="ACTIVE">ACTIVE</option>
+                                                            <option value="INACTIVE">INACTIVE</option>
 																													</select>
 																													</div>
 																											</div>
-                                                      <div class="form-group">
+                                                      <div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Oder Created On</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-calender"></i></div>
@@ -617,7 +617,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																													<div class="panel panel-default card-view">
 																														<div class="panel-heading">
 																															<div class="pull-left">
-																																<h6 class="panel-title txt-dark">Order Informations</h6>
+																																<h4 class="panel-title txt-dark"><font color="#A9A9A9">Order Information</font></h4>
 																															</div>
 																															<div class="clearfix"></div>
 																														</div>
@@ -629,93 +629,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																	<div class="col-sm-12 col-xs-12">
 																																		<div class="form-wrap">
                                                                       <div class="form-group col-sm-3 col-xs-3">
-                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Booking For</label>
-                                                                        <div class="input-group">
-                                                                          <div class="input-group-addon"><i class="icon-user"></i></div>
-                                                                            <select name="bookigFor" class="form-control" id="exampleInputpwd_1">
-                                                                            <option value="NULL">SELECT YOUR BOOKING TYPE</option>
-                                                                            <option value="SELF">SELF</option>
-                                                                            <option value="REFERENCE">SOME ONE ELSE</option>
-                                                                          </select>
-                                                                          </div>
-                                                                      </div>
-                                                                      <div class="form-group col-sm-3 col-xs-3">
-                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Address</label>
-                                                                        <div class="input-group">
-                                                                          <div class="input-group-addon"><i class="icon-home"></i></div>
-                                                                            <select name="address" class="form-control" id="address">
-                                                                            <option value="NULL">SELECT YOUR BOOKING TYPE</option>
-                                                                            <option value="SELF">SELF</option>
-                                                                            <option value="REFERENCE">SOME ONE ELSE</option>
-                                                                          </select>
-                                                                          </div>
-                                                                      </div>
-                                                                      <div class="form-group">
-                                                                          <label class="control-label mb-10" for="exampleInputuname_1">Service Preference</label>
-                                                                            <div class="input-group">
-                                                                              <div class="input-group-addon"><i class="icon-anchor"></i></div>
-                                                                              <select name="preference" class="form-control" id="exampleInputpwd_1">
-                                                                              <option value="NULL">SELECT SERVICE PREFERENCE</option>
-                                                                              <option value="Pickup">Pickup</option>
-                                                                              <option value="Walk-in">Walk-in</option>
-                                                                            </select>
-                                                                          </div>
-                                                                      </div>
-                                                                      <div class="form-group col-sm-6 col-xs-6">
-                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
-                                                                        <div class="input-group">
-                                                                          <div class="input-group-addon"><i class="icon-check"></i></div>
-                                                                            <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
-                                                                            <option value="NULL">SELECT ORDER STATUS</option>
-                                                                            <option value="Placed">Placed</option>
-                                                                            <option value="Unconfirmed">Unconfirmed</option>
-                                                                            <option value="Confirmed">Confirmed</option>
-                                                                            <option value="Picked-up/Walk-in">Picked-up/Walk-in</option>
-                                                                            <option value="Inprogress">Inprogress</option>
-                                                                            <option value="Delivered">Delivered</option>
-                                                                          </select>
-                                                                          </div>
-                                                                      </div>
-                                                                      <div class="form-group">
-                                                                          <label class="control-label mb-10" for="exampleInputuname_1">VehicLe Color</label>
-                                                                            <div class="input-group">
-                                                                              <div class="input-group-addon"><i class="icon-list"></i></div>
-                                                                              <select name="vehiclecolor" class="form-control" id="exampleInputpwd_1">
-                                                                              <option value="NULL">SELECT VEHICLE COLOR</option>
-                                                                              <option value="Air Force blue">Air Force blue</option>
-                                                                              <option value="Alice blue">Alice blue</option>
-                                                                              <option value="Alizarin crimson">Alizarin crimson</option>
-                                                                              <option value="Cash">Almond</option>
-                                                                              <option value="Paytm">Amaranth</option>
-                                                                              <option value="Online">Amber</option>
-                                                                              <option value="Cash">Amethyst</option>
-                                                                              <option value="Paytm">Android green</option>
-                                                                              <option value="Online">Anti-flash white</option>
-                                                                              <option value="Cash">Antique brass</option>
-                                                                              <option value="Paytm">Antique fuchsia</option>
-                                                                              <option value="Online">Antique white</option>
-                                                                            </select>
-                                                                          </div>
-                                                                      </div>
-                                                                      <div class="form-group col-sm-3 col-xs-3">
-                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Fuel Variant</label>
-                                                                        <div class="input-group">
-                                                                          <div class="input-group-addon"><i class="icon-drop"></i></div>
-                                                                            <select name="fuelvariant" class="form-control">
-                                                                            <option value="NULL">SELECT FUEL VARIANT</option>
-                                                                            <option value="Petrol">Petrol</option>
-                                                                            <option value="Diesel">Diesel</option>
-                                                                          </select>
-                                                                          </div>
-                                                                        </div>
-                                                                        <div class="form-group col-sm-3 col-xs-3">
-                                                                          <label class="control-label mb-10" for="exampleInputpwd_1">Kilometer Reading</label>
-                                                                          <div class="input-group">
-                                                                            <div class="input-group-addon"><i class="icon-clock"></i></div>
-                                                                            <input type="number" class="form-control" name="meterReading" placeholder="">
-                                                                            </div>
-                                                                          </div>
-                                                                      <div class="form-group">
                                                                         <label class="control-label mb-10" for="exampleInputpwd_1">Vehicle Type</label>
                                                                         <div class="input-group">
                                                                           <div class="input-group-addon"><i class="ti-car"></i></div>
@@ -747,27 +660,100 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                                 }
                                                                                 ?>
                                                                             </datalist>
-                                                                    <div class="form-group col-sm-6 col-xs-6">
+                                                                    <div class="form-group col-sm-3 col-xs-3">
 																																				<label class="control-label mb-10" for="exampleInputpwd_1">Vehicle Brand</label>
 																																				<div class="input-group">
 																																					<div class="input-group-addon"><i class="icon-support"></i></div>
                                                                           <input type="text" class="form-control" id="vehicleName" name="vehicleName" placeholder="Hero" required="required" list="carList">
 																																					</div>
 																																			</div>
-																																					<div class="form-group">
+                                                                      <div class="form-group col-sm-3 col-xs-3">
+                                                                          <label class="control-label mb-10" for="exampleInputuname_1">VehicLe Color</label>
+                                                                            <div class="input-group">
+                                                                              <div class="input-group-addon"><i class="icon-list"></i></div>
+                                                                              <select name="vehiclecolor" class="form-control" id="exampleInputpwd_1">
+                                                                              <option value="NULL">SELECT VEHICLE COLOR</option>
+                                                                              <option value="Air Force blue">Air Force blue</option>
+                                                                              <option value="Alice blue">Alice blue</option>
+                                                                              <option value="Alizarin crimson">Alizarin crimson</option>
+                                                                            </select>
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="form-group col-sm-3 col-xs-3">
+                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Fuel Variant</label>
+                                                                        <div class="input-group">
+                                                                          <div class="input-group-addon"><i class="icon-drop"></i></div>
+                                                                            <select name="fuelvariant" class="form-control">
+                                                                            <option value="NULL">SELECT FUEL VARIANT</option>
+                                                                            <option value="Petrol">Petrol</option>
+                                                                            <option value="Diesel">Diesel</option>
+                                                                          </select>
+                                                                          </div>
+                                                                        </div>
+                                                                        <div class="form-group col-sm-3 col-xs-3">
+                                                                          <label class="control-label mb-10" for="exampleInputpwd_1">Kilometer Reading</label>
+                                                                          <div class="input-group">
+                                                                            <div class="input-group-addon"><i class="icon-clock"></i></div>
+                                                                            <input type="number" class="form-control" name="meterReading" placeholder="">
+                                                                            </div>
+                                                                          </div>
+                                                                          <div class="form-group col-sm-3 col-xs-3">
+                                                                            <label class="control-label mb-10" for="servicetype">Service Type</label>
+                                                                            <div class="input-group">
+                                                                              <div class="input-group-addon"><i class="icon-wrench"></i></div>
+                                                                                <select name="servicetype" id="servicetype" class="form-control">
+                                                                                <option value="NULL">SELECT SERVICE TYPE</option>
+                                                                                <option value="Regular Checkup">Regular Check-up</option>
+                                                                                <option value="General Diagnostics">General Diagnostics</option>
+                                                                                <option value="Washing & Polishing">Washing & Polishing</option>
+                                                                                <option value="Denting & Painting">Denting & Painting</option>
+                                                                                <option value="Breakdown Assitance">Breakdown Assitance</option>
+                                                                                <option value="Detailing">Detailing</option>
+                                                                                <option value="Vehicle Insurance">Vehicle Insurance</option>
+                                                                              </select>
+                                                                              </div>
+                                                                          </div>
+
+                                                                      <div class="form-group col-sm-3 col-xs-3">
+                                                                          <label class="control-label mb-10" for="exampleInputuname_1">Service Preference</label>
+                                                                            <div class="input-group">
+                                                                              <div class="input-group-addon"><i class="icon-anchor"></i></div>
+                                                                              <select name="preference" class="form-control" id="exampleInputpwd_1">
+                                                                              <option value="NULL">SELECT SERVICE PREFERENCE</option>
+                                                                              <option value="Pickup">Pickup</option>
+                                                                              <option value="Walk-in">Walk-in</option>
+                                                                            </select>
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="form-group col-sm-3 col-xs-3">
+                                                                        <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
+                                                                        <div class="input-group">
+                                                                          <div class="input-group-addon"><i class="icon-check"></i></div>
+                                                                            <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
+                                                                            <option value="NULL">SELECT ORDER STATUS</option>
+                                                                            <option value="Placed">Placed</option>
+                                                                            <option value="Unconfirmed">Unconfirmed</option>
+                                                                            <option value="Confirmed">Confirmed</option>
+                                                                            <option value="Picked-up/Walk-in">Picked-up/Walk-in</option>
+                                                                            <option value="Inprogress">Inprogress</option>
+                                                                            <option value="Delivered">Delivered</option>
+                                                                          </select>
+                                                                          </div>
+                                                                      </div>
+                                                                          <div class="form-group col-sm-3 col-xs-3">
 																																						<label class="control-label mb-10" for="exampleInputuname_1">Pick-up Date</label>
 																																							<div class="input-group">
 																																								<div class="input-group-addon"><i class="icon-calender"></i></div>
 																																								<input type="datetime-local" name="pickUpDate" class="form-control" id="pickupdate" value="" placeholder="">
                                                                               </div>
 																																						</div>
-																																					<div class="form-group col-sm-6 col-xs-6">
+																																					<div class="form-group col-sm-3 col-xs-3">
 																																						<label class="control-label mb-10 text-left">Drop-off Date</label>
 																																						<div class="input-group date' id='datetimepicker1'">
 																																							<div class="input-group-addon"><i class="icon-calender"></i></div>
                                                                               <input type="datetime-local" name="dropDate" class="form-control" id="dropdate" value="" placeholder="">  </div>
 																																					</div>
-                                                                          <div class="form-group">
+                                                                          <div class="form-group col-sm-3 col-xs-3">
 																																						<label class="control-label mb-10" for="servicetype">Service Type</label>
 																																						<div class="input-group">
 																																							<div class="input-group-addon"><i class="icon-wrench"></i></div>
@@ -783,7 +769,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																							</select>
 																																							</div>
 																																					</div>
-                                                                          <div class="form-group col-sm-6 col-xs-6">
+                                                                          <div class="form-group col-sm-3 col-xs-3">
 																																						<label class="control-label mb-10" for="issue">Issue</label>
 																																							<div class="input-group">
 																																								<div class="input-group-addon"><i class="icon-note"></i></div>
@@ -797,7 +783,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
   																																								<input type="number" name="totalpayment" class="form-control" id="totalPayment" value="" placeholder="Total Estimated amount">
   																																							</div>
   																																					</div>
-                                                                            <div class="form-group">
+                                                                            <div class="form-group col-sm-3 col-xs-3">
     																																						<label class="control-label mb-10" for="exampleInputuname_1">Advance Payment</label>
     																																							<div class="input-group">
     																																								<div class="input-group-addon"><i class="icon-wallet"></i></div>
@@ -832,14 +818,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                                         <input type="text" name="transID" class="form-control" id="exampleInputuname_1" value="" placeholder="#EXPMNT8547896">
       																																						</div>
     																																				</div>
-                                                                            <div class="form-group">
-    																																						<label class="control-label mb-10" for="exampleInputuname_1">Last Updatedon</label>
-    																																							<div class="input-group">
-                                                                                    <div class="input-group-addon"><i class="icon-calender"></i></div>
-                                                                                    <input type="datetime-local" name="lastupdates" class="form-control" id="dropdate" value="" placeholder="">  </div>
-      																																					</div>
-    																																				</div>
-                                                                            <div class="form-group col-sm-6 col-xs-6">
+                                                                            <div class="form-group col-sm-3 col-xs-3">
   																																						<label class="control-label mb-10" for="exampleInputpwd_1">Garage</label>
   																																						<div class="input-group">
   																																							<div class="input-group-addon"><i class="icon-magnet"></i></div>
@@ -851,7 +830,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
   																																							</select>
   																																							</div>
   																																					</div>
-                                                                            <div class="form-group">
+                                                                            <div class="form-group col-sm-3 col-xs-3">
     																																						<label class="control-label mb-10" for="exampleInputuname_1">Pickup / Drop-off Boy</label>
     																																							<div class="input-group">
     																																								<div class="input-group-addon"><i class="icon-user-follow"></i></div>
@@ -863,9 +842,11 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
     																																							</select>
                                                                                 </div>
     																																				</div>
+                                                            <div  class="col-xs-12">
                                                       <input type="hidden" name="customerId" value="<?=$selectCustomerData['customerID'];?>">
                                                     	<button type="submit" name="submit" class="btn btn-success mr-10">Submit
 																											<button type="reset" class="btn btn-default">Cancel</button>
+                                                    </div>
                                                       <?php
 																                        }
 																                    } else { //if didn't execute
@@ -937,6 +918,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
     <!--Script for Payment Calculations.-->
     <script type="text/javascript">
         $(document).ready(function(){
+
             $('#totalPayment').on('keyup',function(){
 
                   $('#advancedPayment').val(0);
@@ -952,6 +934,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                   });
 
             });
+
         });
     </script>
 	</body>

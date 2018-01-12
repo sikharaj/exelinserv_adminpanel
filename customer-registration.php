@@ -655,18 +655,18 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																							</div>
 																																						</div>
                                                                             <div class="form-group col-sm-3 col-xs-3">
-  									  																												<label class="control-label mb-10" for="exampleInputuname_1">Address</label>
+  									  																												<label class="control-label mb-10" for="exampleInputuname_1">Booking For</label>
   									  																													<div class="input-group">
   									  																														<div class="input-group-addon"><i class="icon-home "></i></div>
   									                                                              <select name="addressType" id="addressType" class="form-control">
-  									                                                                <option value="NULL">SELECT ADDRESS TYPE</option>
+  									                                                                <option value="">SELECT ADDRESS TYPE</option>
   									                                                                <option Value="SELF">Self</option>
-                                                                                    <option value="REFERENCE">Some one else</option>
+                                                                                    <option value="REFERENCE">Someone else</option>
   									                                                                </select>
   									  																														</div>
   									  																												</div>
 																																							<div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputEmail_1">Street Address</label>
+																																								<label class="control-label mb-10" for="exampleInputEmail_1">Address</label>
 																																								<div class="input-group">
 																																									<div class="input-group-addon"><i class="icon-home"></i></div>
 																																									<input type="text" name="streetAddress" class="form-control" id="streetAddress" required placeholder="Enter streetaddress">
@@ -678,16 +678,12 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																									<div class="input-group-addon"><i class="icon-paper-plane"></i></div>
 																																									<input type="text" name="area" class="form-control" id="area" placeholder="area" required>
 																																								</div>
-																																							</div>
-																																							<div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputuname_1">Temperary Phone Number</label>
-																																									<div class="input-group">
-																																										<div class="input-group-addon"><i class="icon-phone"></i></div>
-																																										<input type="tel" name="temphone" class="form-control" id="temphone" placeholder="Enter a temperary phone number">
-																																									</div>
-																																								</div>
+																																							</div> <br />
+
+                                                                              <div class="form-group col-xs-12">
 																																							<button type="submit" class="btn btn-success mr-10">Create Customer</button>
 																											<button type="reset" class="btn btn-default">Reset</button>
+                                                    </div>
 																										</form>
 																									</div>
 																								</div>
@@ -749,5 +745,22 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 		<!-- Init JavaScript -->
 		<script src="dist/js/init.js"></script>
+
+    <script>
+      $(document).ready(function(){
+          $('#temp').hide();
+          $('#addressType').on('change',function(){
+            var addressType = $('#addressType').val();
+            if ( addressType == 'SELF' || addressType == ''){
+              $('#temp').hide();
+            } else {
+              $('#temp').show();
+            }
+
+          });
+
+      });
+
+    </script>
 	</body>
 </html>

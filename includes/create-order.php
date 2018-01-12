@@ -43,7 +43,13 @@
         $customerid = $_POST['customerId'];
 
         if (!empty($_POST)){
-          $insertOrderData = "INSERT INTO `orders`(`customerID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`) VALUES('$customerid','$firstName','$vehicleBrand','$pickupDate','$dropoffDate','$orderCreatedOn','$orderStatus','$userStatus','$issue','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$lastUpdatedOn','$fuelVariant','$kilomtReading','$preference','$transactionID')";
+          if(!$dropoffDate)
+          {
+            $dropoffDate =  "Not Confirmed";
+          }else {
+            $dropoffDate = $dropoffDate;
+          }
+          $insertOrderData = "INSERT INTO `orders`(`customerID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`) VALUES('$customerid','$firstName','$vehicleBrand','$pickupDate','$dropoffDate','$orderCreatedOn','$orderStatus','$userStatus','$issue','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
           $insertOrderDataResult = $conn->query($insertOrderData);
             if ($insertOrderDataResult){// If Insertion successful
               $message = "Oder Created Successfully";

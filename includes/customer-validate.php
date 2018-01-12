@@ -40,7 +40,7 @@
               if ($selectEmailIDResult->num_rows > 0)  {//If email already exist
                   header('Location:../customer-registration.php?message=User with same mail ID is already registered with us.');
               } else {
-                $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`, `gender`) VALUES ('$firstname','$lastname','$phone','$email','INACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1','$gender')";
+                $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`, `gender`) VALUES ('$firstname','$lastname','$phone','$email','ACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1','$gender')";
                 $insertCustomerDataResult =$conn -> query($insertCustomerData);
 
                   if ($insertCustomerDataResult) { //If insertion successful
@@ -55,14 +55,14 @@
                                       $customerId = $customerData['customerID']; //select customer ID
                                         //insert Address data to address Table
 
-                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `streetAddress`, `city`, `state`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$area','$pincode','$addressType')";
+                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `streetAddress`, `city`, `state`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$streetAddress','$city','$state','$area','$pincode','$addressType')";
                                         $insertAddressDataResult = $conn -> query($insertAddressData);
                                         if ($insertAddressDataResult) {
                                           $message = "Customer registered successfully";
-                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                          header('Location:../order-creation.php?customerid='.$customerId);
                                         } else {
                                           $message = "Registration failed";
-                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                          header('Location:../order-creation.php?customerid='.$customerId);
                                         }
                           }
                         } else {
@@ -77,7 +77,7 @@
               if ($selectEmailIDResult->num_rows > 0)  {//If email already exist
                   header('Location:../customer-registration.php?message=User with same mail ID is already registered with us.');
               } else {
-                $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`, `gender`) VALUES ('$firstname','$lastname','$phone','$email','INACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1','$gender')";
+                $insertCustomerData = "INSERT INTO `customerdetails`(`firstName`, `lastName`, `phoneNumber`,`email`,`status`, `createdOn`, `lastUpdatedOn`, `PBStatus`, `password`, `salt`, `gender`) VALUES ('$firstname','$lastname','$phone','$email','ACTIVE','$createdOn','$lastUpdatedOn','PUBLISHED','Exelinserv#1','Exelinserv#1','$gender')";
                 $insertCustomerDataResult =$conn -> query($insertCustomerData);
 
                   if ($insertCustomerDataResult) { //If insertion successful
@@ -96,10 +96,10 @@
                                         $insertAddressDataResult = $conn -> query($insertAddressData);
                                         if ($insertAddressDataResult) {
                                           $message = "Customer registered successfully";
-                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                          header('Location:../order-creation.php?customerid='.$customerId);
                                         } else {
                                           $message = "Registration failed";
-                                          header('Location:../order-creation.php?customerid='.$last_id);
+                                          header('Location:../order-creation.php?customerid='.$customerId);
                                         }
 
                               }
