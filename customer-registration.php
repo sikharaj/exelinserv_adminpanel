@@ -563,33 +563,31 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																													<input type="password" name="password" class="form-control" id="exampleInputpwd_1" placeholder="Enter password">
 																												</div>
 																											</div>
-                                                      <div class="row">
-                                                        <div class="form-group mb-30">
-                                  													<label class="control-label mb-10 text-left">Radio</label>
-                                                            <div class="form-group col-sm-6 col-xs-12">
+
+                                                      	<div class="form-group col-sm-6 col-xs-6">
+
+                                  													<label class="control-label mb-10 text-left">Gender</label>
+
                                                             <div class="radio radio-info">
-                                  														<input type="radio" name="radio" id="radio1" value="option1" checked="">
-                                  														<label for="radio1">
-                                  															M
+                                  														<input type="radio" name="genderChoose" id="male" value="Male" checked>
+                                  														<label for="radio2">
+                                  															Male
                                   														</label>
-                                  													</div>
-                                                          </div>
-                                                              <div class="form-group col-sm-6 col-xs-12">
-                                                              <div class="radio radio-info">
-                                                                <input type="radio" name="radio" id="radio1" value="option1" checked="">
+                                                                &nbsp; &nbsp; &nbsp;
+                                                                <input type="radio" name="genderChoose" id="female" value="Female">
                                                                 <label for="radio1">
-                                                                  M
+                                                                  Female
                                                                 </label>
                                                               </div>
-                                                            </div>
-                                  												</div>
-                                                        </div>
+                                                          </div>
+
 																													<div class="row">
 																														<div class="col-md-12">
 																															<div class="panel panel-default card-view">
 																																<div class="panel-heading">
 																																	<div class="pull-left">
-																																		<h4 class="panel-title txt-dark"><font color="#A9A9A9">Customer Address</font></h4>
+                                                                    <h6 class="panel-title txt-dark">Customer Registration</h6><br/>
+                        																						<h4 class="panel-title txt-dark"><font color="#A9A9A9">Customer Communcation Address With All Details.</font></h4>
 																																	</div>
 																																	<div class="clearfix"></div>
 																																</div>
@@ -604,13 +602,13 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 									  																												<label class="control-label mb-10" for="exampleInputuname_1">Country</label>
 									  																													<div class="input-group">
 									  																														<div class="input-group-addon"><i class="icon-layers "></i></div>
-									                                                              <select name="country" id="country" class="form-control">
+									                                                              <select name="country" id="countryChoice" class="form-control">
 									                                                                <option value="NULL">SELECT COUNTRY</option>
 									                                                                <?php
 									                                                                      $electCountry = mysqli_query($conn,"SELECT * FROM `country`");
 									                                                                      while($electCountryData = mysqli_fetch_array($electCountry)){
 									                                                                ?>
-									                                                                <option value="<?php echo $electCountryData['countryName'];?>"><?php echo $electCountryData['countryName'];?></option>
+									                                                                <option value="<?php echo $electCountryData['countryID'];?>"><?php echo $electCountryData['countryName'];?></option>
 									                                                                <?php
 									                                                                        }
 									                                                                ?>
@@ -621,16 +619,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 									  																												<label class="control-label mb-10" for="exampleInputuname_1">State</label>
 									  																													<div class="input-group">
 									  																														<div class="input-group-addon"><i class="icon-directions"></i></div>
-									                                                              <select name="state" id="state" class="form-control">
+									                                                              <select name="state" id="stateChoice" class="form-control">
 									                                                                <option value="NULL">SELECT STATE</option>
-									                                                                <?php
-									                                                                      $electState = mysqli_query($conn,"SELECT * FROM `state`");
-									                                                                      while($selectStateData = mysqli_fetch_array($electState)){
-									                                                                ?>
-									                                                                <option value="<?php echo $selectStateData['stateName'];?>"><?php echo $selectStateData['stateName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
 									                                                                </select>
 									  																														</div>
 									  																												</div>
@@ -638,16 +628,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 									  																												<label class="control-label mb-10" for="exampleInputuname_1">City</label>
 									  																													<div class="input-group">
 									  																														<div class="input-group-addon"><i class="icon-direction"></i></div>
-									                                                              <select name="city" id="city" class="form-control">
+									                                                              <select name="city" id="cityChoice" class="form-control">
 									                                                                <option value="NULL">SELECT CITY</option>
-									                                                                <?php
-									                                                                      $electCity = mysqli_query($conn,"SELECT * FROM `city`");
-									                                                                      while($electCityData = mysqli_fetch_array($electCity)){
-									                                                                ?>
-									                                                                <option value="<?php echo $electCityData['cityName'];?>"><?php echo $electCityData['cityName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
 									                                                                </select>
 									  																														</div>
 									  																												</div>
@@ -663,9 +645,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
   									  																													<div class="input-group">
   									  																														<div class="input-group-addon"><i class="icon-home "></i></div>
   									                                                              <select name="addressType" id="addressType" class="form-control">
-  									                                                                <option value="">SELECT ADDRESS TYPE</option>
-  									                                                                <option Value="SELF">Self</option>
-                                                                                    <option value="REFERENCE">Someone else</option>
+  									                                                                <option value="">ADDRESS TYPE</option>
+  									                                                                <option Value="SELF"> MY HOME</option>
+                                                                                    <option value="REFERENCE">FRIEND'S HOME</option>
+                                                                                    <option value="OFFICE">MY OFFICE</option>
   									                                                                </select>
   									  																														</div>
   									  																												</div>
@@ -686,7 +669,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
                                                                               <div class="form-group col-xs-12">
 																																							<button type="submit" class="btn btn-success mr-10">Create Customer</button>
-																											<button type="reset" class="btn btn-default">Reset</button>
+																											<button type="reset" class="btn btn-danger">Reset</button>
                                                     </div>
 																										</form>
 																									</div>
@@ -752,13 +735,101 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
     <script>
       $(document).ready(function(){
-          $('#temp').hide();
-          $('#addressType').on('change',function(){
-            var addressType = $('#addressType').val();
-            if ( addressType == 'SELF' || addressType == ''){
-              $('#temp').hide();
-            } else {
-              $('#temp').show();
+
+          $('#countryChoice').on('change',function(){
+
+              $('#stateChoice').html('<option>Please choose State</option>');
+              $('#cityChoice').html('<option>Please choose State First</option>');
+
+              var country = $(this).val();
+
+                if(country){
+
+                  //Running the AJAX Call for data retrival
+                  $.ajax({
+
+                        type: 'post',
+                        url: 'includes/fetchLocations.php?country='+country,
+                        cache: false,
+                        dataType: 'json',
+                        data:{country:country},
+                        success: function(stateInfo){
+
+                            var len = stateInfo.length;
+                            $('#stateChoice').html('<option value="NULL">Please choose State</option>');
+
+
+                              if(stateInfo){
+
+                                for (var i = 0; i<len; i++){
+
+                                      var stateID = stateInfo[i]['stateID'];
+                                      var stateName = stateInfo[i]['stateName'];
+                                        $('#stateChoice').append("<option value = '"+stateID+"'>"+stateName+"</option>");
+
+                                }
+
+
+
+                              }else{
+
+                                $('#stateChoice').html('<option value="NULL">Please choose Country first</option>');
+
+                              }
+                        }
+                  });
+
+                }else{
+
+                  $('#stateChoice').append('<option value="NULL">Please choose Country first</option>');
+
+                }
+
+            });
+
+          $('#stateChoice').on('change', function(){
+
+            var state = $(this).val();
+
+              if(state){
+
+              //Running the AJAX Call for data retrival
+              $.ajax({
+
+                    type: 'post',
+                    url: 'includes/fetchLocations.php?state='+state,
+                    cache: false,
+                    dataType: 'json',
+                    data:{state:state},
+                    success: function(cityInfo){
+
+                        $('#cityChoice').html('<option value="NULL">Please choose City</option>');
+
+                          if(cityInfo){
+
+                              var len = cityInfo.length;
+
+                              for (var i = 0; i<len; i++){
+
+                                var cityID = cityInfo[i]['cityID'];
+                                var cityName = cityInfo[i]['cityName'];
+                                $('#cityChoice').append("<option value = '"+cityID+"'>"+cityName+"</option>");
+
+                              }
+
+
+                          } else{
+
+                            $('#cityChoice').html('<option value="NULL">No City in list</option>');
+
+                          }
+                    }
+              });
+
+            }else{
+
+                  $('#cityChoice').html('<option value="NULL">Please choose State First</option>');
+
             }
 
           });
