@@ -25,9 +25,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
         header('Location:index.php?Please Login Again!');
     }
 }
-   $selectAllQuickOrders = "SELECT * FROM `orders`";
-   $selectAllQuickOrdersResults = $conn -> query($selectAllQuickOrders);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -476,9 +473,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 				</ul>
 			</div>
 			<!-- /Right Sidebar Menu -->
-
-
-
 			<!-- Right Sidebar Backdrop -->
 			<div class="right-sidebar-backdrop"></div>
 			<!-- /Right Sidebar Backdrop -->
@@ -503,69 +497,79 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 					</div>
 					<!-- /Title -->
 					<!-- Row -->
-          <!-- Row -->
-  				<div class="row">
-  					<div class="col-sm-12">
-  						<div class="panel panel-default card-view">
-  							<div class="panel-wrapper collapse in">
-  								<div class="panel-body">
-  									<div class="table-wrap">
-  										<div class="table-responsive">
-  				              <form id="add_name" name="add_name" method="POST">
-												<table class="table table-hover display  pb-30" id="datatable-fixedheader">
-													<thead>
-														<tr>
-                              <th>Sl.No.</th>
-															<th>Item</th>
-                              <th>Description</th>
-                              <th>Quantity</th>
-															<th>Price</th>
-															<th>Discount</th>
-                              <th>Tax Rate</th>
-                              <th>Product Unit</th>
-															<th>Totals</th>
-                              </tr>
-													</thead>
-
-													<tbody>
-                            <?php
-                    if($selectAllQuickOrdersResults) { // if Executed
-                        while ($selectAllQuickOrdersData = $selectAllQuickOrdersResults -> fetch_assoc()) {
-                    ?>
-														<tr>
-															<td>
-                            <?=$selectAllQuickOrdersData['serviceType'];?>
-                          </td>
-															<td><?=$selectAllQuickOrdersData['name'];?>
-                            </td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-                              <td><?=$selectAllQuickOrdersData['name'];?></td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-                            <td><?=$selectAllQuickOrdersData['name'];?></td>
-                              <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
-														</tr>
-                            <?php
-                        }
-                    } else { //if didn't execute
-                        echo "Unable to process Please try again later";
-                    }
-                    ?>
-													</tbody>
-
-												</table>
-                      </div>
-
-											<div class="clearfix"></div>
-										</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default card-view">
+								<div class="panel-heading">
+									<div class="pull-left">
+										<h6 class="panel-title txt-dark">Invoice</h6>
 									</div>
+									<div class="pull-right">
+                    <form method="POST" name="" id="" action="generate_invoice.php">
+										<select name="orderId" id="orderId" class="form-control">
+											<option value="NULL"><h6 class="txt-dark">SELECT ORDER#</h6></option>
+											<?php
+														$electOrder = mysqli_query($conn,"SELECT * FROM `orders`");
+														while($electOrderData = mysqli_fetch_array($electOrder)){
+											?>
+											<option value="<?php echo $electOrderData['orderID'];?>">
+												<table>
+													<tr><th>ID : </th><td><?php echo $electOrderData['orderID'];?>,</td><th> Name : </th><td><?php echo $electOrderData['name'];?></td></tr>
+												</table>
+											</option>
+
+											<?php
+															}
+											?>
+											</select>
+                      <input type="text" id="idvalue" value="<?php echo $electOrderData['orderID'];?>">
+                      <input type="submit" name="">
+                    </form>
+									</div>
+									<div class="clearfix"></div>
 								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /Row -->
-        </div>
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-xs-6">
+												<span class="txt-dark head-font inline-block capitalize-font mb-5">Billed to:</span>
+												<address class="mb-15">
+													<span class="address-head mb-5">Fasbook, Inc.</span>
+                					<br>
+												  <abbr title="Phone">P:</abbr>
+												</address>
+											</div>
+											<div class="col-xs-6 text-right">
+												<span class="txt-dark head-font inline-block capitalize-font mb-5">shiped to:</span>
+												<address class="mb-15">
+													<span class="address-head mb-5">, Inc.</span>
+													<br>
+													 <br>
+													<abbr title="Phone">P:</abbr>
+												</address>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-xs-6">
+												<address>
+													<span class="txt-dark head-font capitalize-font mb-5">payment method:</span>
+													<br>
+													Visa ending **** 4242<br>
+													Email :
+												</address>
+											</div>
+											<div class="col-xs-6 text-right">
+												<address>
+													<span class="txt-dark head-font capitalize-font mb-5">order date:</span><br>
+													<br><br>
+												</address>
+											</div>
+										</div>
+
+										<div class="seprator-block"></div>
+
+				</div>
 
 				<!-- Footer -->
 				<footer class="footer container-fluid pl-30 pr-30">
@@ -605,58 +609,5 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 		<!-- Init JavaScript -->
 		<script src="dist/js/init.js"></script>
-
-    <!-- Add Table Row -->
-    <script type="text/javascript">
-        $(document).ready(function(){
-          var postURL = "addmore.php";
-          var i=1;
-
-
-          $('#add').click(function(){
-               i++;
-               $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
-          });
-
-
-          $(document).on('click', '.btn_remove', function(){
-               var button_id = $(this).attr("id");
-               $('#row'+button_id+'').remove();
-          });
-
-
-          $('#saveInvoiceButton').on('click',function(){
-            //alert("hi");
-               $.ajax({
-                    url:postURL,
-                    method:"POST",
-                    data:$('#add_name').serialize(),
-                    type:'json',
-                    cache: false,
-                    success:function(data)
-                    {
-                      	i=1;
-                      	$('.dynamic-added').remove();
-                      	$('#add_name')[0].reset();
-        				        //alert('Record Inserted Successfully.');
-                    }
-               });
-          });
-
-
-        });
-    </script>
-
-        <!-- Auto-increment table script-->
-        <script>
-        var tables = document.getElementsByTagName('table');
-        var table = tables[tables.length - 1];
-        var rows = table.rows;
-        for(var i = 1, td; i < rows.length; i++){
-            td = document.createElement('td');
-            td.appendChild(document.createTextNode(i + 0));
-            rows[i].insertBefore(td, rows[i].firstChild);
-        }
-      </script>
 	</body>
 </html>

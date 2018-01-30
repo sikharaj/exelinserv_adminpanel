@@ -25,9 +25,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
         header('Location:index.php?Please Login Again!');
     }
 }
-   $selectAllQuickOrders = "SELECT * FROM `orders`";
-   $selectAllQuickOrdersResults = $conn -> query($selectAllQuickOrders);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -476,9 +473,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 				</ul>
 			</div>
 			<!-- /Right Sidebar Menu -->
-
-
-
 			<!-- Right Sidebar Backdrop -->
 			<div class="right-sidebar-backdrop"></div>
 			<!-- /Right Sidebar Backdrop -->
@@ -502,17 +496,94 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 						<!-- /Breadcrumb -->
 					</div>
 					<!-- /Title -->
+          <?php
+              if(isset($_GET['orderId']) && $_GET['orderId'] != "") {
+
+                  $orderId = $_GET['orderId'];
+                  $selectOrderId = "SELECT * FROM `orders` WHERE `orderID` = '$orderId'";
+                  $selectOrderIdResults = $conn -> query($selectOrderId);
+                  if($selectOrderIdResults) { // if Executed
+                      $selectOrderIdData = $selectOrderIdResults -> fetch_assoc();
+                     $custId = $selectOrderIdData['customerID'];
+                      $selectCustomerAddress = "SELECT * FROM `address` WHERE `customerID` = '$custId'";
+                      $selectCustomerAddressResults = $conn -> query($selectCustomerAddress);
+                      if($selectCustomerAddressResults) { // If Executed
+                        $selectCustomerAddressData = $selectCustomerAddressResults -> fetch_assoc();
+
+                        $selectCustomerInfo = "SELECT * FROM `customerdetails` WHERE `customerID` = '$custId'";
+                        $selectCustomerInfoResults = $conn -> query($selectCustomerInfo);
+                        if($selectCustomerInfoResults){ //If Executed
+                          $selcetCustomerInfoData = $selectCustomerInfoResults -> fetch_assoc();
+
+
+                      ?>
 					<!-- Row -->
-          <!-- Row -->
-  				<div class="row">
-  					<div class="col-sm-12">
-  						<div class="panel panel-default card-view">
-  							<div class="panel-wrapper collapse in">
-  								<div class="panel-body">
-  									<div class="table-wrap">
-  										<div class="table-responsive">
-  				              <form id="add_name" name="add_name" method="POST">
-												<table class="table table-hover display  pb-30" id="datatable-fixedheader">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default card-view">
+								<div class="panel-heading">
+									<div class="pull-left">
+										<h6 class="panel-title txt-dark">Invoice</h6>
+									</div>
+                  <div class="pull-right">
+                    <h6>Order #<?=$orderId;?></h6>
+                  </div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-xs-6">
+												<span class="txt-dark head-font inline-block capitalize-font mb-5">Billed to:</span>
+												<address class="mb-15">
+													<span class="address-head mb-5"><?=$selectCustomerAddressData['customerName'];?>, Inc.</span>
+                					<?=$selectCustomerAddressData['streetAddress'];?><br>
+                          <?=$selectCustomerAddressData['tempCusAddress'];?><br/>
+                          <?=$selectCustomerAddressData['area'];?>, <?=$selectCustomerAddressData['pinCode'];?><br/>
+												  <abbr title="Phone">P:<?=$selectCustomerAddressData['custPhoneNumber']?></abbr>
+												</address>
+											</div>
+											<div class="col-xs-6 text-right">
+												<span class="txt-dark head-font inline-block capitalize-font mb-5">shiped to:</span>
+												<address class="mb-15">
+													<span class="address-head mb-5">, Inc.</span>
+													<br>
+													 <br>
+													<abbr title="Phone">P:</abbr>
+												</address>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-xs-6">
+												<address>
+													<span class="txt-dark head-font capitalize-font mb-5">payment method:</span>
+													<br>
+													Visa ending **** 4242<br>
+													Email :<?=$selcetCustomerInfoData['email'];?>
+												</address>
+											</div>
+											<div class="col-xs-6 text-right">
+												<address>
+													<span class="txt-dark head-font capitalize-font mb-5">order date:</span> <br/><?=$selectOrderIdData['orderCreatedOn'];?>
+													<br><br>
+												</address>
+											</div>
+										</div>
+
+                    <?php
+                                        }}  } else {
+                                          header("Location:editRental.php?message=No User Found.");
+                                      }}
+
+                                      ?>
+
+										<div class="seprator-block"></div>
+
+										<div class="invoice-bill-table">
+											<div class="table-responsive">
+                        <form id="add_name" name="add_name" method="POST" action="">
+												<table class="table table-hover" id="dynamic_field">
 													<thead>
 														<tr>
                               <th>Sl.No.</th>
@@ -524,39 +595,43 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                               <th>Tax Rate</th>
                               <th>Product Unit</th>
 															<th>Totals</th>
-                              </tr>
+                            </tr>
 													</thead>
-
 													<tbody>
-                            <?php
-                    if($selectAllQuickOrdersResults) { // if Executed
-                        while ($selectAllQuickOrdersData = $selectAllQuickOrdersResults -> fetch_assoc()) {
-                    ?>
 														<tr>
-															<td>
-                            <?=$selectAllQuickOrdersData['serviceType'];?>
+                            <td>
+                            <input type="text" name="item" placeholder="" class="form-control name_list"/>
                           </td>
-															<td><?=$selectAllQuickOrdersData['name'];?>
+															<td><input type="text" name="description" placeholder="" class="form-control name_list"/>
                             </td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-                              <td><?=$selectAllQuickOrdersData['name'];?></td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-															<td><?=$selectAllQuickOrdersData['name'];?></td>
-                            <td><?=$selectAllQuickOrdersData['name'];?></td>
+															<td><input type="text" name="qty" placeholder="" class="form-control name_list" />
+                            </td>
+															<td><input type="text" name="price" placeholder="" class="form-control name_list" />
+                            </td><td><input type="text" name="discount" placeholder="" class="form-control name_list" />
+                            </td>
+															<td><input type="text" name="taxrate" placeholder="" class="form-control name_list" />
+                            </td>
+															<td><input type="text" name="productunit" placeholder="" class="form-control name_list" />
+                            </td>
+                            <td><input type="text" name="total" placeholder="" class="form-control name_list" />
+                          </td>
                               <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
 														</tr>
-                            <?php
-                        }
-                    } else { //if didn't execute
-                        echo "Unable to process Please try again later";
-                    }
-                    ?>
 													</tbody>
-
 												</table>
-                      </div>
-
+											</div>
+											<div class="button-list pull-right">
+                        <button type="submit" class="btn btn-success mr-10" id="saveInvoiceButton">
+													Submit
+												</button>
+												<button type="button" class="btn btn-success mr-10" id="paymentProcessing">
+													Proceed to payment
+												</button>
+												<button type="button" class="btn btn-primary btn-outline btn-icon left-icon" onclick="javascript:window.print();">
+													<i class="fa fa-print"></i><span> Print</span>
+												</button>
+											</div>
+                    </form>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -565,7 +640,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 						</div>
 					</div>
 					<!-- /Row -->
-        </div>
+
+				</div>
 
 				<!-- Footer -->
 				<footer class="footer container-fluid pl-30 pr-30">
@@ -615,7 +691,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
           $('#add').click(function(){
                i++;
-               $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+               $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td></td><td><input type="text" name="item" class="form-control name_list" /></td><td><input type="text" name="description" class="form-control name_list"  /></td><td><input type="text" name="qty" class="form-control name_list" /></td><td><input type="text" name="price" class="form-control name_list" /></td><td><input type="text" name="discount" class="form-control name_list" /></td><td><input type="text" name="texrate" class="form-control name_list" /></td><td><input type="text" name="discount" class="form-control name_list"/></td><td><input type="text" name="totals" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
           });
 
 
@@ -627,12 +703,14 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
           $('#saveInvoiceButton').on('click',function(){
             //alert("hi");
+            //var Button = $('#add_name').val();
+          //  alert(Button);
                $.ajax({
                     url:postURL,
                     method:"POST",
                     data:$('#add_name').serialize(),
                     type:'json',
-                    cache: false,
+                    //cache: false,
                     success:function(data)
                     {
                       	i=1;
@@ -646,17 +724,16 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
         });
     </script>
-
-        <!-- Auto-increment table script-->
-        <script>
-        var tables = document.getElementsByTagName('table');
-        var table = tables[tables.length - 1];
-        var rows = table.rows;
-        for(var i = 1, td; i < rows.length; i++){
-            td = document.createElement('td');
-            td.appendChild(document.createTextNode(i + 0));
-            rows[i].insertBefore(td, rows[i].firstChild);
-        }
-      </script>
+    <!-- Auto-increment table script-->
+    <script>
+    var tables = document.getElementsByTagName('table');
+    var table = tables[tables.length - 1];
+    var rows = table.rows;
+    for(var i = 1, td; i < rows.length; i++){
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(i + 0));
+        rows[i].insertBefore(td, rows[i].firstChild);
+    }
+  </script>
 	</body>
 </html>

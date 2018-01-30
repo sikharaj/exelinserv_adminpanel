@@ -1,6 +1,7 @@
 <?php
 
-
+	print_r($_POST);
+	exit;
 	define (DB_USER, "root");
 	define (DB_PASSWORD, "");
 	define (DB_DATABASE, "exelinserv");
@@ -11,12 +12,10 @@
 	if(!empty($_POST)){
 
 
-		foreach ($_POST["name"] as $key => $value) {
-			$sql = "INSERT INTO ip_invoices(invoice_date_created,invoice_time_created) VALUES ('".$value."','".$value."')";
+		foreach ($_POST[""] as $key => $value) {
+			$sql = "INSERT INTO ip_invoices(`user_id`, `address_id`, `invoice_datetime`, `invoice_date_due`, `invoice_number`, `invoice_discount_amount`, `invoice_discount_percent`, `invoice_terms`, `invoice_url_key`, `payment_method`) VALUES ('".$value."','".$value."','".$value."','".$value."','".$value."','".$value."','".$value."','".$value."','".$value."','".$value."')";
 			$mysqli->query($sql);
 		}
 		echo json_encode(['success'=>'Names Inserted successfully.']);
 	}
-
-
 ?>
