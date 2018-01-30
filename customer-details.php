@@ -2,7 +2,7 @@
     session_start(); // Start Session
 
     include_once "includes/db_connect.php"; //DB Connection script
-    
+
     if(!isset($_SESSION['bazooka'])) { // if session not set
         header('Location:index.php?message=Please Login and try.');
 
@@ -486,14 +486,14 @@
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-					  <h5 class="txt-dark">Export</h5>
+					  <h5 class="txt-dark">Information</h5>
 					</div>
 					<!-- Breadcrumb -->
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 					  <ol class="breadcrumb">
 						<li><a href="index.html">Dashboard</a></li>
-						<li><a href="#"><span>table</span></a></li>
-						<li class="active"><span>Export</span></li>
+						<li><a href="#"><span>Customer</span></a></li>
+						<li class="active"><span>Details</span></li>
 					  </ol>
 					</div>
 					<!-- /Breadcrumb -->

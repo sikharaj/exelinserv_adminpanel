@@ -16,7 +16,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 } else { // if set get the email
     $email = $_SESSION['bazooka'];
-    $selectAdminQuery = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";
+    $selectAdminQuery = "SELECT * FROM `users` WHERE `email` = '$email'";
     $selectAdminDataResult = $conn -> query($selectAdminQuery);
     if ($selectAdminDataResult) { //Successfully execute SQL Query
         $selectAdminData = $selectAdminDataResult->fetch_assoc();

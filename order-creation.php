@@ -787,7 +787,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
     																																						<label class="control-label mb-10" for="exampleInputuname_1">Advance Payment</label>
     																																							<div class="input-group">
     																																								<div class="input-group-addon"><i class="icon-wallet"></i></div>
-    																																								<input type="number" name="advancedpayment" class="form-control" id="advancedPayment" value="" placeholder="Due payment if any">
+    																																								<input type="number" name="advancedpayment" class="form-control" id="advancedPayment" value="" placeholder="Advance payment if any">
     																																							</div>
     																																				</div>
                                                                             <div class="form-group col-sm-3 col-xs-3">
@@ -795,12 +795,11 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
   																																						<div class="input-group">
   																																							<div class="input-group-addon"><i class="icon-wallet"></i></div>
   																																								<select name="paymentmode" class="form-control" id="exampleInputpwd_1">
-  																																								<option value="NULL">SELECT PAYMENT MODE</option>
+  																																								<option value="NULL" disabled selected>SELECT PAYMENT METHOD</option>
   																																								<option value="Cash">Cash</option>
   																																								<option value="Paytm">Paytm</option>
                                                                                   <option value="UPI">UPI</option>
-                                                                                  <option value="Online">Online(Bank/Payment Gateway)</option>
-                                                                                  <option value="Debit/Credit Card">Debit/Credit Card</option>
+                                                                                  <option value="Online">Debit Card/Credit Card/Net Banking</option>
   																																							</select>
   																																							</div>
   																																					</div>
@@ -845,7 +844,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                             <div  class="col-xs-12">
                                                       <input type="hidden" name="customerId" value="<?=$selectCustomerData['customerID'];?>">
                                                     	<button type="submit" name="submit" class="btn btn-success mr-10">Submit
-																											<button type="reset" class="btn btn-default">Cancel</button>
+																											<button type="reset" class="btn btn-danger">Cancel</button>
                                                     </div>
                                                       <?php
 																                        }

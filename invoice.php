@@ -35,30 +35,25 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 		<meta name="description" content="Philbert is a Dashboard & Admin Site Responsive Template by hencework." />
 		<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Philbert Admin, Philbertadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
 		<meta name="author" content="hencework"/>
-
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 
-		<!-- vector map CSS -->
-		<link href="vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
 		<!-- Custom CSS -->
 		<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 	</head>
-
 	<body>
 		<!--Preloader-->
 		<div class="preloader-it">
 			<div class="la-anim-1"></div>
 		</div>
 		<!--/Preloader-->
-
 		<div class="wrapper theme-1-active pimary-color-green">
 			<?php include "includes/header.php";?>
 
- 		<?php include "includes/nav.php";?>
-<!-- Right Sidebar Menu -->
+			<?php include "includes/nav.php";?>
+
+			<!-- Right Sidebar Menu -->
 			<div class="fixed-sidebar-right">
 				<ul class="right-sidebar">
 					<li>
@@ -488,229 +483,267 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 			<!-- Main Content -->
 			<div class="page-wrapper">
 				<div class="container-fluid">
-
 					<!-- Title -->
 					<div class="row heading-bg">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h5 class="txt-dark">Admin Panel</h5>
+							<h5 class="txt-dark">invoice</h5>
 						</div>
-
 						<!-- Breadcrumb -->
 						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 							<ol class="breadcrumb">
 								<li><a href="index.html">Dashboard</a></li>
-								<li><a href="#"><span>merchant</span></a></li>
-								<li class="active"><span>Registration</span></li>
+								<li><a href="#"><span>special</span></a></li>
+								<li class="active"><span>invoice</span></li>
 							</ol>
 						</div>
 						<!-- /Breadcrumb -->
+					</div>
+					<!-- /Title -->
+					<!-- Row -->
+          <?php
+            if(isset($_GET['orderId']) && $_GET['orderId'] != "") {
+                $orderId = $_GET['orderId'];
+            $selectOrders = "SELECT * FROM `orders` WHERE `orderID` = $orderId";
+            $selectOrdersResults = $conn -> query($selectOrders);
+            if($selectOrdersResults) { // if Executed
+            $selectOrdersData = $selectOrdersResults -> fetch_assoc();
+            $custmId = $selectOrdersData['customerID'];
+                $selectAddress = "SELECT * FROM `address` WHERE `customerID` = $custmId";
+                $selectAddressResults = $conn -> query($selectAddress);
+                if($selectAddressResults){
+                    $selectAddressData = $selectAddressResults -> fetch_assoc();
+                    $selectEmail = "SELECT * FROM `customerdetails` WHERE `customerID` = $custmId";
+                    $selectEmailResults = $conn -> query($selectEmail);
+                    if($selectEmailResults){
+                        $selectEmailData = $selectEmailResults -> fetch_assoc();
+                        $email = $selectEmailData['email'];
 
+            ?>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default card-view">
+								<div class="panel-heading">
+									<div class="pull-left">
+										<h6 class="panel-title txt-dark">Invoice</h6>
+									</div>
+									<div class="pull-right">
+                    <h6>Order #<?=$orderId;?></h6>
+										<!--<select name="order" id="order" class="form-control">
+											<option value="NULL"><h6 class="txt-dark">SELECT ORDER#</h6></option>
+											<!--<?php
+														$electOrder = mysqli_query($conn,"SELECT * FROM `orders`");
+														while($electOrderData = mysqli_fetch_array($electOrder)){
+											?>
+											<option value="<?php echo $electOrderData['orderID'];?>">
+												<table>
+													<tr><th>ID : </th><td><?php echo $electOrderData['orderID'];?>,</td><th> Name : </th><td><?php echo $electOrderData['name'];?></td></tr>
+												</table>
+											</option>
+
+											<!--<?php
+															}
+											?>-->
+											<!--</select>-->
+
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-xs-6">
+												<span class="txt-dark head-font inline-block capitalize-font mb-5">Billed to:</span>
+												<address class="mb-15">
+													<span class="address-head mb-5">Fasbook, Inc.</span>
+                          <?=$selectAddressData['tempCusAddress'];?>
+                          <?=$selectAddressData['streetAddress'];?>
+													<br>
+													<?=$selectOrdersData['name'];?> <br>
+													<abbr title="Phone">P:</abbr><?=$selectAddressData['custPhoneNumber'];?>
+												</address>
+											</div>
+											<div class="col-xs-6 text-right">
+												<span class="txt-dark head-font inline-block capitalize-font mb-5">shiped to:</span>
+												<address class="mb-15">
+													<span class="address-head mb-5"><?=$selectAddressData['customerName'];?>, Inc.</span>
+                          <?=$selectAddressData['tempCusAddress'];?>
+                          <?=$selectAddressData['streetAddress'];?>
+													<br>
+													<?=$selectOrdersData['name'];?> <br>
+													<abbr title="Phone">P:</abbr><?=$selectAddressData['custPhoneNumber'];?>
+												</address>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-xs-6">
+												<address>
+													<span class="txt-dark head-font capitalize-font mb-5">Payment Method:</span>
+													<br>
+													Visa ending **** 4242<br>
+													<?=$selectEmailData['email'];?>
+												</address>
+											</div>
+											<div class="col-xs-6 text-right">
+												<address>
+													<span class="txt-dark head-font capitalize-font mb-5">order date:</span><br>
+													<?=$selectOrdersData['orderCreatedOn'];?><br><br>
+												</address>
+											</div>
+										</div>
+
+										<div class="seprator-block"></div>
+
+										<div class="invoice-bill-table">
+											<div class="table-responsive">
+                        <form id="add_name" name="add_name">
+												<table class="table table-hover" id="dynamic_field">
+													<thead>
+														<tr>
+															<th>Item</th>
+                              <th>Quantity</th>
+															<th>Price</th>
+															<th>Item Discount</th>
+                              <th>Tax Rate</th>
+                              <th>Description</th>
+                              <th>Product Unit</th>
+															<th>Totals</th>
+                              </tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+                            <input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                          </td>
+															<td><input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                            </td>
+															<td><input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                            </td>
+															<td><input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                            </td>
+                              <td><input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                            </td>
+															<td><input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                            </td>
+															<td><input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                            </td>
+                            <td><input type="text" name="name[]" placeholder="" class="form-control name_list" required="" />
+                          </td>
+                              <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+														</tr>
+														<!--<tr class="txt-dark">
+															<td></td>
+															<td></td>
+                              <td></td>
+															<td></td>
+                              <td></td>
+															<td></td>
+															<td>Subtotal</td>
+															<td>$70.99</td>
+														</tr>
+														<tr class="txt-dark">
+															<td></td>
+															<td></td>
+                              <td></td>
+															<td></td>
+                              <td></td>
+															<td></td>
+															<td>Shipping</td>
+															<td>$15</td>
+														</tr>
+														<tr class="txt-dark">
+															<td></td>
+															<td></td>
+                              <td></td>
+															<td></td>
+                              <td></td>
+															<td></td>
+															<td>Total</td>
+															<td>$685.99</td>
+														</tr>-->
+													</tbody>
+												</table>
+											</div>
+											<div class="button-list pull-right">
+                        <button type="submit" class="btn btn-success mr-10">
+													Submit
+												</button>
+												<button type="submit" class="btn btn-success mr-10">
+													Proceed to payment
+												</button>
+												<button type="button" class="btn btn-primary btn-outline btn-icon left-icon" onclick="javascript:window.print();">
+													<i class="fa fa-print"></i><span> Print</span>
+												</button>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<!-- /Title -->
-								<!--Row-->
-															<!--<div class="panel-wrapper collapse in">
-																<div class="panel-body">-->
-																	<div class="row">
-																		<div class="col-md-12">
-																			<div class="panel panel-default card-view">
-																				<div class="panel-heading">
-																					<div class="pull-left">
-																						<h6 class="panel-title txt-dark">Merchant Registration</h6><br/>
-																						<h4 class="panel-title txt-dark"><font color="#A9A9A9">Merchant Informations</font></h4>
-																					</div>
-																					<div class="clearfix"></div>
-																				</div>
-																			<!--<div class="form-wrap">
-																				<form>-->
-																				<div class="panel-wrapper collapse in">
-																					<div class="panel-body">
-																						<div class="row">
-																							<div class="col-sm-12 col-xs-12">
-																								<div class="form-wrap">
-																									<form method="POST" action="includes/merchant-validate.php">
-																										<div class="form-group col-sm-6 col-xs-6">
-																											<label class="control-label mb-10" for="exampleInputuname_1">First Name</label>
-																												<div class="input-group">
-																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="firstName" class="form-control" id="exampleInputuname_1" placeholder="Enter firstname">
-																												</div>
-																											</div>
-																											<div class="form-group">
-																												<label class="control-label mb-10" for="exampleInputuname_1">Last Name</label>
-																													<div class="input-group">
-																														<div class="input-group-addon"><i class="icon-user"></i></div>
-																														<input type="text" name="lastName" class="form-control" id="exampleInputuname_1" placeholder="Enter lastname">
-																													</div>
-																												</div>
-																											<div class="form-group col-sm-6 col-xs-6">
-																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
-																												<div class="input-group">
-																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																													<input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email">
-																												</div>
-																											</div>
-																											<div class="form-group">
-																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
-																													<div class="input-group">
-																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" placeholder="Enter phone number">
-																													</div>
-																												</div>
-																											<div class="form-group col-sm-6 col-xs-6">
-																												<label class="control-label mb-10" for="exampleInputpwd_1">Password</label>
-																												<div class="input-group">
-																													<div class="input-group-addon"><i class="icon-lock"></i></div>
-																													<input type="password" name="password" class="form-control" id="exampleInputpwd_1" placeholder="Enter password">
-																												</div>
-																											</div>
-																											<div class="form-group">
-																												<label class="control-label mb-10">Gender</label>
+					</div>
+					<!-- /Row -->
+          <?php
+        } else {
+            header("Location:invoice.php?message=No Order Found.");
+        }
 
-																														<div class="radio">
-
-																																<input type="radio" name="radio1" id="radio_1" value="Male" checked="">
-																																<label for="radio_2">
-																																		M
-																																	</label>
-																																</div>
-																																	<div class="radio">
-																																<input type="radio" name="radio1" id="radio_2" value="Female" checked="">
-																																<label for="radio_2">
-																																	F
-																																</label>
-																														</div>
-																													</div>
-																													<div class="row">
-																														<div class="col-md-12">
-																															<div class="panel panel-default card-view">
-																																<div class="panel-heading">
-																																	<div class="pull-left">
-																																		<h4 class="panel-title txt-dark"><font color="#A9A9A9">merchant Address</font></h4>
-																																	</div>
-																																	<div class="clearfix"></div>
-																																</div>
-																															<!--<div class="form-wrap">
-																																<form>-->
-																																<div class="panel-wrapper collapse in">
-																																	<div class="panel-body">
-																																		<div class="row">
-																																			<div class="col-sm-12 col-xs-12">
-																																				<div class="form-wrap">
-                                                                        	<div class="form-group col-sm-3 col-xs-3">
-									  																												<label class="control-label mb-10" for="exampleInputuname_1">Country</label>
-									  																													<div class="input-group">
-									  																														<div class="input-group-addon"><i class="icon-layers "></i></div>
-									                                                              <select name="country" id="country" class="form-control">
-									                                                                <option value="NULL">SELECT COUNTRY</option>
-									                                                                <?php
-									                                                                      $electCountry = mysqli_query($conn,"SELECT * FROM `country`");
-									                                                                      while($electCountryData = mysqli_fetch_array($electCountry)){
-									                                                                ?>
-									                                                                <option value="<?php echo $electCountryData['countryName'];?>"><?php echo $electCountryData['countryName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
-									                                                                </select>
-									  																														</div>
-									  																												</div>
-									                                                        <div class="form-group col-sm-3 col-xs-3">
-									  																												<label class="control-label mb-10" for="exampleInputuname_1">State</label>
-									  																													<div class="input-group">
-									  																														<div class="input-group-addon"><i class="icon-directions"></i></div>
-									                                                              <select name="state" id="state" class="form-control">
-									                                                                <option value="NULL">SELECT STATE</option>
-									                                                                <?php
-									                                                                      $electState = mysqli_query($conn,"SELECT * FROM `state`");
-									                                                                      while($selectStateData = mysqli_fetch_array($electState)){
-									                                                                ?>
-									                                                                <option value="<?php echo $selectStateData['stateName'];?>"><?php echo $selectStateData['stateName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
-									                                                                </select>
-									  																														</div>
-									  																												</div>
-									                                                      <div class="form-group col-sm-3 col-xs-3">
-									  																												<label class="control-label mb-10" for="exampleInputuname_1">City</label>
-									  																													<div class="input-group">
-									  																														<div class="input-group-addon"><i class="icon-direction"></i></div>
-									                                                              <select name="city" id="city" class="form-control">
-									                                                                <option value="NULL">SELECT CITY</option>
-									                                                                <?php
-									                                                                      $electCity = mysqli_query($conn,"SELECT * FROM `city`");
-									                                                                      while($electCityData = mysqli_fetch_array($electCity)){
-									                                                                ?>
-									                                                                <option value="<?php echo $electCityData['cityName'];?>"><?php echo $electCityData['cityName'];?></option>
-									                                                                <?php
-									                                                                        }
-									                                                                ?>
-									                                                                </select>
-									  																														</div>
-									  																												</div>
-							                                                    			<div class="form-group col-sm-3 col-xs-3">
-																																						<label class="control-label mb-10" for="exampleInputuname_1">Pincode</label>
-																																							<div class="input-group">
-																																								<div class="input-group-addon"><i class="icon-location-pin"></i></div>
-																																								<input type="nuumber" name="pincode" class="form-control" required pattern="[0-9]{6}" id="pincode" placeholder="Enter your pin">
-																																							</div>
-																																						</div>
-                                                                            <div class="form-group col-sm-3 col-xs-3">
-  									  																												<label class="control-label mb-10" for="exampleInputuname_1">Booking For</label>
-  									  																													<div class="input-group">
-  									  																														<div class="input-group-addon"><i class="icon-home "></i></div>
-  									                                                              <select name="addressType" id="addressType" class="form-control">
-  									                                                                <option value="">SELECT ADDRESS TYPE</option>
-  									                                                                <option Value="SELF">Self</option>
-                                                                                    <option value="REFERENCE">Someone else</option>
-  									                                                                </select>
-  									  																														</div>
-  									  																												</div>
-																																							<div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputEmail_1">Address</label>
-																																								<div class="input-group">
-																																									<div class="input-group-addon"><i class="icon-home"></i></div>
-																																									<input type="text" name="streetAddress" class="form-control" id="streetAddress" required placeholder="Enter streetaddress">
-																																								</div>
-																																							</div>
-                                                                              <div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputEmail_1">Area</label>
-																																								<div class="input-group">
-																																									<div class="input-group-addon"><i class="icon-paper-plane"></i></div>
-																																									<input type="text" name="area" class="form-control" id="area" placeholder="area" required>
-																																								</div>
-																																							</div> <br />
-
-                                                                              <div class="form-group col-xs-12">
-																																							<button type="submit" class="btn btn-success mr-10">Create merchant</button>
-																											<button type="reset" class="btn btn-danger">Reset</button>
-                                                    </div>
-																										</form>
-																									</div>
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																					</div>
-																					</div>
-                                        </div>
-                                      </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
+      } }}else {
+        ?>
+            <!-- Begin Default Style -->
+            <div class="row">
+  						<div class="col-md-12">
+  							<div class="panel panel-default card-view">
+  								<div class="panel-heading">
+  									<div class="pull-left">
+  										<h6 class="panel-title txt-dark">Invoice</h6>
+  									</div>
+  									<div class="pull-right">
+                      <h6>Order #</h6>
+                      <div class="clearfix"></div>
+                    </div>
+                        <!-- Begin Form -->
+                        <form id="add_name" method="GET" action ="invoice.php">
+                            <!-- Begin Form Group -->
+                            <div class="form-group">
+                                <label for="orderID"><i class="fa fa-mobile m-xs-r"></i>ORDER ID</label>
+                                <input type="text" class="form-control" id="orderId" name="orderId" list="orderIDList">
+                                <datalist id="orderID">
+                                    <?php
+                                    $selectPhoneNumbers = "SELECT * FROM `orders`";
+                                    $selectPhoneNumbersResults = $conn -> query($selectPhoneNumbers);
+                                    if($selectPhoneNumbersResults) { // if Executed
+                                    while($selectPhoneData = $selectPhoneNumbersResults ->fetch_assoc()) {
+                                    ?>
+                                        <option value="<?=$selectPhoneData['orderID'];?>">EXOD<?=$selectPhoneData['orderID'];?> : <?=$selectPhoneData['firstName'];?> <?=$selectPhoneData['lastName'];?> - <?=$selectPhoneData['phoneNumber'];?></option>
+                                        <?php
+                                        }
+                                        }
+                                        ?>
+                                </datalist>
                             </div>
-															<!--/Row-->
+                            <!-- End Form Group -->
+                            <p>
+                                <button type="submit" class="btn btn-primary w-150 m-sm-t">Search</button>
+                            </p>
+                        </form>
+                        <!-- End Form -->
+                    </div>
+                </div>
+            </div>
+          </div>
+            <!-- End Default Style -->
+            <?php
+        }
+        ?>
 
-
+				</div>
 
 				<!-- Footer -->
 				<footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
 						<div class="col-sm-12">
-							<p>2017 &copy; Exelinserv. Pampered by CoolHaxlabs</p>
+							<p>2017 &copy; Powered by CoolHaxlabs</p>
 						</div>
 					</div>
 				</footer>
@@ -729,7 +762,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 		<!-- Bootstrap Core JavaScript -->
 		<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
 
 		<!-- Slimscroll JavaScript -->
 		<script src="dist/js/jquery.slimscroll.js"></script>
@@ -746,21 +778,43 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 		<!-- Init JavaScript -->
 		<script src="dist/js/init.js"></script>
 
-    <script>
-      $(document).ready(function(){
-          $('#temp').hide();
-          $('#addressType').on('change',function(){
-            var addressType = $('#addressType').val();
-            if ( addressType == 'SELF' || addressType == ''){
-              $('#temp').hide();
-            } else {
-              $('#temp').show();
-            }
+    <!-- Add Table Row -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+          var postURL = "/addmore.php";
+          var i=1;
 
+
+          $('#add').click(function(){
+               i++;
+               $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><input type="text" name="name[]" placeholder="" class="form-control name_list" required /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
           });
 
-      });
 
+          $(document).on('click', '.btn_remove', function(){
+               var button_id = $(this).attr("id");
+               $('#row'+button_id+'').remove();
+          });
+
+
+          $('#submit').click(function(){
+               $.ajax({
+                    url:postURL,
+                    method:"POST",
+                    data:$('#add_name').serialize(),
+                    type:'json',
+                    success:function(data)
+                    {
+                      	i=1;
+                      	$('.dynamic-added').remove();
+                      	$('#add_name')[0].reset();
+        				        alert('Record Inserted Successfully.');
+                    }
+               });
+          });
+
+
+        });
     </script>
 	</body>
 </html>
