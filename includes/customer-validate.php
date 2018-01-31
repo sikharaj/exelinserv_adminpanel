@@ -55,7 +55,7 @@
                                       $customerId = $customerData['customerID']; //select customer ID
                                         //insert Address data to address Table
 
-                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `streetAddress`, `city`, `state`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$streetAddress','$city','$state','$area','$pincode','$addressType')";
+                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `streetAddress`, `city`, `state`,`country`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$streetAddress','$city','$state','$country','$area','$pincode','$addressType')";
                                         $insertAddressDataResult = $conn -> query($insertAddressData);
                                         if ($insertAddressDataResult) {
                                           $message = "Customer registered successfully";

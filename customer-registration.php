@@ -553,7 +553,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" placeholder="Enter phone number">
+																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" placeholder="Enter phone number" pattern="[7-9]{1}[0-9]{9}">
 																													</div>
 																												</div>
 																											<div class="form-group col-sm-6 col-xs-6">

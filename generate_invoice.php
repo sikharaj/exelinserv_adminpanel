@@ -503,26 +503,22 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                   $selectOrderId = "SELECT * FROM `orders` WHERE `orderID` = '$orderId'";
                   $selectOrderIdResults = $conn -> query($selectOrderId);
                   if($selectOrderIdResults) { // if Executed
-                      $selectOrderIdData = $selectOrderIdResults -> fetch_assoc();
+                    $selectOrderIdData = $selectOrderIdResults -> fetch_assoc();
                      $custId = $selectOrderIdData['customerID'];
-                      $selectCustomerAddress = "SELECT * FROM `address` WHERE `customerID` = '$custId'";
-                      $selectCustomerAddressResults = $conn -> query($selectCustomerAddress);
-                      if($selectCustomerAddressResults) { // If Executed
+                     $cusAddressId = $selectOrderIdData['addressID'];
+                     $selectCustomerAddress = "SELECT * FROM address ad JOIN customerdetails cd ON ad.customerID=cd.customerID WHERE ad.addressID = '$cusAddressId'";
+                     $selectCustomerAddressResults = $conn -> query($selectCustomerAddress);
+                     if($selectCustomerAddressResults) { // If Executed
                         $selectCustomerAddressData = $selectCustomerAddressResults -> fetch_assoc();
-
-                        $selectCustomerInfo = "SELECT * FROM `customerdetails` WHERE `customerID` = '$custId'";
-                        $selectCustomerInfoResults = $conn -> query($selectCustomerInfo);
-                        if($selectCustomerInfoResults){ //If Executed
-                          $selcetCustomerInfoData = $selectCustomerInfoResults -> fetch_assoc();
-
-
-                      ?>
+                        $addressId = $selectCustomerAddressData['addressID'];
+          ?>
 					<!-- Row -->
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel panel-default card-view">
 								<div class="panel-heading">
 									<div class="pull-left">
+                    <form id="add_name" name="add_name" method="POST" action="addmore.php">
 										<h6 class="panel-title txt-dark">Invoice</h6>
 									</div>
                   <div class="pull-right">
@@ -540,7 +536,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                 					<?=$selectCustomerAddressData['streetAddress'];?><br>
                           <?=$selectCustomerAddressData['tempCusAddress'];?><br/>
                           <?=$selectCustomerAddressData['area'];?>, <?=$selectCustomerAddressData['pinCode'];?><br/>
-												  <abbr title="Phone">P:<?=$selectCustomerAddressData['custPhoneNumber']?></abbr>
+												  <abbr title="Phone">P : <?=$selectCustomerAddressData['custPhoneNumber']?></abbr>
 												</address>
 											</div>
 											<div class="col-xs-6 text-right">
@@ -560,7 +556,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 													<span class="txt-dark head-font capitalize-font mb-5">payment method:</span>
 													<br>
 													Visa ending **** 4242<br>
-													Email :<?=$selcetCustomerInfoData['email'];?>
+													Email : <?=$selectCustomerAddressData['email'];?>
+
 												</address>
 											</div>
 											<div class="col-xs-6 text-right">
@@ -570,19 +567,11 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 												</address>
 											</div>
 										</div>
-
-                    <?php
-                                        }}  } else {
-                                          header("Location:editRental.php?message=No User Found.");
-                                      }}
-
-                                      ?>
-
 										<div class="seprator-block"></div>
 
 										<div class="invoice-bill-table">
 											<div class="table-responsive">
-                        <form id="add_name" name="add_name" method="POST" action="">
+
 												<table class="table table-hover" id="dynamic_field">
 													<thead>
 														<tr>
@@ -598,22 +587,22 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                             </tr>
 													</thead>
 													<tbody>
-														<tr>
+                            <tr>
                             <td>
-                            <input type="text" name="item" placeholder="" class="form-control name_list"/>
+                            <input type="text" name="item" class="form-control name_list"/>
                           </td>
-															<td><input type="text" name="description" placeholder="" class="form-control name_list"/>
+															<td><input type="text" name="description" class="form-control name_list"/>
                             </td>
-															<td><input type="text" name="qty" placeholder="" class="form-control name_list" />
+															<td><input type="text" name="qty" class="form-control name_list" />
                             </td>
-															<td><input type="text" name="price" placeholder="" class="form-control name_list" />
-                            </td><td><input type="text" name="discount" placeholder="" class="form-control name_list" />
+															<td><input type="text" name="price" class="form-control name_list" />
+                            </td><td><input type="text" name="discount" class="form-control name_list" />
                             </td>
-															<td><input type="text" name="taxrate" placeholder="" class="form-control name_list" />
+															<td><input type="text" name="taxrate" class="form-control name_list" />
                             </td>
-															<td><input type="text" name="productunit" placeholder="" class="form-control name_list" />
+															<td><input type="text" name="productunit" class="form-control name_list" />
                             </td>
-                            <td><input type="text" name="total" placeholder="" class="form-control name_list" />
+                            <td><input type="text" name="total" class="form-control name_list" />
                           </td>
                               <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
 														</tr>
@@ -621,9 +610,12 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 												</table>
 											</div>
 											<div class="button-list pull-right">
-                        <button type="submit" class="btn btn-success mr-10" id="saveInvoiceButton">
-													Submit
-												</button>
+                        <input type="hidden" name="customerId" id="userID" value="<?=$custId;?>">
+                        <input type="hidden" name="addressId" id="addressID" value="<?=$cusAddressId;?>">
+                        <input type="hidden" name="orderId" id="userID" value="<?=$orderId;?>">
+
+                        <input type="submit" class="btn btn-success mr-10" id="saveInvoiceButton" value ="Submit">
+												</input>
 												<button type="button" class="btn btn-success mr-10" id="paymentProcessing">
 													Proceed to payment
 												</button>
@@ -641,6 +633,13 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 					</div>
 					<!-- /Row -->
 
+          <?php
+                //  }}
+              }} else {
+                  header("Location:generate_invoice.php?message=No User Found.");
+                  }}
+
+          ?>
 				</div>
 
 				<!-- Footer -->
@@ -685,7 +684,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
     <!-- Add Table Row -->
     <script type="text/javascript">
         $(document).ready(function(){
-          var postURL = "addmore.php";
           var i=1;
 
 
@@ -701,17 +699,20 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
           });
 
 
-          $('#saveInvoiceButton').on('click',function(){
+          $('#saveInvoiceButton').on('click',function(e){
+            e.preventDefault();
+            var value = $('#add_name').serialize();
+            //var userId = $('#userID').val();
+            //var addressId = $('#addressID').val();
+            //var allData = value+userId+addressId;
             //alert("hi");
-            //var Button = $('#add_name').val();
-          //  alert(Button);
+
                $.ajax({
-                    url:postURL,
-                    method:"POST",
-                    data:$('#add_name').serialize(),
-                    type:'json',
-                    //cache: false,
-                    success:function(data)
+                    url:'addmore.php',
+                    type:'POST',
+                    data:value,
+                    dataType:'json',
+                    success:function(html)
                     {
                       	i=1;
                       	$('.dynamic-added').remove();

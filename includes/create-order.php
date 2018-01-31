@@ -13,10 +13,8 @@
         //print_r($_POST);
         //exit;
         $now =  date('d-m-Y H:i');
-        $pickupDate ="$now";
-        $dropoffDate = "$now";
-        $lastUpdatedOn = "$now";
-        $createdOn = $_POST['createdon'];
+        $createdOn = "$now";
+        //$createdOn = $_POST['createdon'];
         $firstName = $_POST['firstname'];
         $lastName = $_POST['lastname'];
         $email = $_POST['email'];
@@ -50,17 +48,24 @@
           }else {
             $dropoffDate = $dropoffDate;
           }
-          $insertOrderData = "INSERT INTO `orders`(`customerID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`)
-           VALUES('$customerid','$firstName $lastName','$vehicleBrand','$pickupDate','$dropoffDate','$orderCreatedOn','$orderStatus','$userStatus','$issue','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
-          $insertOrderDataResult = $conn->query($insertOrderData);
-            if ($insertOrderDataResult){// If Insertion successful
-              $message = "Oder Created Successfully";
-              header('Location:../order-creation.php?message='.$message);
+          $selectCustomerAddressId = "SELECT * FROM `address` WHERE `customerID` = '$customerid'";
+          $selectCustomerAddressIdResults = $conn -> query($selectCustomerAddressId);
+          if($selectCustomerAddressIdResults) {
+            $selectCustomerAddressIdData = $selectCustomerAddressIdResults -> fetch_assoc();
+            $addressId = $selectCustomerAddressIdData['addressID'];
 
-            } else {
-              $message = "Oder Creation Failed";
-             header('Location:../order-creation.php?message='.$message);
-            }
+              $insertOrderData = "INSERT INTO `orders`(`customerID`, `name`, `vehicleName`, `addressID`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`)
+               VALUES('$customerid','$firstName $lastName','$vehicleBrand','$addressId','$pickupDate','$dropoffDate','$createdOn','$orderStatus','$userStatus','$issue','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
+              $insertOrderDataResult = $conn->query($insertOrderData);
+                if ($insertOrderDataResult){// If Insertion successful
+                  $message = "Oder Created Successfully";
+                  header('Location:../order-creation.php?message='.$message);
+
+                } else {
+                  $message = "Oder Creation Failed";
+                 header('Location:../order-creation.php?message='.$message);
+                }
+              }
         }
 
 }
