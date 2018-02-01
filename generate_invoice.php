@@ -589,22 +589,31 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 													<tbody>
                             <tr>
                             <td>
-                            <input type="text" name="item" class="form-control name_list"/>
+                            <input type="text" name="item" class="form-control name_list" id="slno"/>
                           </td>
-															<td><input type="text" name="description" class="form-control name_list"/>
+														<td>
+                                <input type="text" name="description" class="form-control name_list"/>
                             </td>
-															<td><input type="text" name="qty" class="form-control name_list" />
+														<td>
+                                <input type="number" name="qty" class="form-control name_list" />
                             </td>
-															<td><input type="text" name="price" class="form-control name_list" />
-                            </td><td><input type="text" name="discount" class="form-control name_list" />
+														<td>
+                              <input type="number" name="price" class="form-control name_list" />
                             </td>
-															<td><input type="text" name="taxrate" class="form-control name_list" />
+                            <td>
+                              <input type="number" name="discount" class="form-control name_list" />
                             </td>
-															<td><input type="text" name="productunit" class="form-control name_list" />
+														<td>
+                              <input type="number" name="taxrate" class="form-control name_list" />
                             </td>
-                            <td><input type="text" name="total" class="form-control name_list" />
-                          </td>
-                              <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
+															<td>
+                                <input type="number" name="productunit" class="form-control name_list" />
+                            </td>
+                            <td>
+                              <input type="number" name="total" class="form-control name_list" />
+                            </td>
+                            <td>
+                              <button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
 														</tr>
 													</tbody>
 												</table>
@@ -688,8 +697,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 
           $('#add').click(function(){
+
+                doslnoIncreament();
                i++;
-               $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td></td><td><input type="text" name="item" class="form-control name_list" /></td><td><input type="text" name="description" class="form-control name_list"  /></td><td><input type="text" name="qty" class="form-control name_list" /></td><td><input type="text" name="price" class="form-control name_list" /></td><td><input type="text" name="discount" class="form-control name_list" /></td><td><input type="text" name="texrate" class="form-control name_list" /></td><td><input type="text" name="discount" class="form-control name_list"/></td><td><input type="text" name="totals" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+               $('#dynamic_field').append('<tr id="row'+i+'" name="row" class="dynamic-added"><td><input type="text" name="item1" id="item1" class="form-control name_list"/></td><td><input type="text" name="description1" id="description1" class="form-control name_list"/></td><td><input type="number" name="qty1" id="qty1" class="form-control name_list" /></td><td><input type="number" name="price1" id="price1" class="form-control name_list" /></td><td><input type="number" name="discount1" id="discount1" class="form-control name_list" /></td><td><input type="number" name="taxrate1" id="taxrate1" class="form-control name_list" /></td><td><input type="number" name="productunit1" id="productunit1" class="form-control name_list" /></td><td><input type="number" name="total1" id="total1" class="form-control name_list" /></td><td><button type="button" name="remove1" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
           });
 
 
@@ -702,6 +713,18 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
           $('#saveInvoiceButton').on('click',function(e){
             e.preventDefault();
             var value = $('#add_name').serialize();
+            // var item = $('#item1').val();
+            // var description = $('#description1').val();
+            // var qty = $('#qty1').val();
+            // var price = $('#price1').val();
+            // var discount = $('#discount1').val();
+            // var taxrate = $('#taxrate1').val();
+            // var productunit = $('#productunit1').val();
+            // var total = $('#total1').val();
+
+            //var nextRowValue = $('#item1').val();
+            //var nextRowValue = $('#item1').val();
+            //var allData = value+item+description+qty+price+discount+taxrate+productunit+total;
             //var userId = $('#userID').val();
             //var addressId = $('#addressID').val();
             //var allData = value+userId+addressId;
@@ -721,20 +744,22 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                     }
                });
           });
-
-
         });
     </script>
     <!-- Auto-increment table script-->
     <script>
-    var tables = document.getElementsByTagName('table');
-    var table = tables[tables.length - 1];
-    var rows = table.rows;
-    for(var i = 1, td; i < rows.length; i++){
-        td = document.createElement('td');
-        td.appendChild(document.createTextNode(i + 0));
-        rows[i].insertBefore(td, rows[i].firstChild);
+    function doslnoIncreament(){
+
+      var tables = document.getElementsByTagName('table');
+      var table = tables[tables.length - 1];
+      var rows = table.rows;
+      for(var i = 1, td; i < rows.length; i++){
+          td = document.createElement('td');
+          td.appendChild(document.createTextNode(i + 0));
+          rows[i].insertBefore(td, rows[i].firstChild);
+      }
     }
+
   </script>
 	</body>
 </html>

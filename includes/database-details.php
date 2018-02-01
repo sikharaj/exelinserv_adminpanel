@@ -1,7 +1,7 @@
 <?php
     /*
      * Name : DB Credentials
-     * Author : Debashis Nayak
+     * Author : Sikha Raj
      * Company : CoolHax Labs
      * Description : Contains all DB Credentials
      *

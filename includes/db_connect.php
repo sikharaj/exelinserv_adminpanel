@@ -2,7 +2,7 @@
 
     /*
      * Name : DB Connect
-     * Author : Debashis Nayak
+     * Author : Sikha Raj
      * Company : CoolHax Labs
      * Description : Connects to DB using DB Credentials
      *
