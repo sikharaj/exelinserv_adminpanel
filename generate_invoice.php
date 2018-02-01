@@ -35,6 +35,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 		<meta name="description" content="Philbert is a Dashboard & Admin Site Responsive Template by hencework." />
 		<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Philbert Admin, Philbertadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
 		<meta name="author" content="hencework"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -572,67 +576,118 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 										<div class="invoice-bill-table">
 											<div class="table-responsive">
 
-												<table class="table table-hover" id="dynamic_field">
-													<thead>
-														<tr>
+                        <div class="container">
+
+                          <form enctype="multipart/form-data">
+                            <!--<div class="well clearfix">-->
+                                    <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i> Add Row</a>
+                                <!--  </div>-->
+                        <table id="tbl_posts" width="150px" border="0" class="table table-striped">
+                          <thead>
+                            <tr>
                               <th>Sl.No.</th>
-															<th>Item</th>
+                              <th>Item</th>
                               <th>Description</th>
                               <th>Quantity</th>
-															<th>Price</th>
-															<th>Discount</th>
+                              <th>Price</th>
+                              <th>Discount</th>
                               <th>Tax Rate</th>
                               <th>Product Unit</th>
-															<th>Totals</th>
+                              <th>Totals</th>
+                              <th>Action</th>
                             </tr>
-													</thead>
-													<tbody>
-                            <tr>
-                            <td>
-                            <input type="text" name="item" class="form-control name_list" id="slno"/>
-                          </td>
-														<td>
-                                <input type="text" name="description" class="form-control name_list"/>
-                            </td>
-														<td>
-                                <input type="number" name="qty" class="form-control name_list" />
-                            </td>
-														<td>
-                              <input type="number" name="price" class="form-control name_list" />
-                            </td>
-                            <td>
-                              <input type="number" name="discount" class="form-control name_list" />
-                            </td>
-														<td>
-                              <input type="number" name="taxrate" class="form-control name_list" />
-                            </td>
-															<td>
-                                <input type="number" name="productunit" class="form-control name_list" />
-                            </td>
-                            <td>
-                              <input type="number" name="total" class="form-control name_list" />
-                            </td>
-                            <td>
-                              <button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-											<div class="button-list pull-right">
-                        <input type="hidden" name="customerId" id="userID" value="<?=$custId;?>">
-                        <input type="hidden" name="addressId" id="addressID" value="<?=$cusAddressId;?>">
-                        <input type="hidden" name="orderId" id="userID" value="<?=$orderId;?>">
+                          </thead>
+                          <tbody id="tbl_posts_body">
+                                <tr id="rec-1">
 
-                        <input type="submit" class="btn btn-success mr-10" id="saveInvoiceButton" value ="Submit">
-												</input>
-												<button type="button" class="btn btn-success mr-10" id="paymentProcessing">
-													Proceed to payment
-												</button>
-												<button type="button" class="btn btn-primary btn-outline btn-icon left-icon" onclick="javascript:window.print();">
-													<i class="fa fa-print"></i><span> Print</span>
-												</button>
-											</div>
-                    </form>
+                                <td><span class="sn">1</span></td>
+
+                                <td>
+                                  <input type="text" name="item" class="form-control name_list" id="slno"/>
+                                </td>
+                                <td>
+                                    <input type="text" name="description" class="form-control name_list"/>
+                                </td>
+                                <td>
+                                    <input type="number" name="qty" class="form-control name_list" />
+                                </td>
+                                <td>
+                                  <input type="number" name="price" class="form-control name_list" />
+                                </td>
+                                <td>
+                                  <input type="number" name="discount" class="form-control name_list" />
+                                </td>
+                                <td>
+                                  <input type="number" name="taxrate" class="form-control name_list" />
+                                </td>
+                                  <td>
+                                    <input type="number" name="productunit" class="form-control name_list" />
+                                </td>
+                                <td>
+                                  <input type="number" name="total" class="form-control name_list" />
+                                </td>
+                                <td bgcolor="#63b77b">
+                                  <a class="btn btn-xs delete-record" data-id="1"><i class="glyphicon glyphicon-trash"></i></a>
+                                </td>
+
+                              <!--  <td><input type="button" value="Add Row" onclick="addRow('dataTable')" />  </td>-->
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </form>
+                      </div>
+
+                      <div style="display:none;">
+                          <table id="sample_table">
+                            <tr id="">
+                             <td><span class="sn"></span>.</td>
+
+                                         <td>
+                                           <input type="text" name="item" class="form-control name_list" id="slno"/>
+                                         </td>
+                                         <td>
+                                             <input type="text" name="description" class="form-control name_list"/>
+                                         </td>
+                                         <td>
+                                             <input type="number" name="qty" class="form-control name_list" />
+                                         </td>
+                                         <td>
+                                           <input type="number" name="price" class="form-control name_list" />
+                                         </td>
+                                         <td>
+                                           <input type="number" name="discount" class="form-control name_list" />
+                                         </td>
+                                         <td>
+                                           <input type="number" name="taxrate" class="form-control name_list" />
+                                         </td>
+                                           <td>
+                                             <input type="number" name="productunit" class="form-control name_list" />
+                                         </td>
+                                         <td>
+                                           <input type="number" name="total" class="form-control name_list" />
+                                         </td>
+                                         <td bgcolor="#63b77b">
+                                           <a class="btn btn-xs delete-record" data-id="0"><i class="glyphicon glyphicon-trash"></i></a>
+                                         </td>
+                           </tr>
+                         </table>
+                       </div>
+                       <div class="button-list pull-right">
+                         <input type="hidden" name="customerId" id="userID" value="<?=$custId;?>">
+                         <input type="hidden" name="addressId" id="addressID" value="<?=$cusAddressId;?>">
+                         <input type="hidden" name="orderId" id="userID" value="<?=$orderId;?>">
+
+                         <input type="submit" class="btn btn-success mr-10" id="saveInvoiceButton" value ="Submit">
+                         </input>
+                         <button type="button" class="btn btn-success mr-10" id="paymentProcessing">
+                           Proceed to payment
+                         </button>
+                         <button type="button" class="btn btn-primary btn-outline btn-icon left-icon" onclick="javascript:window.print();">
+                           <i class="fa fa-print"></i><span> Print</span>
+                         </button>
+                       </div>
+
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -691,75 +746,40 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 		<script src="dist/js/init.js"></script>
 
     <!-- Add Table Row -->
-    <script type="text/javascript">
-        $(document).ready(function(){
-          var i=1;
-
-
-          $('#add').click(function(){
-
-                doslnoIncreament();
-               i++;
-               $('#dynamic_field').append('<tr id="row'+i+'" name="row" class="dynamic-added"><td><input type="text" name="item1" id="item1" class="form-control name_list"/></td><td><input type="text" name="description1" id="description1" class="form-control name_list"/></td><td><input type="number" name="qty1" id="qty1" class="form-control name_list" /></td><td><input type="number" name="price1" id="price1" class="form-control name_list" /></td><td><input type="number" name="discount1" id="discount1" class="form-control name_list" /></td><td><input type="number" name="taxrate1" id="taxrate1" class="form-control name_list" /></td><td><input type="number" name="productunit1" id="productunit1" class="form-control name_list" /></td><td><input type="number" name="total1" id="total1" class="form-control name_list" /></td><td><button type="button" name="remove1" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
-          });
-
-
-          $(document).on('click', '.btn_remove', function(){
-               var button_id = $(this).attr("id");
-               $('#row'+button_id+'').remove();
-          });
-
-
-          $('#saveInvoiceButton').on('click',function(e){
-            e.preventDefault();
-            var value = $('#add_name').serialize();
-            // var item = $('#item1').val();
-            // var description = $('#description1').val();
-            // var qty = $('#qty1').val();
-            // var price = $('#price1').val();
-            // var discount = $('#discount1').val();
-            // var taxrate = $('#taxrate1').val();
-            // var productunit = $('#productunit1').val();
-            // var total = $('#total1').val();
-
-            //var nextRowValue = $('#item1').val();
-            //var nextRowValue = $('#item1').val();
-            //var allData = value+item+description+qty+price+discount+taxrate+productunit+total;
-            //var userId = $('#userID').val();
-            //var addressId = $('#addressID').val();
-            //var allData = value+userId+addressId;
-            //alert("hi");
-
-               $.ajax({
-                    url:'addmore.php',
-                    type:'POST',
-                    data:value,
-                    dataType:'json',
-                    success:function(html)
-                    {
-                      	i=1;
-                      	$('.dynamic-added').remove();
-                      	$('#add_name')[0].reset();
-        				        //alert('Record Inserted Successfully.');
-                    }
-               });
-          });
-        });
+  <script>
+    jQuery(document).delegate('a.add-record', 'click', function(e) {
+      e.preventDefault();
+      var content = jQuery('#sample_table tr'),
+      size = jQuery('#tbl_posts >tbody >tr').length + 1,
+      element = null,
+      element = content.clone();
+      element.attr('id', 'rec-'+size);
+      element.find('.delete-record').attr('data-id', size);
+      element.appendTo('#tbl_posts_body');
+      element.find('.sn').html(size);
+      });
     </script>
-    <!-- Auto-increment table script-->
+    <!--Delete table row-->
     <script>
-    function doslnoIncreament(){
+    jQuery(document).delegate('a.delete-record', 'click', function(e) {
+         e.preventDefault();
+         var didConfirm = confirm("Are you sure You want to delete");
+         if (didConfirm == true) {
+          var id = jQuery(this).attr('data-id');
+          var targetDiv = jQuery(this).attr('targetDiv');
+          jQuery('#rec-' + id).remove();
 
-      var tables = document.getElementsByTagName('table');
-      var table = tables[tables.length - 1];
-      var rows = table.rows;
-      for(var i = 1, td; i < rows.length; i++){
-          td = document.createElement('td');
-          td.appendChild(document.createTextNode(i + 0));
-          rows[i].insertBefore(td, rows[i].firstChild);
+        //regnerate index number on table
+        $('#tbl_posts_body tr').each(function(index) {
+          //alert(index);
+          $(this).find('span.sn').html(index+1);
+        });
+        return true;
+      } else {
+        return false;
       }
-    }
+    });
+    </script>
 
-  </script>
 	</body>
 </html>

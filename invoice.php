@@ -660,3 +660,19 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
       </script>
 	</body>
 </html>
+<!--
+<div class="button-list pull-right">
+  <input type="hidden" name="customerId" id="userID" value="<?=$custId;?>">
+  <input type="hidden" name="addressId" id="addressID" value="<?=$cusAddressId;?>">
+  <input type="hidden" name="orderId" id="userID" value="<?=$orderId;?>">
+
+  <input type="submit" class="btn btn-success mr-10" id="saveInvoiceButton" value ="Submit">
+  </input>
+  <button type="button" class="btn btn-success mr-10" id="paymentProcessing">
+    Proceed to payment
+  </button>
+  <button type="button" class="btn btn-primary btn-outline btn-icon left-icon" onclick="javascript:window.print();">
+    <i class="fa fa-print"></i><span> Print</span>
+  </button>
+</div>
+-->
