@@ -23,6 +23,9 @@
 						<li>
 							<a href="all-bookings.php">All Bookings</a>
 						</li>
+						<li>
+							<a href="modify.php">Update Bookings</a>
+						</li>
 					</ul>
 				</li>
 				<li>

@@ -744,14 +744,14 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 		<script src="dist/js/init.js"></script>
 
     <!-- Add Table Row -->
-    <script>
+    <!--<script>
     $("tr.items").each(function() {
         var quantity1 = $(this).find("input.form-control name_list").val(),
          quantity2 = $(this).find("input.form-control name_list1").val();
         alert(quantity1);
         alert(quantity2);
-});
-</script>
+      });
+  </script>-->
   <script>
     jQuery(document).delegate('a.add-record', 'click', function(e) {
       e.preventDefault();
