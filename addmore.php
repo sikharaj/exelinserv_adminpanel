@@ -27,15 +27,6 @@
  	$customerId = $_POST['customerId'];
 	$addressId = $_POST['addressId'];
 	$orderId = $_POST['orderId'];
-	 //$item1 = $_POST['item1'];
- 	 //$description1 = $_POST['description1'];
-	 //$qty1 = $_POST['qty1'];
-	 //$price1 = $_POST['price1'];
-	 //$discount1 = $_POST['discount1'];
-	 //$taxrate1 = $_POST['taxrate1'];
-	 //$productunit1 = $_POST['productunit1'];
-	 //$total1 = $_POST['total1'];
-
 
 	if(!empty($_POST)){// If no blank datas are there
 		 	 $insertInvoiceSql = "INSERT INTO `ip_invoices`(`user_id`, `address_id`, `order_id`, `invoice_datetime`, `invoice_number`) VALUES ('$customerId','$addressId','$orderId','$dateTime','#EXINVOD123')";

@@ -8,10 +8,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+  <!--<?php
+    for($i=0;$i<=6;$i++){
+      echo $i;
+  }
+  ?>-->
+  <form enctype="multipart/form-data">
     <div class="container">
-
-      <form enctype="multipart/form-data">
         <div class="well clearfix">
                 <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i> Add Row</a>
               </div>
@@ -62,13 +65,9 @@
             <td>
               <a class="btn btn-xs delete-record" data-id="1"><i class="glyphicon glyphicon-trash"></i></a>
             </td>
-
-          <!--  <td><input type="button" value="Add Row" onclick="addRow('dataTable')" />  </td>-->
-
         </tr>
       </tbody>
     </table>
-  </form>
   </div>
 
   <div style="display:none;">
@@ -103,6 +102,19 @@
        </tr>
      </table>
    </div>
+</form>
+
+  <script>
+$("#TableView tr.item").each(function() {
+
+           var quantity1=$(this).find("input.name").val();
+           var quantity2=$(this).find("input.id").val();
+
+
+           });
+         </script>
+   <!-- Script to increase the row size -->
+
     <script>
       jQuery(document).delegate('a.add-record', 'click', function(e) {
         e.preventDefault();
@@ -116,6 +128,9 @@
         element.find('.sn').html(size);
         });
       </script>
+
+      <!-- Script to delete dynamic row -->
+
       <script>
       jQuery(document).delegate('a.delete-record', 'click', function(e) {
            e.preventDefault();
@@ -137,66 +152,5 @@
       });
       </script>
 
-    <!--<script type="text/javascript">
-
-            function addRow(dataTable) {
-
-                var table = document.getElementById(dataTable);
-
-                var rowCount = table.rows.length;
-
-                var row = table.insertRow(rowCount);
-
-                var firstCell = row.insertCell(0);
-
-                firstCell.innerHTML = rowCount + 1;
-
-                var secondCell = row.insertCell(1);
-                var thirdCell = row.insertCell(1);
-                var fourthCell = row.insertCell(1);
-                var sixthCell = row.insertCell(1);
-                var seventhCell = row.insertCell(1);
-                var eightCell = row.insertCell(1);
-                var ninethCell = row.insertCell(1);
-                var tenthCell = row.insertCell(1);
-
-                var element = document.createElement("input");
-                var element1 = document.createElement("input");
-                var element2 = document.createElement("input");
-                var element3 = document.createElement("input");
-                var element4 = document.createElement("input");
-                var element5 = document.createElement("input");
-                var element6 = document.createElement("input");
-                var element7 = document.createElement("input");
-
-                element.type = "text";
-                element1.type = "text";
-                element2.type = "text";
-                element3.type = "number";
-                element4.type = "number";
-                element5.type = "number";
-                element6.type = "number";
-                element7.type = "number";
-
-                element.name = "txtbox[]";
-                element1.name = "txtbox[]";
-                element2.name = "textbox[]";
-                element3.name = "numbox[]";
-                element4.name = "numbox[]";
-                element5.name = "numbox[]";
-                element6.name = "numbox[]";
-                element7.name = "numbox[]";
-
-                secondCell.appendChild(element);
-                thirdCell.appendChild(element1);
-                fourthCell.appendChild(element2);
-                sixthCell.appendChild(element3);
-                seventhCell.appendChild(element4);
-                eightCell.appendChild(element5);
-                ninethCell.appendChild(element6);
-                tenthCell.appendChild(element7);
-            }
-        </script>-->
-</body>
-
+    </body>
 </html>

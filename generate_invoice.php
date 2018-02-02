@@ -522,7 +522,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 							<div class="panel panel-default card-view">
 								<div class="panel-heading">
 									<div class="pull-left">
-                    <form id="add_name" name="add_name" method="POST" action="addmore.php">
+                    <form enctype="multipart/form-data" method="POST" action="addmore.php">
 										<h6 class="panel-title txt-dark">Invoice</h6>
 									</div>
                   <div class="pull-right">
@@ -544,7 +544,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 												</address>
 											</div>
 											<div class="col-xs-6 text-right">
-												<span class="txt-dark head-font inline-block capitalize-font mb-5">shiped to:</span>
+												<span class="txt-dark head-font inline-block capitalize-font mb-5">Billed to:</span>
 												<address class="mb-15">
 													<span class="address-head mb-5">, Inc.</span>
 													<br>
@@ -578,11 +578,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
                         <div class="container">
 
-                          <form enctype="multipart/form-data">
                             <!--<div class="well clearfix">-->
                                     <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i> Add Row</a>
                                 <!--  </div>-->
-                        <table id="tbl_posts" width="150px" border="0" class="table table-striped">
+                        <table id="tbl_posts" width="150px" border="0"  class="table table-hover display  pb-30">
                           <thead>
                             <tr>
                               <th>Sl.No.</th>
@@ -598,7 +597,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                             </tr>
                           </thead>
                           <tbody id="tbl_posts_body">
-                                <tr id="rec-1">
+                                <tr id="rec-1" class="items">
 
                                 <td><span class="sn">1</span></td>
 
@@ -606,7 +605,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                   <input type="text" name="item" class="form-control name_list" id="slno"/>
                                 </td>
                                 <td>
-                                    <input type="text" name="description" class="form-control name_list"/>
+                                    <input type="text" name="description" class="form-control name_list1"/>
                                 </td>
                                 <td>
                                     <input type="number" name="qty" class="form-control name_list" />
@@ -626,8 +625,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                 <td>
                                   <input type="number" name="total" class="form-control name_list" />
                                 </td>
-                                <td bgcolor="#63b77b">
-                                  <a class="btn btn-xs delete-record" data-id="1"><i class="glyphicon glyphicon-trash"></i></a>
+                                <td>
+                                  <a class="delete-record" data-id="1"><font color="red"><i class="glyphicon glyphicon-trash"></i></font></a> &nbsp; &nbsp;  <a class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a>
                                 </td>
 
                               <!--  <td><input type="button" value="Add Row" onclick="addRow('dataTable')" />  </td>-->
@@ -635,12 +634,11 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                             </tr>
                           </tbody>
                         </table>
-                      </form>
                       </div>
 
                       <div style="display:none;">
-                          <table id="sample_table">
-                            <tr id="">
+                          <table id="sample_table"  class="table table-hover display  pb-30" >
+                            <tr id="" class="items">
                              <td><span class="sn"></span>.</td>
 
                                          <td>
@@ -667,8 +665,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                          <td>
                                            <input type="number" name="total" class="form-control name_list" />
                                          </td>
-                                         <td bgcolor="#63b77b">
-                                           <a class="btn btn-xs delete-record" data-id="0"><i class="glyphicon glyphicon-trash"></i></a>
+                                         <td>
+                                                               <a class="delete-record" data-id="1"><font color="red"><i class="glyphicon glyphicon-trash"></i></font></a> &nbsp; &nbsp;  <a class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a>
                                          </td>
                            </tr>
                          </table>
@@ -687,7 +685,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                            <i class="fa fa-print"></i><span> Print</span>
                          </button>
                        </div>
-
+  </form>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -746,6 +744,14 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 		<script src="dist/js/init.js"></script>
 
     <!-- Add Table Row -->
+    <script>
+    $("tr.items").each(function() {
+        var quantity1 = $(this).find("input.form-control name_list").val(),
+         quantity2 = $(this).find("input.form-control name_list1").val();
+        alert(quantity1);
+        alert(quantity2);
+});
+</script>
   <script>
     jQuery(document).delegate('a.add-record', 'click', function(e) {
       e.preventDefault();
@@ -779,7 +785,19 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
         return false;
       }
     });
-    </script>
 
+    </script>
+    <!--<script>
+
+
+      $(document).ready(function(){
+
+          var table = document.getElementById('sample_table');
+          var findElement =
+          $.each()
+
+      });
+
+    </script>-->
 	</body>
 </html>
