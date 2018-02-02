@@ -21,11 +21,12 @@
 							<a href="completed-bookings.php">Completed Bookings</a>
 						</li>
 						<li>
-							<a href="all-bookings.php">All Bookings</a>
-						</li>
-						<li>
 							<a href="modify.php">Update Bookings</a>
 						</li>
+						<li>
+							<a href="all-bookings.php">All Bookings</a>
+						</li>
+
 					</ul>
 				</li>
 				<li>
@@ -42,6 +43,9 @@
 						</li>
 						<li>
 							<a href="customer-bookings.php">Customer Bookings</a>
+						</li>
+						<li>
+							<a href="create-orders.php">Create Order</a>
 						</li>
 					</ul>
 				</li>

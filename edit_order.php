@@ -394,9 +394,9 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																				</select>
                                                                       </div>
 																																	</div>
-                                                            <div  class="col-xs-12">        
+                                                            <div  class="col-xs-12">
                                                       <input type="hidden" name="orderId" value="<?=$selectOrderDetailData['orderID'];?>">
-                                                    	<button type="submit" class="btn btn-success mr-10">Save
+                                                    	<button type="submit" class="btn btn-success mr-10">Update
 																											<!--<button type="reset" class="btn btn-danger ">Reset</button>-->
                                                     </div>
                                                       <?php

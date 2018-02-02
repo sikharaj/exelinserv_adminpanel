@@ -665,6 +665,13 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																									<div class="input-group-addon"><i class="icon-paper-plane"></i></div>
 																																									<input type="text" name="area" class="form-control" id="area" placeholder="area" required>
 																																								</div>
+																																							</div>
+                                                                              <div class="form-group col-sm-3 col-xs-3">
+																																								<label class="control-label mb-10" for="exampleInputEmail_1">Alternate Phne Number</label>
+																																								<div class="input-group">
+																																									<div class="input-group-addon"><i class="icon-call-end"></i></div>
+																																									<input type="tel" name="alternatePhoneNumber" class="form-control" id="area" placeholder="area" required>
+																																								</div>
 																																							</div> <br />
 
                                                                               <div class="form-group col-xs-12">

@@ -25,8 +25,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
         header('Location:index.php?Please Login Again!');
     }
 }
-   $selectAllQuickOrders = "SELECT * FROM `orders`";
-   $selectAllQuickOrdersResults = $conn -> query($selectAllQuickOrders);
+   $selectAllCustomers = "SELECT * FROM `customerdetails`";
+   $selectAllCustomersResults = $conn -> query($selectAllCustomers);
 
 ?>
 <!DOCTYPE html>
@@ -103,33 +103,26 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 													<tr>
                             <th>Sl.No.</th>
                             <th>Name</th>
-                            <th>Vehicle Name</th>
-                            <th>CreatedOn</th>
-                            <th>Status</th>
-                            <th>Issue</th>
                             <th>Phone</th>
-                            <th>Service</th>
+                            <th>Email</th>
+                            <th>Registered On</th>
                             <th>Action</th>
 													</tr>
 												</thead>
 												<tbody>
                           <?php
-                  if($selectAllQuickOrdersResults) { // if Executed
-                      while ($selectAllQuickOrdersData = $selectAllQuickOrdersResults -> fetch_assoc()) {
+                  if($selectAllCustomersResults) { // if Executed
+                      while ($selectAllCustomersData = $selectAllCustomersResults -> fetch_assoc()) {
                   ?>
 													<tr>
-                            <td><?=$selectAllQuickOrdersData['orderID'];?></td>
-                            <td><?=$selectAllQuickOrdersData['name'];?></td>
-                            <td><?=$selectAllQuickOrdersData['vehicleName'];?></td>
-                            <td><?=$selectAllQuickOrdersData['orderCreatedOn'];?></td>
-                            <td><?=$selectAllQuickOrdersData['orderStatus'];?></td>
-                            <td><?=$selectAllQuickOrdersData['issue'];?></td>
-                            <td><?=$selectAllQuickOrdersData['phone'];?></td>
-                            <td><?=$selectAllQuickOrdersData['serviceType'];?></td>
-                            <td><a href="delete_order.php?orderId=<?=$selectAllQuickOrdersData['orderID'];?>" class="delete-record" data-id="1"><font color="red"><i class="glyphicon glyphicon-trash"></i></font></a><br/>
-                            <a href="edit_order.php?orderId=<?=$selectAllQuickOrdersData['orderID'];?>" class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a></td>
-                            <!--<td><a class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a></td>
-                          --></tr>
+                            <td><?=$selectAllCustomersData['customerID'];?></td>
+                            <td><?=$selectAllCustomersData['firstName'];?> <?=$selectAllCustomersData['lastName'];?></td>
+                            <td><?=$selectAllCustomersData['phoneNumber'];?></td>
+                            <td><?=$selectAllCustomersData['email'];?></td>
+                            <td><?=$selectAllCustomersData['createdOn'];?></td>
+                            <td><a href="create_customer_order.php?customerId=<?=$selectAllCustomersData['customerID'];?>" class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a>
+                            <input type="hidden" name="addressId" value="<?=$selectAllCustomersData['customerID'];?>"></td>
+                            </tr>
                           <?php
                       }
                   } else { //if didn't execute
