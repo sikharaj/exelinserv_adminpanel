@@ -34,7 +34,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 <head>
     <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>Philbert I Fast build Admin dashboard for any platform</title>
+	<title>Exelinserv || Admin Panel</title>
 	<meta name="description" content="Philbert is a Dashboard & Admin Site Responsive Template by hencework." />
 	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Philbert Admin, Philbertadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
 	<meta name="author" content="hencework"/>
@@ -76,13 +76,13 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-					  <h5 class="txt-dark">Customer Bookings</h5>
+					  <h5 class="txt-dark">Admin Panel</h5>
 					</div>
 					<!-- Breadcrumb -->
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 					  <ol class="breadcrumb">
 						<li><a href="index.html">Dashboard</a></li>
-						<li><a href="#"><span>Booking</span></a></li>
+						<li><a href="#"><span>Customer</span></a></li>
 						<li class="active"><span>Details</span></li>
 					  </ol>
 					</div>

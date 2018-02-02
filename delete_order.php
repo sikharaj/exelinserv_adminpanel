@@ -127,7 +127,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																			<div class="panel panel-default card-view">
 																				<div class="panel-heading">
 																					<div class="pull-left">
-																						<h6 class="panel-title txt-dark">Order Informations</h6>
+																						<h6 class="panel-title txt-dark">Customer Informations</h6>
 																					</div>
 																					<div class="clearfix"></div>
 																				</div>
@@ -152,42 +152,42 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																											<label class="control-label mb-10" for="exampleInputuname_1">Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="name" class="form-control" value="<?=$selectOrderDetailData['name'];?>" placeholder="Enter firstname" readonly>
+																													<input type="text" name="name" class="form-control" value="<?=$selectOrderDetailData['name'];?>" placeholder="Enter firstname" disabled>
 																												</div>
 																											</div>
 																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Vehicle Name</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-user"></i></div>
-																														<input type="text" name="vehicleName" class="form-control" value="<?=$selectOrderDetailData['vehicleName'];?>" placeholder="Enter lastname" readonly>
+																														<input type="text" name="vehicleName" class="form-control" value="<?=$selectOrderDetailData['vehicleName'];?>" placeholder="Enter lastname" disabled>
 																													</div>
 																												</div>
 																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectOrderDetailData['phone'];?>" placeholder="Enter phone number">
+																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectOrderDetailData['phone'];?>" placeholder="Enter phone number" disabled>
 																													</div>
 																												</div>
 																											<div class="form-group col-sm-4 col-xs-4">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Oder Created On</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-calender"></i></div>
-																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectOrderDetailData['orderCreatedOn'];?>" placeholder="Enter phone number" readonly>
+																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectOrderDetailData['orderCreatedOn'];?>" placeholder="Enter phone number" disabled>
 																													</div>
 																												</div>
                                                         <div class="form-group col-sm-4 col-xs-4">
                                                           <label class="control-label mb-10" for="exampleInputuname_1">Pick-up Date</label>
                                                             <div class="input-group">
                                                               <div class="input-group-addon"><i class="icon-calender"></i></div>
-                                                              <input type="datetime-local" name="pickUpDate" class="form-control" id="pickupdate" value="<?=$selectOrderDetailData['pickupDateNdTime'];?>" placeholder="">
+                                                              <input type="datetime-local" name="pickUpDate" class="form-control" id="pickupdate" value="<?=$selectOrderDetailData['pickupDateNdTime'];?>" disabled>
                                                             </div>
                                                           </div>
                                                         <div class="form-group col-sm-4 col-xs-4">
                                                           <label class="control-label mb-10 text-left">Drop-off Date</label>
                                                           <div class="input-group date' id='datetimepicker1'">
                                                             <div class="input-group-addon"><i class="icon-calender"></i></div>
-                                                            <input type="datetime-local" name="dropDate" class="form-control" id="dropdate" value="<?=$selectOrderDetailData['pickupDateNdTime'];?>" placeholder="">
+                                                            <input type="datetime-local" name="dropDate" class="form-control" id="dropdate" value="<?=$selectOrderDetailData['pickupDateNdTime'];?>" disabled>
                                                           </div>
                                                         </div>
 																											<div class="row">
@@ -195,7 +195,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																													<div class="panel panel-default card-view">
 																														<div class="panel-heading">
 																															<div class="pull-left">
-																																<h4 class="panel-title txt-dark"><font color="#A9A9A9">Extra Information</font></h4>
+																																<h4 class="panel-title txt-dark">Order Information</h4>
 																															</div>
 																															<div class="clearfix"></div>
 																														</div>
@@ -208,46 +208,18 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                   <label class="control-label mb-10" for="exampleInputpwd_1">Vehicle Type</label>
                                                                   <div class="input-group">
                                                                     <div class="input-group-addon"><i class="ti-car"></i></div>
-                                                                      <select id="vehicleType" name="vehicleType" class="form-control" onchange="loadVehicledata()">
+                                                                      <select id="vehicleType" name="vehicleType" class="form-control" disabled onchange="loadVehicledata()">
                                                                       <option value="<?=$selectOrderDetailData['vehicleType'];?>"><?=$selectOrderDetailData['vehicleType'];?></option>
                                                                       <option value="Bike">Bike</option>
                                                                       <option value="Car">Car</option>
                                                                     </select>
                                                                     </div>
                                                                   </div>
-                                                                      <datalist id="carList">
-                                                                          <?php
-                                                                              while($carRow = $selectAllCarsResult->fetch_assoc()) {
-                                                                              $carName = $carRow['brand']." ".$carRow['model'];
-                                                                          ?>
-                                                                            <option value="<?=$carName;?>">
-                                                                          <?php
-
-                                                                          }
-                                                                          ?>
-                                                                      </datalist>
-                                                                      <datalist id="bikeList">
-                                                                          <?php
-                                                                              while($bikeRow = $selectAllBikesResult->fetch_assoc()) {
-                                                                              $bikeName = $bikeRow['brand']." ".$bikeRow['model'];
-                                                                          ?>
-                                                                            <option value="<?=$bikeName;?>">
-                                                                          <?php
-                                                                          }
-                                                                          ?>
-                                                                      </datalist>
-                                                              <div class="form-group col-sm-3 col-xs-3">
-																																	<label class="control-label mb-10" for="exampleInputpwd_1">Vehicle Brand</label>
-																																	<div class="input-group">
-																																		<div class="input-group-addon"><i class="icon-support"></i></div>
-                                                                    <input type="text" class="form-control" id="vehicleName" name="vehicleName" placeholder="Hero" required="required" list="carList" value="<?=$selectOrderDetailData['vehicleName'];?>">
-																																		</div>
-																																</div>
                                                                 <div class="form-group col-sm-3 col-xs-3">
                                                                     <label class="control-label mb-10" for="exampleInputuname_1">VehicLe Color</label>
                                                                       <div class="input-group">
                                                                         <div class="input-group-addon"><i class="icon-list"></i></div>
-                                                                        <select name="vehiclecolor" class="form-control" id="exampleInputpwd_1">
+                                                                        <select name="vehiclecolor" class="form-control" id="exampleInputpwd_1" disabled>
                                                                         <option value="<?=$selectOrderDetailData['vehicleColor'];?>"><?=$selectOrderDetailData['vehicleColor'];?></option>
                                                                         <option value="Air Force blue">Air Force blue</option>
                                                                         <option value="Alice blue">Alice blue</option>
@@ -259,7 +231,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                         <label class="control-label mb-10" for="exampleInputpwd_1">Fuel Variant</label>
                                                                         <div class="input-group">
                                                                           <div class="input-group-addon"><i class="icon-drop"></i></div>
-                                                                            <select name="fuelvariant" class="form-control">
+                                                                            <select name="fuelvariant" class="form-control" disabled>
                                                                             <option value="<?=$selectOrderDetailData['fuelVariant'];?>"><?=$selectOrderDetailData['fuelVariant'];?></option>
                                                                             <option value="Petrol">Petrol</option>
                                                                             <option value="Diesel">Diesel</option>
@@ -270,14 +242,14 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                           <label class="control-label mb-10" for="exampleInputpwd_1">Kilometer Reading</label>
                                                                           <div class="input-group">
                                                                             <div class="input-group-addon"><i class="icon-clock"></i></div>
-                                                                            <input type="number" class="form-control" name="meterReading" value="<?=$selectOrderDetailData['kiloMeterReading'];?>">
+                                                                            <input type="number" class="form-control" name="meterReading" value="<?=$selectOrderDetailData['kiloMeterReading'];?>" disabled>
                                                                             </div>
                                                                           </div>
                                                                           <div class="form-group col-sm-3 col-xs-3">
                                                                             <label class="control-label mb-10" for="servicetype">Service Type</label>
                                                                             <div class="input-group">
                                                                               <div class="input-group-addon"><i class="icon-wrench"></i></div>
-                                                                                <select name="servicetype" id="servicetype" class="form-control">
+                                                                                <select name="servicetype" id="servicetype" class="form-control" disabled>
                                                                                 <option value="<?=$selectOrderDetailData['serviceType'];?>"><?=$selectOrderDetailData['serviceType'];?></option>
                                                                                 <option>SELECT SERVICE TYPE</option>
                                                                                 <option value="Regular Checkup">Regular Check-up</option>
@@ -295,7 +267,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                           <label class="control-label mb-10" for="exampleInputuname_1">Service Preference</label>
                                                                             <div class="input-group">
                                                                               <div class="input-group-addon"><i class="icon-anchor"></i></div>
-                                                                              <select name="preference" class="form-control" id="exampleInputpwd_1">
+                                                                              <select name="preference" class="form-control" id="exampleInputpwd_1" disabled>
                                                                               <option value="<?=$selectOrderDetailData['preferenceService'];?>"><?=$selectOrderDetailData['preferenceService'];?></option>
                                                                               <option>SELECT SERVICE PREFERENCE</option>
                                                                               <option value="Pickup">Pickup</option>
@@ -307,7 +279,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                         <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
                                                                         <div class="input-group">
                                                                           <div class="input-group-addon"><i class="icon-check"></i></div>
-                                                                            <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
+                                                                            <select name="oderstatus" class="form-control" id="exampleInputpwd_1" disabled>
                                                                               <option value="<?=$selectOrderDetailData['orderStatus'];?>"><?=$selectOrderDetailData['orderStatus'];?></option>
                                                                             <option value="NULL">SELECT ORDER STATUS</option>
                                                                             <option value="Placed">Placed</option>
@@ -323,28 +295,28 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																	<label class="control-label mb-10" for="issue">Issue</label>
 																																		<div class="input-group">
 																																			<div class="input-group-addon"><i class="icon-note"></i></div>
-																																			<input type="text" name="issue" class="form-control" id="issue" value="<?=$selectOrderDetailData['issue'];?>" placeholder="Enter an issue">
+																																			<input type="text" name="issue" class="form-control" id="issue" value="<?=$selectOrderDetailData['issue'];?>" placeholder="Enter an issue" disabled>
 																																		</div>
 																																	</div>
                                                                   <div class="form-group col-sm-3 col-xs-3">
 																																		<label class="control-label mb-10" for="exampleInputuname_1">Total Payment</label>
 																																			<div class="input-group">
 																																				<div class="input-group-addon"><i class="icon-wallet"></i></div>
-																																				<input type="number" name="totalpayment" class="form-control" id="totalPayment" value="<?=$selectOrderDetailData['totalPayment'];?>" placeholder="Total Estimated amount">
+																																				<input type="number" name="totalpayment" class="form-control" id="totalPayment" value="<?=$selectOrderDetailData['totalPayment'];?>" placeholder="Total Estimated amount" disabled>
 																																			</div>
 																																	</div>
                                                                   <div class="form-group col-sm-3 col-xs-3">
 																																			<label class="control-label mb-10" for="exampleInputuname_1">Advance Payment</label>
 																																				<div class="input-group">
 																																					<div class="input-group-addon"><i class="icon-wallet"></i></div>
-																																					<input type="number" name="advancedpayment" class="form-control" id="advancedPayment" value="<?=$selectOrderDetailData['advancePayment'];?>" placeholder="Advance payment if any">
+																																					<input type="number" name="advancedpayment" class="form-control" id="advancedPayment" value="<?=$selectOrderDetailData['advancePayment'];?>" placeholder="Advance payment if any" disabled>
 																																				</div>
 																																	</div>
                                                                   <div class="form-group col-sm-3 col-xs-3">
 																																		<label class="control-label mb-10" for="exampleInputpwd_1">Payment Mode</label>
 																																		<div class="input-group">
 																																			<div class="input-group-addon"><i class="icon-wallet"></i></div>
-																																				<select name="paymentmode" class="form-control" id="exampleInputpwd_1">
+																																				<select name="paymentmode" class="form-control" id="exampleInputpwd_1" disabled>
                                                                           <option><?=$selectOrderDetailData['paymentMode'];?></option>
 																																				<option value="NULL" disabled selected>SELECT PAYMENT METHOD</option>
 																																				<option value="Cash">Cash</option>
@@ -358,21 +330,21 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																			<label class="control-label mb-10" for="exampleInputuname_1">Payment Due</label>
 																																				<div class="input-group">
 																																					<div class="input-group-addon"><i class="icon-wallet"></i></div>
-																																					<input type="number" name="paymentDue" readonly class="form-control" id="paymentDue" value="<?=$selectOrderDetailData['paymentDue'];?>" placeholder="Due payment if any">
+																																					<input type="number" name="paymentDue" readonly class="form-control" id="paymentDue" value="<?=$selectOrderDetailData['paymentDue'];?>" placeholder="Due payment if any" disabled>
 																																				</div>
 																																	</div>
                                                                   <div class="form-group col-sm-3 col-xs-3">
 																																			<label class="control-label mb-10" for="exampleInputuname_1">Transaction ID</label>
 																																				<div class="input-group">
                                                                           <div class="input-group-addon"><i class="icon-wallet"></i></div>
-                                                                              <input type="text" name="transID" class="form-control" id="exampleInputuname_1" value="<?=$selectOrderDetailData['transactionID'];?>" placeholder="#EXPMNT8547896">
+                                                                              <input type="text" name="transID" class="form-control" id="exampleInputuname_1" value="<?=$selectOrderDetailData['transactionID'];?>" placeholder="#EXPMNT8547896" disabled>
 																																				</div>
 																																	</div>
                                                                   <div class="form-group col-sm-3 col-xs-3">
 																																		<label class="control-label mb-10" for="exampleInputpwd_1">Garage</label>
 																																		<div class="input-group">
 																																			<div class="input-group-addon"><i class="icon-magnet"></i></div>
-																																				<select name="garages" id="garages" class="form-control" id="exampleInputpwd_1">
+																																				<select name="garages" id="garages" class="form-control" id="exampleInputpwd_1" disabled>
                                                                           <option><?=$selectOrderDetailData['garages'];?></option>
 																																				<option value="NULL">SELECT GARAGE</option>
 																																				<option value="NULL"></option>
@@ -385,7 +357,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																			<label class="control-label mb-10" for="exampleInputuname_1">Pickup / Drop-off Boy</label>
 																																				<div class="input-group">
 																																					<div class="input-group-addon"><i class="icon-user-follow"></i></div>
-                                                                          <select name="deliveryboy" class="form-control" id="pickupboy">
+                                                                          <select name="deliveryboy" class="form-control" id="pickupboy" disabled>
                                                                             <option><?=$selectOrderDetailData['deliveryBoy'];?></option>
 																																					<option value="NULL">SELECT PICKUP/DROP-OFF BOY</option>
 																																					<option value=""></option>
