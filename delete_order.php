@@ -262,7 +262,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                               </select>
                                                                               </div>
                                                                           </div>
-
                                                                       <div class="form-group col-sm-3 col-xs-3">
                                                                           <label class="control-label mb-10" for="exampleInputuname_1">Service Preference</label>
                                                                             <div class="input-group">

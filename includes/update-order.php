@@ -52,9 +52,13 @@ if($conn) {
     if($updateOrderResults)  {
 
       $response = "Updated Successfully";
-      header('location:../edit_order.php?orderId='.$orderId);
+      header('location:../modify.php?message'.$response);
+
     } else {
+
       $response = "Not Updated";
+			header('location:../modify.php?message'.$response);
+			
     }
   }
 ?>

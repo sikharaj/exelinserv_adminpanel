@@ -16,9 +16,7 @@
         $createdOn = "$now";
         //$createdOn = $_POST['createdon'];
         $firstName = $_POST['fullname'];
-        $email = $_POST['email'];
         $phone = $_POST['phone'];
-        $userStatus = $_POST['userstatus'];
         $preference = $_POST['preference'];
         $orderStatus = $_POST['oderstatus'];
         $vehicleColor = $_POST['vehiclecolor'];
@@ -35,16 +33,16 @@
         $paymentMode = $_POST['paymentmode'];
         $paymentDue = $_POST['paymentDue'];
         $transactionID = $_POST['transID'];
-        $lastUpdatedOn = $_POST['lastupdates'];
         $garage = $_POST['garages'];
         $pickupBoy = $_POST['deliveryboy'];
-        $customerid = $_POST['customerId'];
+        $quikOrderID = $_POST['quikOrderID'];
         $insuranceType = $_POST['insurance'];
         $insuranceProvider = $_POST['insuranceProvider'];
         $contractNumber = $_POST['contractNumber'];
         $purchaseDate = $_POST['purchaseDate'];
         $expiryDate = $_POST['expiryDate'];
         $ldvIdv = $_POST['ldvIdv'];
+        $location = $_POST[''];
 
 
         if (!empty($_POST)){
@@ -54,31 +52,39 @@
           }else {
             $dropoffDate = $dropoffDate;
           }
-          $selectCustomerAddressId = "SELECT * FROM `address` WHERE `customerID` = '$customerid'";
-          $selectCustomerAddressIdResults = $conn -> query($selectCustomerAddressId);
-          if($selectCustomerAddressIdResults) {
-            $selectCustomerAddressIdData = $selectCustomerAddressIdResults -> fetch_assoc();
-            $addressId = $selectCustomerAddressIdData['addressID'];
+          $selectTempOrderId = "SELECT * FROM `quickorder` WHERE `quikOrderID` = '$quikOrderID'";
+          $selectTempOrderIdResults = $conn -> query($selectTempOrderId);
+          if($selectTempOrderIdResults) {
+            $selectTempOrderIdData = $selectTempOrderIdResults -> fetch_assoc();
+             $quikOrderID;
 
-              $insertOrderData = "INSERT INTO `orders`(`customerID`, `name`, `vehicleName`, `addressID`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`)
-               VALUES('$customerid','$firstName $lastName','$vehicleBrand','$addressId','$pickupDate','$dropoffDate','$createdOn','$orderStatus','$userStatus','$issue','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
+               $insertOrderData = "INSERT INTO `orders`(`tempOrderID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `location`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`)
+               VALUES('$quikOrderID','$firstName','$vehicleBrand','$pickupDate','$dropoffDate','$createdOn','$orderStatus','ACTIVE','$issue','$location','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
               $insertOrderDataResult = $conn->query($insertOrderData);
                 if ($insertOrderDataResult){// If Insertion successful
                   $last_id = $conn ->insert_id;
 
-                  $insertVehicleInfo = "INSERT INTO `vehicleInformations`(`orderID`, `customerID`, `addressID`, `insurance`, `providerName`, `contractNumber`, `purchaseDate`, `expiryDate`, `LDV_IDV`) VALUES ('$last_id','$customerid','$addressId','$insuranceType','$insuranceProvider','$contractNumber','$purchaseDate','$expiryDate','$ldvIdv')";//
+                  $insertVehicleInfo = "INSERT INTO `vehicleInformations`(`orderID`, `insurance`, `providerName`, `contractNumber`, `purchaseDate`, `expiryDate`, `LDV_IDV`) VALUES ('$last_id','$insuranceType','$insuranceProvider','$contractNumber','$purchaseDate','$expiryDate','$ldvIdv')";//
                   $insertVehicleInfoReults = $conn -> query($insertVehicleInfo);
                   if ($insertVehicleInfoReults){
-                    $message = "Oder Created Successfully";
-                    header('Location:../customer-bookings.php?message='.$message);
+                    $deleteTempOrderDetails = "DELETE FROM `quickorder` WHERE `quikOrderID` = '$quikOrderID'";
+                    $DeletedResult = $conn -> query($deleteTempOrderDetails);
+                    if ($DeletedResult) {
+                      $message = "Oder Created Successfully";
+                      header('Location:../active-bookings.php?message='.$message);
+                    }else {
+                      $message = "Oder Creation Failed";
+                      header('Location:../active-bookings.php?message='.$message);
+                    }
+
                   }else {
-                    $message = "Oder Creation Failed";
-                   header('Location:../customer-bookings.php?message='.$message);
+                    $message = "Vehicle informations insertion  failed";
+                    header('Location:../active-bookings.php?message='.$message);
                   }
 
                 } else {
                   $message = "Oder data could not be submitted";
-                 header('Location:../customer-bookings.php?message='.$message);
+                  header('Location:../customer-bookings.php?message='.$message);
                 }
               }
         }

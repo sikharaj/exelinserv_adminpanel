@@ -1,53 +1,57 @@
 <?php
 
-    include_once "../includes/db_connect.php"; //DB Connection Script Inclusion
-    date_default_timezone_set('Asia/Kolkata');
+    //Setting header type
+    //header("Content-Type: application/json");
 
-    if(isset($_SESSION['bazooka'])) { //Check if the session is already set
+    //Disabling all errors
+    error_reporting( 0);
 
-        header('Location:../admin-dashboard.php?message=You are already Logged in.'); // Redirect to dashboard if already logged in
-    } else {
-        session_start();
+    //Initializing Session for better security
+    session_start();
 
-        //Define Variables and assigning values received via POST
-        //print_r($_POST);
-        //exit;
-        $now =  date('d-m-Y H:i');
-        $createdOn = "$now";
-        //$createdOn = $_POST['createdon'];
-        $firstName = $_POST['fullname'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $userStatus = $_POST['userstatus'];
-        $preference = $_POST['preference'];
-        $orderStatus = $_POST['oderstatus'];
-        $vehicleColor = $_POST['vehiclecolor'];
-        $fuelVariant = $_POST['fuelvariant'];
-        $kilomtReading = $_POST['meterReading'];
-        $vehicleType = $_POST['vehicleType'];
-        $vehicleBrand = $_POST['vehicleName'];
-        $pickupDate = $_POST['pickUpDate'];
-        $dropoffDate = $_POST['dropDate'];
-        $serviceType = $_POST['servicetype'];
-        $issue = $_POST['issue'];
-        $totalPayment = $_POST['totalpayment'];
-        $advancedPayment = $_POST['advancedpayment'];
-        $paymentMode = $_POST['paymentmode'];
-        $paymentDue = $_POST['paymentDue'];
-        $transactionID = $_POST['transID'];
-        $lastUpdatedOn = $_POST['lastupdates'];
-        $garage = $_POST['garages'];
-        $pickupBoy = $_POST['deliveryboy'];
-        $customerid = $_POST['customerId'];
-        $insuranceType = $_POST['insurance'];
-        $insuranceProvider = $_POST['insuranceProvider'];
-        $contractNumber = $_POST['contractNumber'];
-        $purchaseDate = $_POST['purchaseDate'];
-        $expiryDate = $_POST['expiryDate'];
-        $ldvIdv = $_POST['ldvIdv'];
+    //Including necessary callbacks
+    include 'db_connect.php';
 
+    //Define Variables and assigning values received via POST
+    //print_r($_POST);
+    //exit;
+    $now =  date('d-m-Y H:i');
+    $createdOn = "$now";
+    //$createdOn = $_POST['createdon'];
+    $firstName = $_POST['firstname'];
+    $lastName = $_POST['lastname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $userStatus = $_POST['userstatus'];
+    $preference = $_POST['preference'];
+    $orderStatus = $_POST['oderstatus'];
+    $vehicleColor = $_POST['vehiclecolor'];
+    $fuelVariant = $_POST['fuelvariant'];
+    $kilomtReading = $_POST['meterReading'];
+    $vehicleType = $_POST['vehicleType'];
+    $vehicleBrand = $_POST['vehicleName'];
+    $pickupDate = $_POST['pickUpDate'];
+    $dropoffDate = $_POST['dropDate'];
+    $serviceType = $_POST['servicetype'];
+    $issue = $_POST['issue'];
+    $totalPayment = $_POST['totalpayment'];
+    $advancedPayment = $_POST['advancedpayment'];
+    $paymentMode = $_POST['paymentmode'];
+    $paymentDue = $_POST['paymentDue'];
+    $transactionID = $_POST['transID'];
+    $lastUpdatedOn = $_POST['lastupdates'];
+    $garage = $_POST['garages'];
+    $pickupBoy = $_POST['deliveryboy'];
+    $customerid = $_POST['customerId'];
+    $insuranceType = $_POST['insurance'];
+    $insuranceProvider = $_POST['insuranceProvider'];
+    $contractNumber = $_POST['contractNumber'];
+    $purchaseDate = $_POST['purchaseDate'];
+    $expiryDate = $_POST['expiryDate'];
+    $ldvIdv = $_POST['ldvIdv'];
+    //$expiryDate = $_POST['expiryDate'];
 
-        if (!empty($_POST)){
+    if (!empty($_POST)){
           if(!$dropoffDate)
           {
             $dropoffDate =  "Not Confirmed";
@@ -70,17 +74,16 @@
                   $insertVehicleInfoReults = $conn -> query($insertVehicleInfo);
                   if ($insertVehicleInfoReults){
                     $message = "Oder Created Successfully";
-                    header('Location:../customer-bookings.php?message='.$message);
+                    header('Location:../create-orders.php?message='.$message);
                   }else {
                     $message = "Oder Creation Failed";
-                   header('Location:../customer-bookings.php?message='.$message);
+                   header('Location:../create-orders.php?message='.$message);
                   }
+
 
                 } else {
                   $message = "Oder data could not be submitted";
-                 header('Location:../customer-bookings.php?message='.$message);
+                 header('Location:../create-orders.php?message='.$message);
                 }
               }
         }
-
-}

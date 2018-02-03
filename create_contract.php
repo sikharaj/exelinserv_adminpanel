@@ -120,7 +120,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 											<!--Row-->
 															<!--<div class="panel-wrapper collapse in">
 																<div class="panel-body">-->
-                                  <form name="ordercreation" method="POST" action="includes/create-order.php">
+                                  <form name="ordercreation" method="POST" action="includes/create-contract.php">
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="panel panel-default card-view">
@@ -133,10 +133,9 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																			<!--<div class="form-wrap">
 																				<form>-->
 																				<?php
-																					if(isset($_GET['customerid']) && $_GET['customerid'] != "") {
-																							echo"Customer Registered Successfully";
-																							$customerId = $_GET['customerid'];
-																						 $selectCustomers = "SELECT * FROM `customerdetails` WHERE `customerID` = $customerId";
+																					if(isset($_GET['quickOrderId']) && $_GET['quickOrderId'] != "") {
+																							$quickOrderId = $_GET['quickOrderId'];
+																						 $selectCustomers = "SELECT * FROM `quickorder` WHERE `quikOrderID` = '$quickOrderId'";
 																							$selectCustomersResults = $conn -> query($selectCustomers);
 																							if($selectCustomersResults) { // if Executed
 																									$selectCustomerData = $selectCustomersResults -> fetch_assoc();
@@ -152,21 +151,21 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																											<label class="control-label mb-10" for="exampleInputuname_1">Customer Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="fullname" class="form-control" value="<?=$selectCustomerData['firstName'];?> <?=$selectCustomerData['lastName'];?>" placeholder="Enter firstname" readonly>
+																													<input type="text" name="fullname" class="form-control" value="<?=$selectCustomerData['name'];?>" placeholder="Enter name" readonly>
 																												</div>
 																											</div>
 																											<div class="form-group col-sm-3 col-xs-3">
-																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
+																												<label class="control-label mb-10" for="exampleInputEmail_1">Location</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																													<input type="email" name="email" class="form-control" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email" readonly>
+																													<input type="text" name="location" class="form-control" value="<?=$selectCustomerData['city'];?>" placeholder="Enter location" readonly>
 																												</div>
 																											</div>
 																											<div class="form-group col-sm-3 col-xs-3">
 																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phoneNumber'];?>" placeholder="Enter phone number" readonly>
+																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phone'];?>" placeholder="Enter phone number" readonly>
 																													</div>
 																												</div>
                                                         <div class="form-group col-sm-3 col-xs-3">
@@ -181,7 +180,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                           <div class="input-group">
                                                             <div class="input-group-addon"><i class="icon-check"></i></div>
                                                               <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
-                                                              <option value="NULL">SELECT ORDER STATUS</option>
+                                                                <option value="<?=$selectCustomerData['status'];?>">Order Status : <?=$selectCustomerData['status'];?></option>
+                                                              <option value="NULL" selected disabled>SELECT ORDER STATUS</option>
                                                               <option value="Placed">Placed</option>
                                                               <option value="Unconfirmed">Unconfirmed</option>
                                                               <option value="Confirmed">Confirmed</option>
@@ -318,22 +318,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                               <input type="datetime-local" name="dropDate" class="form-control" id="dropdate" value="" placeholder="">  </div>
 																																					</div>
                                                                           <div class="form-group col-sm-3 col-xs-3">
-																																						<label class="control-label mb-10" for="servicetype">Service Type</label>
-																																						<div class="input-group">
-																																							<div class="input-group-addon"><i class="icon-wrench"></i></div>
-																																								<select name="servicetype" id="servicetype" class="form-control">
-																																								<option value="NULL">SELECT SERVICE TYPE</option>
-																																								<option value="Regular Checkup">Regular Check-up</option>
-																																								<option value="General Diagnostics">General Diagnostics</option>
-                                                                                <option value="Washing & Polishing">Washing & Polishing</option>
-																																								<option value="Denting & Painting">Denting & Painting</option>
-                                                                                <option value="Breakdown Assitance">Breakdown Assitance</option>
-																																								<option value="Detailing">Detailing</option>
-                                                                                <option value="Vehicle Insurance">Vehicle Insurance</option>
-																																							</select>
-																																							</div>
-																																					</div>
-                                                                          <div class="form-group col-sm-3 col-xs-3">
 																																						<label class="control-label mb-10" for="issue">Issue</label>
 																																							<div class="input-group">
 																																								<div class="input-group-addon"><i class="icon-note"></i></div>
@@ -433,10 +417,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                                                   </div>
                                           																											</div>
                                                                                                 <div id="contractNumber" class="form-group col-sm-3 col-xs-3">
-                                                                                                  <label class="control-label mb-10" for="exampleInputEmail_1">Contract Number</label>
+                                                                                                  <label class="control-label mb-10" for="exampleInputEmail_1">Policy Number</label>
                                                                                                   <div class="input-group">
                                                                                                     <div class="input-group-addon"><i class="icon-plus"></i></div>
-                                                                                                    <input type="text" name="contractNumber" id="contractNumber1"class="form-control" value="" placeholder="INSURANCE / POLICY / CONTRACT NUMBER" />
+                                                                                                    <input type="text" name="contractNumber" id="contractNumber1"class="form-control" value="" placeholder="CONTRACT NUMBER" />
                                                                                                   </div>
                                                                                                 </div>
 
@@ -518,8 +502,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
       																																						</div>
     																																				</div>
                                                             <div  class="col-xs-12">
-                                                      <input type="hidden" name="customerId" value="<?=$selectCustomerData['customerID'];?>">
-                                                    	<button type="submit" name="submit" class="btn btn-success mr-10">Submit
+                                                      <input type="hidden" name="quikOrderID" value="<?=$selectCustomerData['quikOrderID'];?>">
+                                                    	<button type="submit" name="submit" class="btn btn-success mr-10">Confirm
 																											<button type="reset" class="btn btn-danger ">Cancel</button>
                                                     </div>
                                                       <?php

@@ -25,7 +25,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
         header('Location:index.php?Please Login Again!');
     }
 }
-   $selectAllCustomers = "SELECT * FROM `customerdetails`";
+   $selectAllCustomers = "SELECT * FROM `customerdetails` GROUP BY `createdOn` ASC";
    $selectAllCustomersResults = $conn -> query($selectAllCustomers);
 
 ?>
@@ -120,8 +120,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                             <td><?=$selectAllCustomersData['phoneNumber'];?></td>
                             <td><?=$selectAllCustomersData['email'];?></td>
                             <td><?=$selectAllCustomersData['createdOn'];?></td>
-                            <td><a href="create_customer_order.php?customerId=<?=$selectAllCustomersData['customerID'];?>" class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a>
-                            <input type="hidden" name="addressId" value="<?=$selectAllCustomersData['customerID'];?>"></td>
+                            <td><button type="button" class="btn btn-success mr-10"><a href="create_customer_order.php?customerId=<?=$selectAllCustomersData['customerID'];?>" class="delete-record" data-id="1"><font color="white"><i class="glyphicon glyphicon-pencil"></i></font></a>
+                            <input type="hidden" name="addressId" value="<?=$selectAllCustomersData['customerID'];?>"></button></td>
                             </tr>
                           <?php
                       }
@@ -140,17 +140,15 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 				</div>
 				<!-- /Row -->
 			</div>
-
 			<!-- Footer -->
-			<footer class="footer container-fluid pl-30 pr-30">
+		<footer class="footer container-fluid pl-30 pr-30">
 				<div class="row">
 					<div class="col-sm-12">
 						<p>2017 &copy; Exelinserv. Pampered by CoolHaxLabs</p>
 					</div>
 				</div>
-			</footer>
-			<!-- /Footer -->
-
+		</footer>
+		<!-- /Footer -->
 		</div>
 		<!-- /Main Content -->
 

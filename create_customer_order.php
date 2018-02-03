@@ -538,7 +538,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 											<!--Row-->
 															<!--<div class="panel-wrapper collapse in">
 																<div class="panel-body">-->
-                                  <form name="ordercreation" method="POST" action="includes/create-order.php">
+                                  <form name="ordercreation" method="POST" action="includes/create_customer_orderAPI.php">
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="panel panel-default card-view">
@@ -781,9 +781,6 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                                   </select>
                                                                                 </div>
                                                                             </div>
-
-
-
                                                             <div class="row">
                           																		<div class="col-md-12">
                           																			<div class="panel panel-default card-view">
@@ -809,31 +806,78 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                           																												<label class="control-label mb-10" for="exampleInputuname_1">Engine Number</label>
                           																													<div class="input-group">
                           																														<div class="input-group-addon"><i class="icon-settings"></i></div>
-                          																														<input type="number" name="engineNumber" id="engineNumber"class="form-control" value="<?=$selectCustomerData[''];?>" placeholder="Enter lastname" />
+                          																														<input type="text" name="engineNumber" id="engineNumber"class="form-control" value="" placeholder="Enter engine number" />
                           																													</div>
                           																												</div>
                           																											<div class="form-group col-sm-4 col-xs-4">
-                          																												<label class="control-label mb-10" for="exampleInputEmail_1">Insurance</label>
+                          																												<label class="control-label mb-10" for="exampleInputEmail_1">Do you have an Insurance?</label>
                           																												<div class="input-group">
                           																													<div class="input-group-addon"><i class="icon-plus"></i></div>
                                                                                   <select name="insurance" id="insurance" class="form-control">
-                                                                                    <option>CHOOSE INSURANCE</option>
+                                                                                    <option value="NULL" selected disabled>CHOOSE INSURANCE STATUS</option>
                                                                                     <option value="INSURANCE">INSURANCE</option>
                                                                                     <option value="EXPIRED">EXPIRED</option>
                                                                                   </select></div>
                           																											</div>
-                                                                                <div id="insuranceProvider" class="form-group col-sm-4 col-xs-4">
-                          																												<label class="control-label mb-10" for="exampleInputEmail_1">CHOOSE INSURANCE PROVIDER</label>
+                                                                                <div id="insuranceProvider" class="form-group col-sm-3 col-xs-3">
+                          																												<label class="control-label mb-10" for="exampleInputEmail_1">INSURANCE PROVIDER</label>
                           																											<div class="input-group">
                           																												<div class="input-group-addon"><i class="icon-plus"></i></div>
-                                                                                  <select name="insuranceProvider" id="insuranceProvider" class="form-control">
-                                                                                    <option value="INSURANCE / POLICY / CONTRACT NUMBER">INSURANCE / POLICY / CONTRACT NUMBER</option>
-                                                                                    <option value="PURCHASE DATE">PURCHASE DATE</option>
-                                                                                    <option value="PURCHASE DATE">EXPIRY DATE</option>
-                                                                                    <option value="LDV / IDV">LDV / IDV</option>
+                                                                                  <select name="insuranceProvider" id="insuranceProvider1" class="form-control">
+                                                                                    <option value="NULL" selected disabled>CHOOSE PROVIDER</option>
+                                                                                    <option value="HDFC ERGO">HDFC ERGO</option>
+                                                                                    <option value="BAJAJ Allianz">BAJAJ Allianz</option>
+                                                                                    <option value="bharati AXA">bharati AXA/option>
+                                                                                    <option value="Chola MS">Chola MS</option>
+                                                                                    <option value="FUTURE GENERALI">FUTURE GENERALI</option>
+                                                                                    <option value="icicilombard">icicilombard</option>
+                                                                                    <option value="IFFCO-TOKIO">IFFCO-TOKIO</option>
+                                                                                    <option value="Liberty Videocon">Liberty Videocon</option>
+                                                                                    <option value="L&T Insurance">L&T Insurance</option>
+                                                                                    <option value="National Insurance">National Insurance</option>
+                                                                                    <option value="Oriental insurance">Oriental insurance</option>
+                                                                                    <option value="Reliance General">Reliance General</option>
+                                                                                    <option value="Royal Sundaram">Royal Sundaram</option>
+                                                                                    <option value="SBIGeneral">SBIGeneral</option>
+                                                                                    <option value="SHRIRAM">SHRIRAM</option>
+                                                                                    <option value="TATA AIG">TATA AIG</option>
+                                                                                    <option value="New India Insurance">New India Insurance</option>
+                                                                                    <option value="UNITED INDIA INSURANCE">UNITED INDIA INSURANCE</option>
+                                                                                    <option value="Universal Sompo">Universal Sompo</option>
+                                                                                    <option value="Kotak">Kotak</option>
+                                                                                    <option value="MAGMA HDI">MAGMA HDI</option>
                                                                                   </select>
-                                                                                </div>
+                                                                                  </div>
                           																											</div>
+                                                                                <div id="contractNumber" class="form-group col-sm-3 col-xs-3">
+                                                                                  <label class="control-label mb-10" for="exampleInputEmail_1">Contract Number</label>
+                                                                                  <div class="input-group">
+                                                                                    <div class="input-group-addon"><i class="icon-plus"></i></div>
+                                                                                    <input type="text" name="contractNumber" id="contractNumber1"class="form-control" value="" placeholder="INSURANCE / POLICY / CONTRACT NUMBER" />
+                                                                                  </div>
+                                                                                </div>
+
+                                                                              <div id="purchaseDate" class="form-group col-sm-3 col-xs-3">
+                                                                                <label class="control-label mb-10" for="exampleInputEmail_1">Purchase Date</label>
+                                                                                <div class="input-group">
+                                                                                  <div class="input-group-addon"><i class="icon-plus"></i></div>
+                                                                                  <input type="date" name="purchaseDate" class="form-control" value="" placeholder="Purchase date" />
+                                                                                </div>
+                                                                              </div>
+                                                                              <div id="expiryDate" class="form-group col-sm-3 col-xs-3">
+                                                                                <label class="control-label mb-10" for="exampleInputEmail_1">Expiry Date</label>
+                                                                                <div class="input-group">
+                                                                                  <div class="input-group-addon"><i class="icon-plus"></i></div>
+                                                                                  <input type="date" name="expiryDate" class="form-control" value="" placeholder="Expiry date" />
+                                                                                </div>
+                                                                              </div>
+                                                                              <div id="ldvIdv" class="form-group col-sm-3 col-xs-3">
+                                                                                <label class="control-label mb-10" for="exampleInputEmail_1">LDV / IDV</label>
+                                                                                <div class="input-group">
+                                                                                  <div class="input-group-addon"><i class="icon-plus"></i></div>
+                                                                                  <input type="text" name="ldvIdv" class="form-control" value="" placeholder="Enter LDV / IDV" />
+                                                                                </div>
+                                                                              </div>
                                                           <div class="row">
                         																		<div class="col-md-12">
                         																			<div class="panel panel-default card-view">
@@ -968,13 +1012,31 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
     <!--Script for Payment Calculations.-->
     <script type="text/javascript">
         $(document).ready(function(){
-          $('#insuranceProvider').hide();//INSURANCE EXPIRED
+          $('#insuranceProvider').hide();
+          $('#purchaseDate').hide();
+          $('#expiryDate').hide();
+          $('#ldvIdv').hide();
+          $('#contractNumber').hide();
           $('#insurance').on('change',function(){
+
             var insurance = $('#insurance').val();
             if ( insurance == 'INSURANCE' || insurance == ''){
+
               $('#insuranceProvider').show();
+              $('#insuranceProvider1').on('change',function(){
+                $('#contractNumber').show();
+                $('#purchaseDate').show();
+                $('#expiryDate').show();
+                $('#ldvIdv').show();
+
+              });
+
+
             } else {
               $('#insuranceProvider').hide();
+              $('#purchaseDate').hide();
+              $('#expiryDate').hide();
+              $('#ldvIdv').hide();
             }
             $('#totalPayment').on('keyup',function(){
 
