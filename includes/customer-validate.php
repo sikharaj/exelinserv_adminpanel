@@ -31,7 +31,7 @@
 
 
         if (!empty($_POST)){
-          echo $addressType;
+           $addressType;
           $phone = "91".$phone;
           $temperaryPhNumber = "91".$temperaryPhNumber;
           if ($addressType == 'SELF'){
@@ -58,6 +58,7 @@
                                         $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `streetAddress`, `city`, `state`,`country`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$country','$area','$pincode','$addressType')";
                                         $insertAddressDataResult = $conn -> query($insertAddressData);
                                         if ($insertAddressDataResult) {
+
                                           $message = "Customer registered successfully";
                                           header('Location:../order-creation.php?customerid='.$customerId);
                                         } else {
@@ -71,7 +72,7 @@
                         }
 
                 }
-            }else if ($addressType == 'REFERENCE') {
+            }else if ($addressType == 'REFERENCE' || $addressType == 'OFFICE') {
               $selectEmailId = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";// check if the email ID already Existing or not
               $selectEmailIDResult = $conn -> query($selectEmailId);
               if ($selectEmailIDResult->num_rows > 0)  {//If email already exist
@@ -92,7 +93,7 @@
                                       $customerId = $customerData['customerID']; //select customer ID
                                         //insert Address data to address Table
 
-                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `tempCusAddress`, `city`, `state`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$area','$pincode','$addressType')";
+                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `tempCusAddress`, `city`, `state`, `country`,`area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$country','$area','$pincode','$addressType')";
                                         $insertAddressDataResult = $conn -> query($insertAddressData);
                                         if ($insertAddressDataResult) {
                                           $message = "Customer registered successfully";

@@ -556,41 +556,37 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" placeholder="Enter phone number" pattern="[7-9]{1}[0-9]{9}">
 																													</div>
 																												</div>
-																											<div class="form-group col-sm-6 col-xs-6">
+																											<!--<div class="form-group col-sm-6 col-xs-6">
 																												<label class="control-label mb-10" for="exampleInputpwd_1">Password</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-lock"></i></div>
 																													<input type="password" name="password" class="form-control" id="exampleInputpwd_1" placeholder="Enter password">
 																												</div>
-																											</div>
+																											</div>-->
 
-                                                      	<div class="form-group col-sm-6 col-xs-6">
-
-                                  													<label class="control-label mb-10 text-left">Gender</label>
-
-                                                            <div class="radio radio-info">
-                                  														<input type="radio" name="genderChoose" id="male" value="Male" checked>
-                                  														<label for="radio2">
-                                  															Male
-                                  														</label>
-                                                                &nbsp; &nbsp; &nbsp;
-                                                                <input type="radio" name="genderChoose" id="female" value="Female">
-                                                                <label for="radio1">
-                                                                  Female
-                                                                </label>
-                                                              </div>
+                                                      <div class="form-group col-sm-6 col-xs-6">
+                                                        <label class="control-label mb-10 text-left">Gender</label>
+                                                          <div class="radio radio-info">
+                                  													<input type="radio" name="genderChoose" id="male" value="Male" checked>
+                                  													<label for="radio2">
+                                  														Male
+                                  													</label>
+                                                              &nbsp; &nbsp; &nbsp;
+                                                            <input type="radio" name="genderChoose" id="female" value="Female">
+                                                            <label for="radio1">
+                                                              Female
+                                                            </label>
                                                           </div>
-
-																													<div class="row">
-																														<div class="col-md-12">
-																															<div class="panel panel-default card-view">
-																																<div class="panel-heading">
-																																	<div class="pull-left">
-                                                                    <h6 class="panel-title txt-dark">Customer Registration</h6><br/>
-                        																						<h4 class="panel-title txt-dark"><font color="#A9A9A9">Customer Communcation Address With All Details.</font></h4>
-																																	</div>
-																																	<div class="clearfix"></div>
-																																</div>
+                                                      </div>
+																											<div class="row">
+																												<div class="col-md-12">
+																													<div class="panel panel-default card-view">
+																														<div class="panel-heading">
+																															<div class="pull-left">
+                        																				<h4 class="panel-title txt-dark">Customer Communcation Address With All Details.</h4>
+																															</div>
+																															<div class="clearfix"></div>
+																														</div>
 																															<!--<div class="form-wrap">
 																																<form>-->
 																																<div class="panel-wrapper collapse in">
@@ -667,13 +663,12 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																								</div>
 																																							</div>
                                                                               <div class="form-group col-sm-3 col-xs-3">
-																																								<label class="control-label mb-10" for="exampleInputEmail_1">Alternate Phne Number</label>
+																																								<label class="control-label mb-10" for="exampleInputEmail_1">Alternate Phone Number</label>
 																																								<div class="input-group">
 																																									<div class="input-group-addon"><i class="icon-call-end"></i></div>
 																																									<input type="tel" name="alternatePhoneNumber" class="form-control" id="area" placeholder="area" required>
 																																								</div>
 																																							</div> <br />
-
                                                                               <div class="form-group col-xs-12">
 																																							<button type="submit" class="btn btn-success mr-10">Create Customer</button>
 																											<button type="reset" class="btn btn-danger">Reset</button>

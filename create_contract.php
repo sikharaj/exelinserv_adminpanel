@@ -148,58 +148,156 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																								<div class="form-wrap">
 
 																										<div class="form-group col-sm-3 col-xs-3">
-																											<label class="control-label mb-10" for="exampleInputuname_1">Customer Name</label>
+																											<label class="control-label mb-10" for="exampleInputuname_1">First Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="fullname" class="form-control" value="<?=$selectCustomerData['name'];?>" placeholder="Enter name" readonly>
+																													<input type="text" name="firstname" class="form-control" value="<?=$selectCustomerData['name'];?>" placeholder="Enter name" readonly>
 																												</div>
-																											</div>
-																											<div class="form-group col-sm-3 col-xs-3">
-																												<label class="control-label mb-10" for="exampleInputEmail_1">Location</label>
+																										</div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+  																											<label class="control-label mb-10" for="exampleInputuname_1">If user left his last name.</label>
+  																												<div class="input-group">
+  																													<div class="input-group-addon"><i class="icon-user"></i></div>
+  																													<input type="text" name="lastname" class="form-control" value="" placeholder="Enter last name" >
+  																												</div>
+  																									</div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+                                                        <input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email">
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-phone"></i></div>
+                                                          <input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phone'];?>" placeholder="Enter phone number" readonly>
+                                                        </div>
+                                                      </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10 text-left">Gender</label>
+                                                        <div class="radio radio-info">
+                                                          <input type="radio" name="genderChoose" id="male" value="Male" checked>
+                                                          <label for="radio2">
+                                                            Male
+                                                          </label>
+                                                            &nbsp; &nbsp; &nbsp;
+                                                          <input type="radio" name="genderChoose" id="female" value="Female">
+                                                          <label for="radio1">
+                                                            Female
+                                                          </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputuname_1">Country</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-layers "></i></div>
+                                                          <select name="country" id="countryChoice" class="form-control">
+                                                            <option value="NULL">SELECT COUNTRY</option>
+                                                            <?php
+                                                                  $electCountry = mysqli_query($conn,"SELECT * FROM `country`");
+                                                                  while($electCountryData = mysqli_fetch_array($electCountry)){
+                                                            ?>
+                                                            <option value="<?php echo $electCountryData['countryID'];?>"><?php echo $electCountryData['countryName'];?></option>
+                                                            <?php
+                                                                    }
+                                                            ?>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputuname_1">State</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-directions"></i></div>
+                                                          <select name="state" id="stateChoice" class="form-control">
+                                                            <option value="NULL">SELECT STATE</option>
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+																												<label class="control-label mb-10" for="exampleInputEmail_1">City</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																													<input type="text" name="location" class="form-control" value="<?=$selectCustomerData['city'];?>" placeholder="Enter location" readonly>
-																												</div>
-																											</div>
-																											<div class="form-group col-sm-3 col-xs-3">
-																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
-																													<div class="input-group">
-																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phone'];?>" placeholder="Enter phone number" readonly>
-																													</div>
-																												</div>
-                                                        <div class="form-group col-sm-3 col-xs-3">
-  																												<label class="control-label mb-10" for="exampleInputuname_1">Created On</label>
-  																													<div class="input-group">
-  																														<div class="input-group-addon"><i class="icon-calender"></i></div>
-  																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectCustomerData['createdOn'];?>" placeholder="Enter phone number" readonly>
-  																													</div>
-  																												</div>
-                                                        <div class="form-group col-sm-3 col-xs-3">
-                                                          <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
+                                                          <select name="city" id="cityChoice" class="form-control">
+                                                            <option value="<?=$selectCustomerData['city'];?>">Selected by customer : <?=$selectCustomerData['city'];?></option>
+                                                            <option value="NULL" selected disabled>SELECT CITY</option>
+                                                          </select>
+                                                        <!--  <input type="text" name="location" id="cityChoice" class="form-control" value="<?=$selectCustomerData['city'];?>" placeholder="Enter location" readonly>
+																												--></div>
+																										</div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                        <label class="control-label mb-10" for="exampleInputuname_1">Pincode</label>
                                                           <div class="input-group">
-                                                            <div class="input-group-addon"><i class="icon-check"></i></div>
-                                                              <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
-                                                                <option value="<?=$selectCustomerData['status'];?>">Order Status : <?=$selectCustomerData['status'];?></option>
-                                                              <option value="NULL" selected disabled>SELECT ORDER STATUS</option>
-                                                              <option value="Placed">Placed</option>
-                                                              <option value="Unconfirmed">Unconfirmed</option>
-                                                              <option value="Confirmed">Confirmed</option>
-                                                              <option value="Picked-up/Walk-in">Picked-up/Walk-in</option>
-                                                              <option value="Inprogress">Inprogress</option>
-                                                              <option value="Delivered">Delivered</option>
-                                                            </select>
-                                                            </div>
+                                                            <div class="input-group-addon"><i class="icon-location-pin"></i></div>
+                                                            <input type="nuumber" name="pincode" class="form-control" required pattern="[0-9]{6}" id="pincode" placeholder="Enter your pin">
+                                                          </div>
                                                         </div>
-																											<div class="row">
-																												<div class="col-md-12">
-																													<div class="panel panel-default card-view">
-																														<div class="panel-heading">
-																															<div class="pull-left">
-																																<h4 class="panel-title txt-dark">Order Information</h4>
+                                                        <div class="form-group col-sm-3 col-xs-3">
+                                                          <label class="control-label mb-10" for="exampleInputuname_1">Booking For</label>
+                                                            <div class="input-group">
+                                                              <div class="input-group-addon"><i class="icon-home "></i></div>
+                                                              <select name="addressType" id="addressType" class="form-control">
+                                                                <option value="">ADDRESS TYPE</option>
+                                                                <option Value="SELF"> MY HOME</option>
+                                                                <option value="REFERENCE">FRIEND'S HOME</option>
+                                                                <option value="OFFICE">MY OFFICE</option>
+                                                                </select>
+                                                              </div>
+                                                      </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Address</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-home"></i></div>
+                                                        <input type="text" name="streetAddress" class="form-control" id="streetAddress" required placeholder="Enter streetaddress">
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Area</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-paper-plane"></i></div>
+                                                        <input type="text" name="area" class="form-control" id="area" placeholder="area" required>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Alternate Phone Number</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-call-end"></i></div>
+                                                        <input type="tel" name="alternatePhoneNumber" class="form-control" id="area" placeholder="area" >
+                                                      </div>
+                                                    </div> <br />
+                                                    <div class="form-group col-sm-3 col-xs-3">
+  																										<label class="control-label mb-10" for="exampleInputuname_1">Created On</label>
+  																											<div class="input-group">
+  																												<div class="input-group-addon"><i class="icon-calender"></i></div>
+  																												<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectCustomerData['createdOn'];?>" placeholder="Enter phone number" readonly>
+  																											</div>
+  																									</div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-check"></i></div>
+                                                          <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
+                                                            <option value="<?=$selectCustomerData['status'];?>">Order Status : <?=$selectCustomerData['status'];?></option>
+                                                            <option value="NULL" selected disabled>SELECT ORDER STATUS</option>
+                                                            <option value="Placed">Placed</option>
+                                                            <option value="Unconfirmed">Unconfirmed</option>
+                                                            <option value="Confirmed">Confirmed</option>
+                                                            <option value="Picked-up/Walk-in">Picked-up/Walk-in</option>
+                                                            <option value="Inprogress">Inprogress</option>
+                                                            <option value="Delivered">Delivered</option>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+																										<div class="row">
+																											<div class="col-md-12">
+																												<div class="panel panel-default card-view">
+																													<div class="panel-heading">
+																														<div class="pull-left">
+																															<h4 class="panel-title txt-dark">Order Information</h4>
 																															</div>
-																															<div class="clearfix"></div>
-																														</div>
+																														<div class="clearfix"></div>
+																													</div>
 																													<!--<div class="form-wrap">
 																														<form>-->
                                                             <div class="panel-wrapper collapse in">
@@ -570,6 +668,111 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 		<!-- Switchery JavaScript -->
 		<script src="vendors/bower_components/switchery/dist/switchery.min.js"></script>
+    <!-- Select address script-->
+    <script>
+      $(document).ready(function(){
+
+          $('#countryChoice').on('change',function(){
+
+            $('#stateChoice').html('<option>Please choose State</option>');
+            $('#cityChoice').html('<option>Please choose State First</option>');
+            var country = $(this).val();
+
+              if(country){
+
+                //Running the AJAX Call for data retrival
+                $.ajax({
+
+                      type: 'post',
+                      url: 'includes/fetchLocations.php?country='+country,
+                      cache: false,
+                      dataType: 'json',
+                      data:{country:country},
+                      success: function(stateInfo){
+
+                          var len = stateInfo.length;
+                          $('#stateChoice').html('<option value="NULL">Please choose State</option>');
+
+
+                            if(stateInfo){
+
+                              for (var i = 0; i<len; i++){
+
+                                    var stateID = stateInfo[i]['stateID'];
+                                    var stateName = stateInfo[i]['stateName'];
+                                      $('#stateChoice').append("<option value = '"+stateID+"'>"+stateName+"</option>");
+
+                              }
+
+
+
+                            }else{
+
+                              $('#stateChoice').html('<option value="NULL">Please choose Country first</option>');
+
+                            }
+                      }
+                });
+
+              }else{
+
+                $('#stateChoice').append('<option value="NULL">Please choose Country first</option>');
+
+              }
+
+          });
+
+        $('#stateChoice').on('change', function(){
+
+          var state = $(this).val();
+
+            if(state){
+
+            //Running the AJAX Call for data retrival
+            $.ajax({
+
+                  type: 'post',
+                  url: 'includes/fetchLocations.php?state='+state,
+                  cache: false,
+                  dataType: 'json',
+                  data:{state:state},
+                  success: function(cityInfo){
+
+                      $('#cityChoice').html('<option value="NULL">Please choose City</option>');
+
+                        if(cityInfo){
+
+                            var len = cityInfo.length;
+
+                            for (var i = 0; i<len; i++){
+
+                              var cityID = cityInfo[i]['cityID'];
+                              var cityName = cityInfo[i]['cityName'];
+                              $('#cityChoice').append("<option value = '"+cityID+"'>"+cityName+"</option>");
+
+                            }
+
+
+                        } else{
+
+                          $('#cityChoice').html('<option value="NULL">No City in list</option>');
+
+                        }
+                  }
+            });
+
+          }else{
+
+                $('#cityChoice').html('<option value="NULL">Please choose State First</option>');
+
+          }
+
+
+          });
+
+      });
+
+    </script>
 
 		<!-- Init JavaScript -->
 		<script src="dist/js/init.js"></script>
@@ -582,46 +785,49 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
           $('#expiryDate').hide();
           $('#ldvIdv').hide();
           $('#contractNumber').hide();
-          $('#insurance').on('change',function(){
 
-            var insurance = $('#insurance').val();
-            if ( insurance == 'INSURANCE' || insurance == ''){
+            $('#insurance').on('change',function(){
 
-              $('#insuranceProvider').show();
-              $('#insuranceProvider1').on('change',function(){
-                $('#contractNumber').show();
-                $('#purchaseDate').show();
-                $('#expiryDate').show();
-                $('#ldvIdv').show();
+              var insurance = $('#insurance').val();
+              if ( insurance == 'INSURANCE' || insurance == ''){
 
-              });
+                $('#insuranceProvider').show();
+                $('#insuranceProvider1').on('change',function(){
+                  $('#contractNumber').show();
+                  $('#purchaseDate').show();
+                  $('#expiryDate').show();
+                  $('#ldvIdv').show();
+
+                });
 
 
-            } else {
-              $('#insuranceProvider').hide();
-              $('#purchaseDate').hide();
-              $('#expiryDate').hide();
-              $('#ldvIdv').hide();
-            }
-            $('#totalPayment').on('keyup',function(){
+              } else {
+                $('#insuranceProvider').hide();
+                $('#purchaseDate').hide();
+                $('#expiryDate').hide();
+                $('#ldvIdv').hide();
+              }
+              $('#totalPayment').on('keyup',function(){
 
-                  $('#advancedPayment').val(0);
+                    $('#advancedPayment').val(0);
 
-                    $('#advancedPayment').on('keyup',function(){
+                      $('#advancedPayment').on('keyup',function(){
 
-                        var totalPayment = $('#totalPayment').val();
-                        var advancedPayment = $('#advancedPayment').val();
-                        var amnt = totalPayment - advancedPayment;
-                        // alert(amnt);
-                        $('#paymentDue').val(amnt);
+                          var totalPayment = $('#totalPayment').val();
+                          var advancedPayment = $('#advancedPayment').val();
+                          var amnt = totalPayment - advancedPayment;
+                          // alert(amnt);
+                          $('#paymentDue').val(amnt);
 
-                      });
+                        });
+
+                    });
 
                   });
 
-            });
 
         });
     </script>
+
 </body>
 </html>
