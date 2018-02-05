@@ -19,42 +19,22 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>createdOn</th>
-                    <th>UpdatedOn</th>
-                    <th>Create Oder</th>
+                    <th>Action</th>
 
                   </tr>
                 </thead>
-                <!--<tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </tfoot>-->
                 <tbody>
                   <?php
                   if($selectAllCustomersResults) { // if Executed
                       while ($selectAllCustomersData = $selectAllCustomersResults -> fetch_assoc()) {
                   ?>
-                  <!--<tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                  </tr>-->
                   <tr>
                     <td style="color:black;">EXCU<?=$selectAllCustomersData['customerID'];?></td>
                     <td style="color:black;"><?=$selectAllCustomersData['firstName'];?> <?=$selectAllCustomersData['lastName'];?></td>
                     <td style="color:black;"><?=$selectAllCustomersData['phoneNumber'];?></td>
                     <td style="color:black;"><a href="mailto:<?=$selectAllCustomersData['email'];?>" target="_blank"><?=$selectAllCustomersData['email'];?></a></td>
                     <td style="color:black;"><?=$selectAllCustomersData['createdOn'];?></td>
-                    <td style="color:black;"><?=$selectAllCustomersData['lastUpdatedOn'];?></td>
-                    <td style="color:black;"><a href="createContract.php?customerId=<?=$selectAllCustomersData['customerID'];?>"><input type="button" class="btn btn-success" value="Ceate Contract"></a></td>
+                    <td style="color:black;"><a href="create-registered-customers-order.php?customerId=<?=$selectAllCustomersData['customerID'];?>"><input type="button" class="btn btn-success" value="Create Oder"></a></td>
                   </tr>
                   <?php
                       }

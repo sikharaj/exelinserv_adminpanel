@@ -86,20 +86,21 @@
                                       $customerId = $customerData['customerID']; //select customer ID
                                         //insert Address data to address Table
 
-                                        $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `streetAddress`, `city`, `state`,`country`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$country','$area','$pincode','$addressType')";
+                                         $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `streetAddress`, `city`, `state`,`country`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$country','$area','$pincode','$addressType')";
                                         $insertAddressDataResult = $conn -> query($insertAddressData);
                                         if ($insertAddressDataResult) {
+
+                                          $address_id = $conn ->insert_id;
                                           $selectTempOrderId = "SELECT * FROM `quickorder` WHERE `quikOrderID` = '$quikOrderID'";
                                           $selectTempOrderIdResults = $conn -> query($selectTempOrderId);
                                           if($selectTempOrderIdResults) {
                                               $selectTempOrderIdData = $selectTempOrderIdResults -> fetch_assoc();
-                                              $quikOrderID;
-                                              $insertOrderData = "INSERT INTO `orders`(`tempOrderID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `location`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`)
-                                               VALUES('$quikOrderID','$firstName','$vehicleBrand','$pickupDate','$dropoffDate','$createdOn','$orderStatus','ACTIVE','$issue','$location','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
+
+                                               $insertOrderData = "INSERT INTO `orders`(`tempOrderID`, `customerID`, `name`, `email`, `vehicleName`, `addressID`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `location`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`) VALUES ('$quikOrderID','$customerId','$firstname $lastname','$email','$vehicleBrand','$address_id','$pickupDate','$dropoffDate','$createdOn','$orderStatus','ACTIVE','$issue','$city','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
                                               $insertOrderDataResult = $conn->query($insertOrderData);
                                                 if ($insertOrderDataResult){// If Insertion successful
                                                   $last_id = $conn ->insert_id;
-                                                  $insertVehicleInfo = "INSERT INTO `vehicleInformations`(`orderID`, `insurance`, `providerName`, `contractNumber`, `purchaseDate`, `expiryDate`, `LDV_IDV`) VALUES ('$last_id','$insuranceType','$insuranceProvider','$contractNumber','$purchaseDate','$expiryDate','$ldvIdv')";//
+                                                  $insertVehicleInfo = "INSERT INTO `vehicleInformations`(`orderID`, `customerID`, `addressID`, `insurance`, `providerName`, `contractNumber`, `purchaseDate`, `expiryDate`, `LDV_IDV`) VALUES ('$last_id','$customerId','$address_id','$insuranceType','$insuranceProvider','$contractNumber','$purchaseDate','$expiryDate','$ldvIdv')";//
                                                   $insertVehicleInfoReults = $conn -> query($insertVehicleInfo);
                                                   if ($insertVehicleInfoReults){
                                                     $deleteTempOrderDetails = "DELETE FROM `quickorder` WHERE `quikOrderID` = '$quikOrderID'";
@@ -126,9 +127,6 @@
                                                 header('Location:../create-contract.php?message='.$message);
                                               }
 
-
-                                          //$message = "Customer registered successfully";
-                                          //header('Location:../order-creation.php?customerid='.$customerId);
                                         } else {
                                           $message = "Address insertion failed";
                                           header('Location:../order-creation.php?customerid='.$customerId);
@@ -160,17 +158,17 @@
                                         $insertAddressData = "INSERT INTO `address`(`customerID`, `customerName`, `custPhoneNumber`, `tmpPhoneNum`, `tempCusAddress`, `city`, `state`, `country`, `area`, `pinCode`, `addressType`) VALUES ('$customerId','$firstname $lastname','$phone','$temperaryPhNumber','$streetAddress','$city','$state','$country','$area','$pincode','$addressType')";
                                         $insertAddressDataResult = $conn -> query($insertAddressData);
                                         if ($insertAddressDataResult) {
+                                          $address_id = $conn ->insert_id;
                                           $selectTempOrderId = "SELECT * FROM `quickorder` WHERE `quikOrderID` = '$quikOrderID'";
                                           $selectTempOrderIdResults = $conn -> query($selectTempOrderId);
                                           if($selectTempOrderIdResults) {
                                               $selectTempOrderIdData = $selectTempOrderIdResults -> fetch_assoc();
-                                              $quikOrderID;
-                                              $insertOrderData = "INSERT INTO `orders`(`tempOrderID`, `name`, `vehicleName`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `location`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`)
-                                               VALUES('$quikOrderID','$firstName','$vehicleBrand','$pickupDate','$dropoffDate','$createdOn','$orderStatus','ACTIVE','$issue','$location','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
+
+                                              $insertOrderData = "INSERT INTO `orders`(`tempOrderID`, `customerID`, `name`, `email`, `vehicleName`, `addressID`, `pickupDateNdTime`, `dropOffDateNdTime`, `orderCreatedOn`, `orderStatus`, `userStatus`, `issue`, `location`, `phone`, `serviceType`, `vehicleType`, `vehicleColor`, `totalPayment`, `advancePayment`, `paymentDue`, `paymentMode`, `deliveryBoy`, `garages`, `lastUpdatedOn`, `fuelVariant`, `kiloMeterReading`, `preferenceService`, `transactionID`) VALUES ('$quikOrderID','$customerId','$firstname $lastname','$email','$vehicleBrand','$address_id','$pickupDate','$dropoffDate','$createdOn','$orderStatus','ACTIVE','$issue','$city','$phone','$serviceType','$vehicleType','$vehicleColor','$totalPayment','$advancedPayment','$paymentDue','$paymentMode','$pickupBoy','$garage','$now','$fuelVariant','$kilomtReading','$preference','$transactionID')";
                                               $insertOrderDataResult = $conn->query($insertOrderData);
                                                 if ($insertOrderDataResult){// If Insertion successful
                                                   $last_id = $conn ->insert_id;
-                                                  $insertVehicleInfo = "INSERT INTO `vehicleInformations`(`orderID`, `insurance`, `providerName`, `contractNumber`, `purchaseDate`, `expiryDate`, `LDV_IDV`) VALUES ('$last_id','$insuranceType','$insuranceProvider','$contractNumber','$purchaseDate','$expiryDate','$ldvIdv')";//
+                                                  $insertVehicleInfo = "INSERT INTO `vehicleInformations`(`orderID`, `customerID`, `addressID`, `insurance`, `providerName`, `contractNumber`, `purchaseDate`, `expiryDate`, `LDV_IDV`) VALUES ('$last_id','$customerId','$address_id','$insuranceType','$insuranceProvider','$contractNumber','$purchaseDate','$expiryDate','$ldvIdv')";//
                                                   $insertVehicleInfoReults = $conn -> query($insertVehicleInfo);
                                                   if ($insertVehicleInfoReults){
                                                     $deleteTempOrderDetails = "DELETE FROM `quickorder` WHERE `quikOrderID` = '$quikOrderID'";
@@ -196,9 +194,7 @@
                                                 $message = "Oder data could not be submitted";
                                                 header('Location:../create-contract.php?message='.$message);
                                               }
-                                          //$message = "Customer registered successfully";
-                                          //header('Location:../order-creation.php?customerid='.$customerId);
-                                        } else {
+                                          } else {
                                           $message = "Address insertion failed";
                                           header('Location:../order-creation.php?customerid='.$customerId);
                                         }
@@ -212,7 +208,7 @@
                   }
 
           } else {
-            header('Location:../customer-registration.php?message=Please Fill in all the data.');
+            header('Location:../create-contract.php?message=Please Fill in all the data.');
         }
 }
 }
@@ -254,3 +250,4 @@
         }
 
 }
+*/

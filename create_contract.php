@@ -165,7 +165,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                       <label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
                                                       <div class="input-group">
                                                         <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-                                                        <input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email">
+                                                        <input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email" value="">
                                                       </div>
                                                     </div>
                                                     <div class="form-group col-sm-3 col-xs-3">
@@ -263,7 +263,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                       <label class="control-label mb-10" for="exampleInputEmail_1">Alternate Phone Number</label>
                                                       <div class="input-group">
                                                         <div class="input-group-addon"><i class="icon-call-end"></i></div>
-                                                        <input type="tel" name="alternatePhoneNumber" class="form-control" id="area" placeholder="area" >
+                                                        <input type="tel" name="alternatePhoneNumber" class="form-control" id="area" placeholder="optional" >
                                                       </div>
                                                     </div> <br />
                                                     <div class="form-group col-sm-3 col-xs-3">
@@ -379,7 +379,9 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                             <div class="input-group">
                                                                               <div class="input-group-addon"><i class="icon-wrench"></i></div>
                                                                                 <select name="servicetype" id="servicetype" class="form-control">
-                                                                                <option value="NULL">SELECT SERVICE TYPE</option>
+
+                                                                                <option value="NULL" selected disabled>SELECT SERVICE TYPE</option>
+                                                                                <option value="<?=$selectCustomerData['serviceType'];?>">User choice : <?=$selectCustomerData['serviceType'];?></option>
                                                                                 <option value="Regular Checkup">Regular Check-up</option>
                                                                                 <option value="General Diagnostics">General Diagnostics</option>
                                                                                 <option value="Washing & Polishing">Washing & Polishing</option>
@@ -419,7 +421,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																						<label class="control-label mb-10" for="issue">Issue</label>
 																																							<div class="input-group">
 																																								<div class="input-group-addon"><i class="icon-note"></i></div>
-																																								<input type="text" name="issue" class="form-control" id="issue" value="" placeholder="Enter an issue">
+																																								<input type="text" name="issue" class="form-control" id="issue" value="<?=$selectCustomerData['issue'];?>" placeholder="Enter an issue">
 																																							</div>
 																																						</div>
                                                                             <div class="form-group col-sm-3 col-xs-3">
@@ -492,7 +494,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                                                     <option value="NULL" selected disabled>CHOOSE PROVIDER</option>
                                                                                                     <option value="HDFC ERGO">HDFC ERGO</option>
                                                                                                     <option value="BAJAJ Allianz">BAJAJ Allianz</option>
-                                                                                                    <option value="bharati AXA">bharati AXA/option>
+                                                                                                    <option value="bharati AXA">bharati AXA</option>
                                                                                                     <option value="Chola MS">Chola MS</option>
                                                                                                     <option value="FUTURE GENERALI">FUTURE GENERALI</option>
                                                                                                     <option value="icicilombard">icicilombard</option>

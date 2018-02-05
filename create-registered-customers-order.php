@@ -16,7 +16,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 } else { // if set get the email
     $email = $_SESSION['bazooka'];
-    $selectAdminQuery = "SELECT * FROM `users` WHERE `email` = '$email'";
+    $selectAdminQuery = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";
     $selectAdminDataResult = $conn -> query($selectAdminQuery);
     if ($selectAdminDataResult) { //Successfully execute SQL Query
         $selectAdminData = $selectAdminDataResult->fetch_assoc();
@@ -120,7 +120,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 											<!--Row-->
 															<!--<div class="panel-wrapper collapse in">
 																<div class="panel-body">-->
-                                  <form name="ordercreation" method="POST" action="includes/create-order.php">
+                                  <form name="ordercreation" method="POST" action="includes/create-contract.php">
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="panel panel-default card-view">
@@ -133,13 +133,12 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																			<!--<div class="form-wrap">
 																				<form>-->
 																				<?php
-																					if(isset($_GET['customerid']) && $_GET['customerid'] != "") {
-																							echo"Customer Registered Successfully";
-																							$customerId = $_GET['customerid'];
-																						 $selectCustomers = "SELECT * FROM `customerdetails` WHERE `customerID` = $customerId";
-																							$selectCustomersResults = $conn -> query($selectCustomers);
-																							if($selectCustomersResults) { // if Executed
-																									$selectCustomerData = $selectCustomersResults -> fetch_assoc();
+																					if(isset($_GET['customerId']) && $_GET['customerId'] != "") {
+																							$customerId = $_GET['customerId'];
+																						 $selectOrders = "SELECT * FROM `orders` WHERE `orderID` = '$customerId'";
+																							$selectOrderResults = $conn -> query($selectOrders);
+																							if($selectOrderResults) { // if Executed
+																									$selectOrdersData = $selectOrderResults -> fetch_assoc();
 
 																					?>
                                           <div class="panel-wrapper collapse in">
@@ -149,57 +148,135 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																								<div class="form-wrap">
 
 																										<div class="form-group col-sm-3 col-xs-3">
-																											<label class="control-label mb-10" for="exampleInputuname_1">Customer Name</label>
+																											<label class="control-label mb-10" for="exampleInputuname_1">Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="fullname" class="form-control" value="<?=$selectCustomerData['firstName'];?> <?=$selectCustomerData['lastName'];?>" placeholder="Enter firstname" readonly>
+																													<input type="text" name="firstname" class="form-control" value="<?=$selectOrdersData['name'];?>" placeholder="Enter name" readonly>
 																												</div>
-																											</div>
-																											<div class="form-group col-sm-3 col-xs-3">
-																												<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
+																										</div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+                                                        <input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email" value="<?=$selectOrdersData['email'];?>">
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-phone"></i></div>
+                                                          <input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectOrdersData['phone'];?>" placeholder="Enter phone number" readonly>
+                                                        </div>
+                                                      </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputuname_1">Country</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-layers "></i></div>
+                                                          <select name="country" id="countryChoice" class="form-control">
+                                                            <option value="NULL" selected disabled>SELECT COUNTRY</option>
+                                                            <?php
+                                                                  $electCountry = mysqli_query($conn,"SELECT * FROM `country`");
+                                                                  while($electCountryData = mysqli_fetch_array($electCountry)){
+                                                            ?>
+                                                            <option value="<?php echo $electCountryData['countryID'];?>"><?php echo $electCountryData['countryName'];?></option>
+                                                            <?php
+                                                                    }
+                                                            ?>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputuname_1">State</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-directions"></i></div>
+                                                          <select name="state" id="stateChoice" class="form-control">
+                                                            <option value="NULL">SELECT STATE</option>
+                                                            </select>
+                                                          </div>
+                                                      </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+																												<label class="control-label mb-10" for="exampleInputEmail_1">City</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-																													<input type="email" name="email" class="form-control" value="<?=$selectCustomerData['email'];?>" placeholder="Enter email" readonly>
-																												</div>
-																											</div>
-																											<div class="form-group col-sm-3 col-xs-3">
-																												<label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
-																													<div class="input-group">
-																														<div class="input-group-addon"><i class="icon-phone"></i></div>
-																														<input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerData['phoneNumber'];?>" placeholder="Enter phone number" readonly>
-																													</div>
-																												</div>
-                                                        <div class="form-group col-sm-3 col-xs-3">
-  																												<label class="control-label mb-10" for="exampleInputuname_1">Created On</label>
-  																													<div class="input-group">
-  																														<div class="input-group-addon"><i class="icon-calender"></i></div>
-  																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectCustomerData['createdOn'];?>" placeholder="Enter phone number" readonly>
-  																													</div>
-  																												</div>
-                                                        <div class="form-group col-sm-3 col-xs-3">
-                                                          <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
+                                                          <select name="city" id="cityChoice" class="form-control">
+                                                            <option value="<?=$selectOrdersData['city'];?>">Selected by customer : <?=$selectOrdersData['city'];?></option>
+                                                            <option value="NULL" selected disabled>SELECT CITY</option>
+                                                          </select>
+                                                        <!--  <input type="text" name="location" id="cityChoice" class="form-control" value="<?=$selectCustomerData['city'];?>" placeholder="Enter location" readonly>
+																												--></div>
+																										</div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                        <label class="control-label mb-10" for="exampleInputuname_1">Pincode</label>
                                                           <div class="input-group">
-                                                            <div class="input-group-addon"><i class="icon-check"></i></div>
-                                                              <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
-                                                              <option value="NULL">SELECT ORDER STATUS</option>
-                                                              <option value="Placed">Placed</option>
-                                                              <option value="Unconfirmed">Unconfirmed</option>
-                                                              <option value="Confirmed">Confirmed</option>
-                                                              <option value="Picked-up/Walk-in">Picked-up/Walk-in</option>
-                                                              <option value="Inprogress">Inprogress</option>
-                                                              <option value="Delivered">Delivered</option>
-                                                            </select>
-                                                            </div>
+                                                            <div class="input-group-addon"><i class="icon-location-pin"></i></div>
+                                                            <input type="nuumber" name="pincode" class="form-control" required pattern="[0-9]{6}" id="pincode" value="<?=$selectOrdersData['pincode'];?>" placeholder="Enter your pin">
+                                                          </div>
                                                         </div>
-																											<div class="row">
-																												<div class="col-md-12">
-																													<div class="panel panel-default card-view">
-																														<div class="panel-heading">
-																															<div class="pull-left">
-																																<h4 class="panel-title txt-dark">Order Information</h4>
+                                                        <div class="form-group col-sm-3 col-xs-3">
+                                                          <label class="control-label mb-10" for="exampleInputuname_1">Booking For</label>
+                                                            <div class="input-group">
+                                                              <div class="input-group-addon"><i class="icon-home "></i></div>
+                                                              <select name="addressType" id="addressType" class="form-control">
+                                                                <option value="" selected disabled>ADDRESS TYPE</option>
+                                                                <option Value="SELF"> MY HOME</option>
+                                                                <option value="REFERENCE">FRIEND'S HOME</option>
+                                                                <option value="OFFICE">MY OFFICE</option>
+                                                                </select>
+                                                              </div>
+                                                      </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Address</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-home"></i></div>
+                                                        <input type="text" name="streetAddress" class="form-control" value="<?=$selectOrdersData['']?>" id="streetAddress" required placeholder="Enter streetaddress">
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Area</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-paper-plane"></i></div>
+                                                        <input type="text" name="area" class="form-control" id="area" placeholder="area" required>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputEmail_1">Alternate Phone Number</label>
+                                                      <div class="input-group">
+                                                        <div class="input-group-addon"><i class="icon-call-end"></i></div>
+                                                        <input type="tel" name="alternatePhoneNumber" class="form-control" id="area" placeholder="optional" >
+                                                      </div>
+                                                    </div> <br />
+                                                    <div class="form-group col-sm-3 col-xs-3">
+  																										<label class="control-label mb-10" for="exampleInputuname_1">Created On</label>
+  																											<div class="input-group">
+  																												<div class="input-group-addon"><i class="icon-calender"></i></div>
+  																												<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectOrdersData['createdOn'];?>" placeholder="Enter phone number" readonly>
+  																											</div>
+  																									</div>
+                                                    <div class="form-group col-sm-3 col-xs-3">
+                                                      <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon"><i class="icon-check"></i></div>
+                                                          <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
+                                                            <option value="<?=$selectOrdersData['status'];?>">Order Status : <?=$selectOrdersData['status'];?></option>
+                                                            <option value="NULL" selected disabled>SELECT ORDER STATUS</option>
+                                                            <option value="Placed">Placed</option>
+                                                            <option value="Unconfirmed">Unconfirmed</option>
+                                                            <option value="Confirmed">Confirmed</option>
+                                                            <option value="Picked-up/Walk-in">Picked-up/Walk-in</option>
+                                                            <option value="Inprogress">Inprogress</option>
+                                                            <option value="Delivered">Delivered</option>
+                                                          </select>
+                                                        </div>
+                                                    </div>
+																										<div class="row">
+																											<div class="col-md-12">
+																												<div class="panel panel-default card-view">
+																													<div class="panel-heading">
+																														<div class="pull-left">
+																															<h4 class="panel-title txt-dark">Order Information</h4>
 																															</div>
-																															<div class="clearfix"></div>
-																														</div>
+																														<div class="clearfix"></div>
+																													</div>
 																													<!--<div class="form-wrap">
 																														<form>-->
                                                             <div class="panel-wrapper collapse in">
@@ -273,7 +350,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                           <label class="control-label mb-10" for="exampleInputpwd_1">Kilometer Reading</label>
                                                                           <div class="input-group">
                                                                             <div class="input-group-addon"><i class="icon-clock"></i></div>
-                                                                            <input type="number" class="form-control" name="meterReading" placeholder="0000">
+                                                                            <input type="number" class="form-control" name="meterReading" placeholder="">
                                                                             </div>
                                                                           </div>
                                                                           <div class="form-group col-sm-3 col-xs-3">
@@ -281,7 +358,9 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                             <div class="input-group">
                                                                               <div class="input-group-addon"><i class="icon-wrench"></i></div>
                                                                                 <select name="servicetype" id="servicetype" class="form-control">
-                                                                                <option value="NULL">SELECT SERVICE TYPE</option>
+
+                                                                                <option value="NULL" selected disabled>SELECT SERVICE TYPE</option>
+                                                                                <option value="<?=$selectOrdersData['serviceType'];?>">User choice : <?=$selectOrdersData['serviceType'];?></option>
                                                                                 <option value="Regular Checkup">Regular Check-up</option>
                                                                                 <option value="General Diagnostics">General Diagnostics</option>
                                                                                 <option value="Washing & Polishing">Washing & Polishing</option>
@@ -298,7 +377,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                             <div class="input-group">
                                                                               <div class="input-group-addon"><i class="icon-anchor"></i></div>
                                                                               <select name="preference" class="form-control" id="exampleInputpwd_1">
-                                                                              <option value="NULL">SELECT SERVICE PREFERENCE</option>
+                                                                              <option value="NULL" selected disabled>SELECT SERVICE PREFERENCE</option>
                                                                               <option value="Pickup">Pickup</option>
                                                                               <option value="Walk-in">Walk-in</option>
                                                                             </select>
@@ -318,26 +397,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                               <input type="datetime-local" name="dropDate" class="form-control" id="dropdate" value="" placeholder="">  </div>
 																																					</div>
                                                                           <div class="form-group col-sm-3 col-xs-3">
-																																						<label class="control-label mb-10" for="servicetype">Service Type</label>
-																																						<div class="input-group">
-																																							<div class="input-group-addon"><i class="icon-wrench"></i></div>
-																																								<select name="servicetype" id="servicetype" class="form-control">
-																																								<option value="NULL">SELECT SERVICE TYPE</option>
-																																								<option value="Regular Checkup">Regular Check-up</option>
-																																								<option value="General Diagnostics">General Diagnostics</option>
-                                                                                <option value="Washing & Polishing">Washing & Polishing</option>
-																																								<option value="Denting & Painting">Denting & Painting</option>
-                                                                                <option value="Breakdown Assitance">Breakdown Assitance</option>
-																																								<option value="Detailing">Detailing</option>
-                                                                                <option value="Vehicle Insurance">Vehicle Insurance</option>
-																																							</select>
-																																							</div>
-																																					</div>
-                                                                          <div class="form-group col-sm-3 col-xs-3">
 																																						<label class="control-label mb-10" for="issue">Issue</label>
 																																							<div class="input-group">
 																																								<div class="input-group-addon"><i class="icon-note"></i></div>
-																																								<input type="text" name="issue" class="form-control" id="issue" value="" placeholder="Enter an issue">
+																																								<input type="text" name="issue" class="form-control" id="issue" value="<?=$selectOrdersData['issue'];?>" placeholder="Enter an issue">
 																																							</div>
 																																						</div>
                                                                             <div class="form-group col-sm-3 col-xs-3">
@@ -345,7 +408,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
   																																						<div class="input-group">
   																																							<div class="input-group-addon"><i class="icon-magnet"></i></div>
   																																								<select name="garages" id="garages" class="form-control" id="exampleInputpwd_1">
-  																																								<option value="NULL">SELECT GARAGE</option>
+  																																								<option value="NULL" selected disabled>SELECT GARAGE</option>
   																																								<option value=""></option>
   																																								<option value=""></option>
                                                                                   <option value=""></option>
@@ -382,7 +445,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                           																											<label class="control-label mb-10" for="exampleInputuname_1">Chasis Number</label>
                                           																												<div class="input-group">
                                           																													<div class="input-group-addon"><i class="icon-reload"></i></div>
-                                          																													<input type="number" name="chasisNumber" id="chasisNumber" class="form-control" value="<?=$selectCustomerData[''];?>" placeholder="Enter chasis number" />
+                                          																													<input type="number" name="chasisNumber" id="chasisNumber" class="form-control" value="" placeholder="Enter chasis number" />
                                           																												</div>
                                           																											</div>
                                           																											<div class="form-group col-sm-4 col-xs-4">
@@ -410,7 +473,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                                                     <option value="NULL" selected disabled>CHOOSE PROVIDER</option>
                                                                                                     <option value="HDFC ERGO">HDFC ERGO</option>
                                                                                                     <option value="BAJAJ Allianz">BAJAJ Allianz</option>
-                                                                                                    <option value="bharati AXA">bharati AXA/option>
+                                                                                                    <option value="bharati AXA">bharati AXA</option>
                                                                                                     <option value="Chola MS">Chola MS</option>
                                                                                                     <option value="FUTURE GENERALI">FUTURE GENERALI</option>
                                                                                                     <option value="icicilombard">icicilombard</option>
@@ -433,10 +496,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                                                   </div>
                                           																											</div>
                                                                                                 <div id="contractNumber" class="form-group col-sm-3 col-xs-3">
-                                                                                                  <label class="control-label mb-10" for="exampleInputEmail_1">Contract Number</label>
+                                                                                                  <label class="control-label mb-10" for="exampleInputEmail_1">Policy Number</label>
                                                                                                   <div class="input-group">
                                                                                                     <div class="input-group-addon"><i class="icon-plus"></i></div>
-                                                                                                    <input type="text" name="contractNumber" id="contractNumber1"class="form-control" value="" placeholder="INSURANCE / POLICY / CONTRACT NUMBER" />
+                                                                                                    <input type="text" name="contractNumber" id="contractNumber1"class="form-control" value="" placeholder="CONTRACT NUMBER" />
                                                                                                   </div>
                                                                                                 </div>
 
@@ -518,8 +581,8 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
       																																						</div>
     																																				</div>
                                                             <div  class="col-xs-12">
-                                                      <input type="hidden" name="customerId" value="<?=$selectCustomerData['customerID'];?>">
-                                                    	<button type="submit" name="submit" class="btn btn-success mr-10">Submit
+                                                      <input type="hidden" name="quikOrderID" value="<?=$selectCustomerData['quikOrderID'];?>">
+                                                    	<button type="submit" name="submit" class="btn btn-success mr-10">Confirm
 																											<button type="reset" class="btn btn-danger ">Cancel</button>
                                                     </div>
                                                       <?php
@@ -544,7 +607,11 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                       </div>
                     </div>
                   </div>
-              <!--/Row-->
+
+
+															<!--/Row-->
+
+
 
 				<!-- Footer -->
 				<footer class="footer container-fluid pl-30 pr-30">
@@ -582,6 +649,111 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 		<!-- Switchery JavaScript -->
 		<script src="vendors/bower_components/switchery/dist/switchery.min.js"></script>
+    <!-- Select address script-->
+    <script>
+      $(document).ready(function(){
+
+          $('#countryChoice').on('change',function(){
+
+            $('#stateChoice').html('<option>Please choose State</option>');
+            $('#cityChoice').html('<option>Please choose State First</option>');
+            var country = $(this).val();
+
+              if(country){
+
+                //Running the AJAX Call for data retrival
+                $.ajax({
+
+                      type: 'post',
+                      url: 'includes/fetchLocations.php?country='+country,
+                      cache: false,
+                      dataType: 'json',
+                      data:{country:country},
+                      success: function(stateInfo){
+
+                          var len = stateInfo.length;
+                          $('#stateChoice').html('<option value="NULL">Please choose State</option>');
+
+
+                            if(stateInfo){
+
+                              for (var i = 0; i<len; i++){
+
+                                    var stateID = stateInfo[i]['stateID'];
+                                    var stateName = stateInfo[i]['stateName'];
+                                      $('#stateChoice').append("<option value = '"+stateID+"'>"+stateName+"</option>");
+
+                              }
+
+
+
+                            }else{
+
+                              $('#stateChoice').html('<option value="NULL">Please choose Country first</option>');
+
+                            }
+                      }
+                });
+
+              }else{
+
+                $('#stateChoice').append('<option value="NULL">Please choose Country first</option>');
+
+              }
+
+          });
+
+        $('#stateChoice').on('change', function(){
+
+          var state = $(this).val();
+
+            if(state){
+
+            //Running the AJAX Call for data retrival
+            $.ajax({
+
+                  type: 'post',
+                  url: 'includes/fetchLocations.php?state='+state,
+                  cache: false,
+                  dataType: 'json',
+                  data:{state:state},
+                  success: function(cityInfo){
+
+                      $('#cityChoice').html('<option value="NULL">Please choose City</option>');
+
+                        if(cityInfo){
+
+                            var len = cityInfo.length;
+
+                            for (var i = 0; i<len; i++){
+
+                              var cityID = cityInfo[i]['cityID'];
+                              var cityName = cityInfo[i]['cityName'];
+                              $('#cityChoice').append("<option value = '"+cityID+"'>"+cityName+"</option>");
+
+                            }
+
+
+                        } else{
+
+                          $('#cityChoice').html('<option value="NULL">No City in list</option>');
+
+                        }
+                  }
+            });
+
+          }else{
+
+                $('#cityChoice').html('<option value="NULL">Please choose State First</option>');
+
+          }
+
+
+          });
+
+      });
+
+    </script>
 
 		<!-- Init JavaScript -->
 		<script src="dist/js/init.js"></script>
@@ -594,46 +766,49 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
           $('#expiryDate').hide();
           $('#ldvIdv').hide();
           $('#contractNumber').hide();
-          $('#insurance').on('change',function(){
 
-            var insurance = $('#insurance').val();
-            if ( insurance == 'INSURANCE' || insurance == ''){
+            $('#insurance').on('change',function(){
 
-              $('#insuranceProvider').show();
-              $('#insuranceProvider1').on('change',function(){
-                $('#contractNumber').show();
-                $('#purchaseDate').show();
-                $('#expiryDate').show();
-                $('#ldvIdv').show();
+              var insurance = $('#insurance').val();
+              if ( insurance == 'INSURANCE' || insurance == ''){
 
-              });
+                $('#insuranceProvider').show();
+                $('#insuranceProvider1').on('change',function(){
+                  $('#contractNumber').show();
+                  $('#purchaseDate').show();
+                  $('#expiryDate').show();
+                  $('#ldvIdv').show();
+
+                });
 
 
-            } else {
-              $('#insuranceProvider').hide();
-              $('#purchaseDate').hide();
-              $('#expiryDate').hide();
-              $('#ldvIdv').hide();
-            }
-            $('#totalPayment').on('keyup',function(){
+              } else {
+                $('#insuranceProvider').hide();
+                $('#purchaseDate').hide();
+                $('#expiryDate').hide();
+                $('#ldvIdv').hide();
+              }
+              $('#totalPayment').on('keyup',function(){
 
-                  $('#advancedPayment').val(0);
+                    $('#advancedPayment').val(0);
 
-                    $('#advancedPayment').on('keyup',function(){
+                      $('#advancedPayment').on('keyup',function(){
 
-                        var totalPayment = $('#totalPayment').val();
-                        var advancedPayment = $('#advancedPayment').val();
-                        var amnt = totalPayment - advancedPayment;
-                        // alert(amnt);
-                        $('#paymentDue').val(amnt);
+                          var totalPayment = $('#totalPayment').val();
+                          var advancedPayment = $('#advancedPayment').val();
+                          var amnt = totalPayment - advancedPayment;
+                          // alert(amnt);
+                          $('#paymentDue').val(amnt);
 
-                      });
+                        });
+
+                    });
 
                   });
 
-            });
 
         });
     </script>
+
 </body>
 </html>
