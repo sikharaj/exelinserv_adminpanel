@@ -16,7 +16,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 } else { // if set get the email
     $email = $_SESSION['bazooka'];
-    $selectAdminQuery = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";
+    $selectAdminQuery = "SELECT * FROM `users` WHERE `email` = '$email'";
     $selectAdminDataResult = $conn -> query($selectAdminQuery);
     if ($selectAdminDataResult) { //Successfully execute SQL Query
         $selectAdminData = $selectAdminDataResult->fetch_assoc();
@@ -135,10 +135,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																				<?php
 																					if(isset($_GET['customerId']) && $_GET['customerId'] != "") {
 																							$customerId = $_GET['customerId'];
-																						 $selectOrders = "SELECT * FROM `orders` WHERE `orderID` = '$customerId'";
-																							$selectOrderResults = $conn -> query($selectOrders);
-																							if($selectOrderResults) { // if Executed
-																									$selectOrdersData = $selectOrderResults -> fetch_assoc();
+																						 $selectCustomerDetails = "SELECT * FROM `customerdetails` WHERE `customerID` = '$customerId'";
+																							$selectCustomerDetailResults = $conn -> query($selectCustomerDetails);
+																							if($selectCustomerDetailResults) { // if Executed
+																									$selectCustomerDetailData = $selectCustomerDetailResults -> fetch_assoc();
 
 																					?>
                                           <div class="panel-wrapper collapse in">
@@ -151,21 +151,21 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																											<label class="control-label mb-10" for="exampleInputuname_1">Name</label>
 																												<div class="input-group">
 																													<div class="input-group-addon"><i class="icon-user"></i></div>
-																													<input type="text" name="firstname" class="form-control" value="<?=$selectOrdersData['name'];?>" placeholder="Enter name" readonly>
+																													<input type="text" name="firstname" class="form-control" value="<?=$selectCustomerDetailData['firstName'];?> <?=$selectCustomerDetailData['lastName'];?>" placeholder="Enter name" readonly>
 																												</div>
 																										</div>
                                                     <div class="form-group col-sm-3 col-xs-3">
                                                       <label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
                                                       <div class="input-group">
                                                         <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-                                                        <input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email" value="<?=$selectOrdersData['email'];?>">
+                                                        <input type="email" name="email" class="form-control" id="exampleInputEmail_1" placeholder="Enter email" value="<?=$selectCustomerDetailData['email'];?>">
                                                       </div>
                                                     </div>
                                                     <div class="form-group col-sm-3 col-xs-3">
                                                       <label class="control-label mb-10" for="exampleInputuname_1">Phone Number</label>
                                                         <div class="input-group">
                                                           <div class="input-group-addon"><i class="icon-phone"></i></div>
-                                                          <input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectOrdersData['phone'];?>" placeholder="Enter phone number" readonly>
+                                                          <input type="tel" name="phone" class="form-control" id="exampleInputuname_1" value="<?=$selectCustomerDetailData['phoneNumber'];?>" placeholder="Enter phone number" readonly>
                                                         </div>
                                                       </div>
                                                     <div class="form-group col-sm-3 col-xs-3">
@@ -209,7 +209,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                         <label class="control-label mb-10" for="exampleInputuname_1">Pincode</label>
                                                           <div class="input-group">
                                                             <div class="input-group-addon"><i class="icon-location-pin"></i></div>
-                                                            <input type="nuumber" name="pincode" class="form-control" required pattern="[0-9]{6}" id="pincode" value="<?=$selectOrdersData['pincode'];?>" placeholder="Enter your pin">
+                                                            <input type="nuumber" name="pincode" class="form-control" required pattern="[0-9]{6}" id="pincode" value="<?=$selectOrdersData['pinCode'];?>" placeholder="Enter your pin">
                                                           </div>
                                                         </div>
                                                         <div class="form-group col-sm-3 col-xs-3">
