@@ -3,7 +3,7 @@
      * Name : Login Validation
      * Author :
      * Company :
-     * Description : 
+     * Description :
      *
      */
 
@@ -51,7 +51,7 @@
 
                    } else { //Login Failed
 
-                       header("Location:../index.php?message= Password Doesn't match. Please try again."); //Redirect to Login page
+                       header("Location:../index.php?message=Password Doesn't match. Please try again."); //Redirect to Login page
 
                    }
                 }

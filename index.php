@@ -12,7 +12,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>Exelinserv || Admin Panel</title>
+		<title>Exelinserv Auto Stations || Admin Panel - Control Center</title>
 		<meta name="description" content="Philbert is a Dashboard & Admin Site Responsive Template by hencework." />
 		<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Philbert Admin, Philbertadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
 		<meta name="author" content="hencework"/>
@@ -29,7 +29,7 @@
 		<!-- Custom CSS -->
 		<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 	</head>
-	<body>
+	<body style="background:url('https://i.pinimg.com/originals/a2/3b/06/a23b06eda5f1b5899ce0e996116be7c2.jpg');">
 		<!--Preloader-->
 		<div class="preloader-it">
 			<div class="la-anim-1"></div>
@@ -40,13 +40,8 @@
 			<header class="sp-header">
 				<div class="sp-logo-wrap pull-left">
 					<a href="index.php">
-						<img class="brand-img mr-10" src="dist/img/logo.png" alt="brand"/>
-						<span class="brand-text"><font color="#ff5500">Exelin</font>serv Auto Services | <small>ADMIN PANEL V1.2(B)</small></span>
+						<span class="brand-text"><b><font color="#ff5500">Exelin</font>serv Auto Stations <h6>ADMIN PANEL V1.2(B) | Control Center</h6></b></span>
 					</a>
-				</div>
-				<div class="form-group mb-0 pull-right">
-					<span class="inline-block pr-10">Don't have an account?</span>
-					<a class="inline-block btn btn-info btn-success btn-rounded btn-outline" href="signup.php">Sign Up</a>
 				</div>
 				<div class="clearfix"></div>
 			</header>
@@ -60,9 +55,10 @@
 							<div class="auth-form  ml-auto mr-auto no-float">
 								<div class="row">
 									<div class="col-sm-12 col-xs-12">
+                    <center><img src="dist/img/appicon-min.png" height="120px" width="120px" class="brand-img mr-10"/></center>
 										<div class="mb-30">
 											<h3 class="text-center txt-dark mb-10">Sign in to <font color="#ff5500">ADMIN</font> DASHBOARD</h3>
-											<h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
+											<h6 class="text-center nonecase-font txt-grey">Enter your credentials below</h6>
 										</div>
 										<div class="form-wrap">
 											<form method="POST" action="includes/login-validate.php">
@@ -72,7 +68,6 @@
 												</div>
 												<div class="form-group">
 													<label class="pull-left control-label mb-10" for="exampleInputpwd_2">Password</label>
-													<a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="forgot-password.html">forgot password ?</a>
 													<div class="clearfix"></div>
 													<input type="password" name="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter password">
 												</div>
@@ -88,6 +83,12 @@
 													<button type="submit" class="btn btn-info btn-success btn-rounded">sign in</button>
 												</div>
 											</form>
+
+                      <!--Footer Identifier-->
+                      <div class="footer">
+                        Copyright (c) 2017-18. All rights reserved. <br>Panel by <a href="https://www.coolhaxlabs.com/" target="_blank" title="CoolHax LABS">CoolHax <b>LABS</b> </a>
+                		</div>
+
 										</div>
 									</div>
 								</div>
@@ -100,7 +101,6 @@
 			</div>
 			<!-- /Main Content -->
 
-		</div>
 		<!-- /#wrapper -->
 
 		<!-- JavaScript -->

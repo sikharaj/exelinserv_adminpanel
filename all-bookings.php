@@ -48,6 +48,10 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 	<!-- Custom CSS -->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
+
+  <!-- xeditable css -->
+  <link href="vendors/bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -126,7 +130,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                             <td><?=$selectAllQuickOrdersData['name'];?></td>
                             <td><?=$selectAllQuickOrdersData['vehicleName'];?></td>
                             <td><?=$selectAllQuickOrdersData['orderCreatedOn'];?></td>
-                            <td><?=$selectAllQuickOrdersData['orderStatus'];?></td>
+                            <td><a href="#" id="orderStatus" data-type="select" data-pk="1" data-value="" data-title="Select New Status"><?=$selectAllQuickOrdersData['orderStatus'];?></a></td>
                             <td><?=$selectAllQuickOrdersData['issue'];?></td>
                             <td><?=$selectAllQuickOrdersData['phone'];?></td>
                           <td><?=$selectAllQuickOrdersData['serviceType'];?></td>
@@ -202,6 +206,43 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>
 
+  <script type="text/javascript" src="vendors/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+	<!-- Form-xeditable Init JavaScript -->
+  <script src="dist/js/form-xeditable-data.js"></script>
+
+  <script>
+  
+  $(function(){
+    "use strict";
+    var readStatus = $('#orderStatus').text();
+
+    $('#orderStatus').editable({
+
+  	  prepend: readStatus,
+      // mode: 'inline',
+  	  source: [
+  	  {value: 'Placed', text: 'Placed'},
+  	  {value: 'Unconfirmed', text: 'Unconfirmed'},
+      {value: 'Confirmed', text: 'Confirmed'},
+      {value: 'Picked-up/Walked-in', text: 'Picked-up/Walked-in'},
+      {value: 'In-progress', text: 'In-progress'},
+      {value: 'Delivered', text: 'Delivered'},
+  	  ],
+  	  display: function(value, sourceData) {
+  	   var colors = {"": "#98a6ad", 1: "#5fbeaa", 2: "#5d9cec"},
+  	   elem = $.grep(sourceData, function(o){return o.value == value;});
+
+  	   if(elem.length) {
+  		 $(this).text(elem[0].text).css("color", colors[value]);
+  	   } else {
+  		 $(this).empty();
+  	   }
+  	 }
+  	});
+
+  });
+  </script>
 
 </body>
 
