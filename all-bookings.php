@@ -117,7 +117,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                             <th>Issue</th>
                             <th>Phone</th>
                             <th>Service</th>
-                            <th>Invoice</th>
+                            <th>Create Invoice</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -212,7 +212,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
   <script src="dist/js/form-xeditable-data.js"></script>
 
   <script>
-  
+
   $(function(){
     "use strict";
     var readStatus = $('#orderStatus').text();

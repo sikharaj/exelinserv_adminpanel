@@ -173,7 +173,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																												<label class="control-label mb-10" for="exampleInputuname_1">Oder Created On</label>
 																													<div class="input-group">
 																														<div class="input-group-addon"><i class="icon-calender"></i></div>
-																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectOrderDetailData['orderCreatedOn'];?>" placeholder="Enter phone number" readonly>
+																														<input type="datetime" name="createdon" class="form-control" id="" value="<?=$selectOrderDetailData['orderCreatedOn'];?>" placeholder="Order Created On" readonly>
 																													</div>
 																												</div>
                                                         <div class="form-group col-sm-4 col-xs-4">
@@ -244,7 +244,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																		</div>
 																																</div>
                                                                 <div class="form-group col-sm-3 col-xs-3">
-                                                                    <label class="control-label mb-10" for="exampleInputuname_1">VehicLe Color</label>
+                                                                    <label class="control-label mb-10" for="exampleInputuname_1">Vehicle Color</label>
                                                                       <div class="input-group">
                                                                         <div class="input-group-addon"><i class="icon-list"></i></div>
                                                                         <select name="vehiclecolor" class="form-control" id="exampleInputpwd_1">
@@ -307,6 +307,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                                                                         <label class="control-label mb-10" for="exampleInputpwd_1">Order Status</label>
                                                                         <div class="input-group">
                                                                           <div class="input-group-addon"><i class="icon-check"></i></div>
+
                                                                             <select name="oderstatus" class="form-control" id="exampleInputpwd_1">
                                                                               <option value="<?=$selectOrderDetailData['orderStatus'];?>"><?=$selectOrderDetailData['orderStatus'];?></option>
                                                                             <option value="NULL">SELECT ORDER STATUS</option>
@@ -365,7 +366,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 																																			<label class="control-label mb-10" for="exampleInputuname_1">Transaction ID</label>
 																																				<div class="input-group">
                                                                           <div class="input-group-addon"><i class="icon-wallet"></i></div>
-                                                                              <input type="text" name="transID" class="form-control" id="exampleInputuname_1" value="<?=$selectOrderDetailData['transactionID'];?>" placeholder="#EXPMNT8547896">
+                                                                              <input type="text" name="transID" class="form-control" id="exampleInputuname_1" value="<?=$selectOrderDetailData['transactionID'];?>" placeholder="#EXPMNT8547896" data-mask="#EXPMNT999999999">
 																																				</div>
 																																	</div>
                                                                   <div class="form-group col-sm-3 col-xs-3">

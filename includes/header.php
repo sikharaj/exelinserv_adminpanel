@@ -5,7 +5,7 @@
 					<div class="logo-wrap">
 						<a href="index.php">
 							<img class="brand-img" src="dist/img/logo.png" alt="brand"/>
-							<span class="brand-text">Exelinserv</span>
+							<span class="brand-text"><font color="#FF5500"><b>Exelin</font>serv</b></span>
 						</a>
 					</div>
 				</div>

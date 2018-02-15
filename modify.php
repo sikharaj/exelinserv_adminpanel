@@ -25,7 +25,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
         header('Location:index.php?Please Login Again!');
     }
 }
-   $selectAllQuickOrders = "SELECT * FROM `orders`";
+   $selectAllQuickOrders = "SELECT * FROM `orders` WHERE `orderStatus` !='Completed'";
    $selectAllQuickOrdersResults = $conn -> query($selectAllQuickOrders);
 
 ?>
