@@ -57,7 +57,7 @@
 									<div class="col-sm-12 col-xs-12">
                     <center><img src="dist/img/appicon-min.png" height="120px" width="120px" class="brand-img mr-10"/></center>
 										<div class="mb-30">
-											<h3 class="text-center txt-dark mb-10">Sign in to <font color="#ff5500">ADMIN</font> DASHBOARD</h3>
+											<h3 class="text-center txt-dark mb-10">Login to <font color="#ff5500">ADMIN</font> DASHBOARD</h3>
 											<h6 class="text-center nonecase-font txt-grey">Enter your credentials below</h6>
 										</div>
 										<div class="form-wrap">
@@ -86,7 +86,7 @@
 
                       <!--Footer Identifier-->
                       <div class="footer">
-                        Copyright (c) 2017-18. All rights reserved. <br>Panel by <a href="https://www.coolhaxlabs.com/" target="_blank" title="CoolHax LABS">CoolHax <b>LABS</b> </a>
+                        Copyright (c) 2017-18 <strong>Exelinserv Auto Stations PVT. LTD.</strong><br> All Rights Reserved. Panel by <a href="https://www.coolhaxlabs.com/" target="_blank" title="CoolHax LABS">CoolHax <b>LABS</b> </a>
                 		</div>
 
 										</div>

@@ -918,7 +918,7 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 				<footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
 						<div class="col-sm-12">
-							<p>2017 &copy; Exelinserv. Pampered by CoolHaxlabs</p>
+							<p>2017 &copy; Exelinserv. Pampered by <a href="http://www.coolhaxlabs.com/" title="CoolHax LABS" target="_blank"><b>CoolHax LABS</b></a></p>
 						</div>
 					</div>
 				</footer>
@@ -926,6 +926,14 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 
 			</div>
 			<!-- /Main Content -->
+
+      <!--Custom Preloader-->
+      <!-- <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: white; z-index: 30001; opacity: 0.8;">
+<p style="position: absolute; color: blue; top: 50%; left: 45%;">
+Loading, please wait...
+<img src="https://camo.githubusercontent.com/60d741b9bfc3081d1c9f4aa6297ba82db8b706b7/687474703a2f2f692e696d6775722e636f6d2f4c4475485a65662e676966">
+</p>
+</div> -->
 
 		</div>
 		<!-- /#wrapper -->

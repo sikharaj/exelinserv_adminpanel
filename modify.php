@@ -126,10 +126,9 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
                             <td><?=$selectAllQuickOrdersData['issue'];?></td>
                             <td><?=$selectAllQuickOrdersData['phone'];?></td>
                             <td><?=$selectAllQuickOrdersData['serviceType'];?></td>
-                            <td><a href="delete_order.php?orderId=<?=$selectAllQuickOrdersData['orderID'];?>" class="delete-record" data-id="1"><font color="red"><i class="glyphicon glyphicon-trash"></i></font></a><br/>
-                            <a href="edit_order.php?orderId=<?=$selectAllQuickOrdersData['orderID'];?>" class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a></td>
-                            <!--<td><a class="delete-record" data-id="1"><font color="blue"><i class="glyphicon glyphicon-pencil"></i></font></a></td>
-                          --></tr>
+                            <td><button class="btn btn-danger btn-block btn-outline btn-anim mt-30" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-trash"></i><span class="btn-text">delete order</span></button>
+                            <button class="btn btn-default btn-block btn-outline btn-anim mt-30" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i><span class="btn-text">edit order</span></button></td>
+                            </tr>
                           <?php
                       }
                   } else { //if didn't execute
@@ -200,28 +199,100 @@ if(!isset($_SESSION['bazooka'])) { // if session not set
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>
 
-  <!--<script>
-  jQuery(document).delegate('a.delete-record', 'click', function(e) {
-       e.preventDefault();
-       var didConfirm = confirm("Are you sure You want to delete");
-       if (didConfirm == true) {
-        var id = jQuery(this).attr('data-id');
-        var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
-
-      //regnerate index number on table
-      $('#tbl_posts_body tr').each(function(index) {
-        //alert(index);
-        $(this).find('span.sn').html(index+1);
-      });
-      return true;
-    } else {
-      return false;
-    }
-  });
-
-</script>-->
-
+    <!-- ORDER EDIT,UPDATE MODAL -->
+											<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+															<h5 class="modal-title" id="myModalLabel">Edit Profile</h5>
+														</div>
+														<div class="modal-body">
+															<!-- Row -->
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="">
+																		<div class="panel-wrapper collapse in">
+																			<div class="panel-body pa-0">
+																				<div class="col-sm-12 col-xs-12">
+																					<div class="form-wrap">
+																						<form action="#">
+																							<div class="form-body overflow-hide">
+																								<div class="form-group">
+																									<label class="control-label mb-10" for="exampleInputuname_1">Name</label>
+																									<div class="input-group">
+																										<div class="input-group-addon"><i class="icon-user"></i></div>
+																										<input type="text" class="form-control" id="exampleInputuname_1" placeholder="willard bryant">
+																									</div>
+																								</div>
+																								<div class="form-group">
+																									<label class="control-label mb-10" for="exampleInputEmail_1">Email address</label>
+																									<div class="input-group">
+																										<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+																										<input type="email" class="form-control" id="exampleInputEmail_1" placeholder="xyz@gmail.com">
+																									</div>
+																								</div>
+																								<div class="form-group">
+																									<label class="control-label mb-10" for="exampleInputContact_1">Contact number</label>
+																									<div class="input-group">
+																										<div class="input-group-addon"><i class="icon-phone"></i></div>
+																										<input type="email" class="form-control" id="exampleInputContact_1" placeholder="+102 9388333">
+																									</div>
+																								</div>
+																								<div class="form-group">
+																									<label class="control-label mb-10" for="exampleInputpwd_1">Password</label>
+																									<div class="input-group">
+																										<div class="input-group-addon"><i class="icon-lock"></i></div>
+																										<input type="password" class="form-control" id="exampleInputpwd_1" placeholder="Enter pwd" value="password">
+																									</div>
+																								</div>
+																								<div class="form-group">
+																									<label class="control-label mb-10">Gender</label>
+																									<div>
+																										<div class="radio">
+																											<input type="radio" name="radio1" id="radio_1" value="option1" checked="">
+																											<label for="radio_1">
+																											M
+																											</label>
+																										</div>
+																										<div class="radio">
+																											<input type="radio" name="radio1" id="radio_2" value="option2">
+																											<label for="radio_2">
+																											F
+																											</label>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="form-group">
+																									<label class="control-label mb-10">Country</label>
+																									<select class="form-control" data-placeholder="Choose a Category" tabindex="1">
+																										<option value="Category 1">USA</option>
+																										<option value="Category 2">Austrailia</option>
+																										<option value="Category 3">India</option>
+																										<option value="Category 4">UK</option>
+																									</select>
+																								</div>
+																							</div>
+																							<div class="form-actions mt-10">
+																								<button type="submit" class="btn btn-success mr-10 mb-30">Update profile</button>
+																							</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-success waves-effect" data-dismiss="modal">Save</button>
+															<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+														</div>
+													</div>
+													<!-- /.modal-content -->
+												</div>
+												<!-- /.modal-dialog -->
 </body>
 
 </html>

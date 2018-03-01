@@ -270,10 +270,10 @@
 						</ul>
 					</li>
 					<li class="dropdown auth-drp">
-						<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="dist/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
+						<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="dist/img/appicon-min.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
 						<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
 							<li>
-								<a href="profile.ph"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
+								<a href="profile.php"><i class="zmdi zmdi-account"></i><span><?= $adminName;?> - Profile</span></a>
 							</li>
 							<li>
 								<a href="#"><i class="zmdi zmdi-card"></i><span>my balance</span></a>

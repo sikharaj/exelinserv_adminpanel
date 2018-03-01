@@ -13,7 +13,6 @@
         if ($selectAdminDataResult) { //Successfully execute SQL Query
             $selectAdminData = $selectAdminDataResult->fetch_assoc();
             $firstName = $selectAdminData['firstName'];
-            $lastName = $selectAdminData['lastName'];
         } else { //couldn't execute SQL Query
             session_destroy();
             header('Location:index.php?Please Login Again!');

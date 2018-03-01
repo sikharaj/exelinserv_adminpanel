@@ -1,22 +1,33 @@
 <?php
+
     session_start(); // Start Session
 
     include_once "includes/db_connect.php"; //DB Connection script
 
-    if(!isset($_SESSION['bazooka'])) { // if session not set
-        header('Location:index.php?message=Please Login and try.');
+    //Global Variables
+    $message = "";
+    $login_status = "";
 
-    } else { // if set get the email
+    if(!isset($_SESSION['bazooka'])) { // if session not set
+        header('Location:index.php');
+        $message="Please Login and try again.";
+
+    }else{ // if set get the email
+
         $email = $_SESSION['bazooka'];
-        $selectAdminQuery = "SELECT * FROM `customerdetails` WHERE `email` = '$email'";
+        $login_status = $_SESSION['login_status'];
+        $selectAdminQuery = "SELECT * FROM `users` WHERE `email` = '$email'";
         $selectAdminDataResult = $conn -> query($selectAdminQuery);
+        $message = "Logged In Successfully!";
+
         if ($selectAdminDataResult) { //Successfully execute SQL Query
-            $selectAdminData = $selectAdminDataResult->fetch_assoc();
-            $firstName = $selectAdminData['firstName'];
-            $lastName = $selectAdminData['lastName'];
-        } else { //couldn't execute SQL Query
+            $selectAdminData = $selectAdminDataResult -> fetch_assoc();
+            $adminName = $selectAdminData['name'];
+
+        }else { //couldn't execute SQL Query
             session_destroy();
-            header('Location:index.php?Please Login Again!');
+            $message = "Please Login Again!";
+            header('Location:index.php');
         }
     }
 ?>
@@ -49,12 +60,20 @@
 </head>
 
 <body>
+
+  <!-- Authentication Messages and Status-->
+  <div id="authStatus" ><?= $login_status;?></div>
+  <div id="authMSGS" ><?= $message;?></div>
+  <div id="authPerson"><?= $adminName;?></div>
+  <!-- End of Authentication Messages and Status -->
+
 	<!-- Preloader -->
 	<div class="preloader-it">
 		<div class="la-anim-1"></div>
 	</div>
 	<!-- /Preloader -->
     <div class="wrapper theme-1-active pimary-color-green">
+
 		 <?php include "includes/header.php";?>
 
 		<?php include "includes/nav.php";?>
@@ -490,6 +509,30 @@
 		<div class="page-wrapper">
             <div class="container-fluid pt-25">
 				<!-- Row -->
+
+        <!-- statistics calculations for data flow view-->
+        <?php
+
+        //Total Number of ORDERS
+        $loadAllOrders = "SELECT * FROM `orders`";
+        $getOrderStatistics = $conn -> query($loadAllOrders);
+        $orderNumberCount = $getOrderStatistics -> num_rows;
+
+        //Percentage of Completed Orders vs rest
+        $loadQuickOrders = "SELECT * FROM `quickorder`";
+        $getQuickOrders = $conn -> query($loadQuickOrders);
+        $getQuickOrdersStatistics = $getQuickOrders -> num_rows;
+        $quickOrderVsOrders = round((($getQuickOrdersStatistics/$orderNumberCount)*100),2);
+
+        //User Statistics
+        $getAllUsers = "SELECT * FROM `customerdetails`";
+        $getCustomers = $conn -> query($getAllUsers);
+        $loadAllCustomers = $getCustomers -> num_rows;
+
+        $ordersVsCustomers = round((($orderNumberCount/$loadAllCustomers)*100),2);
+        ?>
+        <!--statistics end-->
+
 				<div class="row">
 					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
@@ -499,11 +542,11 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-dark block counter"><span class="counter-anim">914,001</span></span>
-													<span class="weight-500 uppercase-font block font-13">visits</span>
+													<span class="txt-dark block counter"><span class="counter-anim"><?= round($orderNumberCount,3);?></span></span>
+													<span class="weight-500 uppercase-font block font-13">Total Orders</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
-													<i class="icon-user-following data-right-rep-icon txt-light-grey"></i>
+													<i class="icon-basket data-right-rep-icon txt-light-grey"></i>
 												</div>
 											</div>
 										</div>
@@ -520,11 +563,11 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-dark block counter"><span class="counter-anim">46.41</span>%</span>
-													<span class="weight-500 uppercase-font block">bounce rate</span>
+													<span class="txt-dark block counter"><span class="counter-anim"><?= $quickOrderVsOrders;?></span>%</span>
+													<span class="weight-500 uppercase-font block">Order Growth</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
-													<i class="icon-control-rewind data-right-rep-icon txt-light-grey"></i>
+													<i class="icon-chart data-right-rep-icon txt-light-grey"></i>
 												</div>
 											</div>
 										</div>
@@ -541,11 +584,11 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-dark block counter"><span class="counter-anim">4,054,876</span></span>
-													<span class="weight-500 uppercase-font block">pageviews</span>
+													<span class="txt-dark block counter"><span class="counter-anim"><?= $loadAllCustomers?></span></span>
+													<span class="weight-500 uppercase-font block">customers</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
-													<i class="icon-layers data-right-rep-icon txt-light-grey"></i>
+													<i class="icon-people data-right-rep-icon txt-light-grey"></i>
 												</div>
 											</div>
 										</div>
@@ -562,11 +605,11 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-dark block counter"><span class="counter-anim">46.43</span>%</span>
-													<span class="weight-500 uppercase-font block">growth rate</span>
+													<span class="txt-dark block counter"><span class="counter-anim"><?= $ordersVsCustomers;?></span>%</span>
+													<span class="weight-500 uppercase-font block">Statistics</span>
 												</div>
-												<div class="col-xs-6 text-center  pl-0 pr-0 pt-25  data-wrap-right">
-													<div id="sparkline_4" style="width: 100px; overflow: hidden; margin: 0px auto;"></div>
+                        <div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+													<i class="icon-graph data-right-rep-icon txt-light-grey"></i>
 												</div>
 											</div>
 										</div>
@@ -584,7 +627,7 @@
                         <div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">user statistics</h6>
+									<h6 class="panel-title txt-dark">Customers vs Orders Statistics</h6>
 								</div>
 								<div class="pull-right">
 									<span class="no-margin-switcher">
@@ -598,15 +641,15 @@
 									<div id="area_chart" class="morris-chart" style="height:293px;"></div>
 									<ul class="flex-stat mt-40">
 										<li>
-											<span class="block">Weekly Users</span>
-											<span class="block txt-dark weight-500 font-18"><span class="counter-anim">3,24,222</span></span>
+											<span class="block">Customers</span>
+											<span class="block txt-dark weight-500 font-18"><span class="counter-anim"><?= $loadAllCustomers?></span></span>
 										</li>
 										<li>
-											<span class="block">Monthly Users</span>
-											<span class="block txt-dark weight-500 font-18"><span class="counter-anim">1,23,432</span></span>
+											<span class="block">Orders</span>
+											<span class="block txt-dark weight-500 font-18"><span class="counter-anim"><?= $orderNumberCount?></span></span>
 										</li>
 										<li>
-											<span class="block">Trend</span>
+											<span class="block">Growth</span>
 											<span class="block">
 												<i class="zmdi zmdi-trending-up txt-success font-24"></i>
 											</span>
@@ -766,7 +809,7 @@
 							</div>
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">social campaigns</h6>
+									<h6 class="panel-title txt-dark">Order overviews</h6>
 								</div>
 								<div class="pull-right">
 									<a href="#" class="pull-left inline-block refresh mr-15">
@@ -790,14 +833,14 @@
 								<div class="panel-body row pa-0">
 									<div class="table-wrap">
 										<div class="table-responsive">
-											<table class="table table-hover mb-0">
+											<table class="table table-hover mb-0" id="orderOverviews">
 												<thead>
 													<tr>
-														<th>Campaign</th>
-														<th>Client</th>
-														<th>Changes</th>
-														<th>Budget</th>
-														<th>Status</th>
+														<th>ORDER ID</th>
+														<th>CUSTOMER NAME</th>
+														<th>BOOKED ON</th>
+														<th>SERVICE TYPE</th>
+														<th>ORDER STATUS</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -919,7 +962,7 @@
 			<footer class="footer container-fluid pl-30 pr-30">
 				<div class="row">
 					<div class="col-sm-12">
-						<p>2017 &copy; Philbert. Pampered by Hencework</p>
+						<p>2017 &copy; Exelinserv. Pampered by <a href="http://www.coolhaxlabs.com/" title="CoolHax LABS" target="_blank"><b>CoolHax LABS</b></a></p>
 					</div>
 				</div>
 			</footer>
@@ -977,6 +1020,12 @@
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>
 	<script src="dist/js/dashboard-data.js"></script>
+
+  <!--Extra Scriptings-->
+  <script>
+
+  </script>
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 /*Dashboard Init*/
- 
-"use strict"; 
+
+"use strict";
 
 /*****Ready function start*****/
 $(document).ready(function(){
@@ -35,11 +35,11 @@ $(document).ready(function(){
 				}
 			]
 		};
-		
+
 		var hBar = new Chart(ctx2, {
 			type:"bar",
 			data:data2,
-			
+
 			options: {
 				tooltips: {
 					mode:"label"
@@ -65,7 +65,7 @@ $(document).ready(function(){
 							fontColor:"#878787"
 						}
 					}],
-					
+
 				},
 				elements:{
 					point: {
@@ -80,13 +80,13 @@ $(document).ready(function(){
 				legend: {
 					display: false,
 				},
-				
+
 				tooltip: {
 					backgroundColor:'rgba(33,33,33,1)',
 					cornerRadius:0,
 					footerFontFamily:"'Poppins'"
 				}
-				
+
 			}
 		});
 	}
@@ -113,7 +113,7 @@ $(document).ready(function(){
 				]
 			}]
 		};
-		
+
 		var doughnutChart  = new Chart(ctx6,{
 			type: 'doughnut',
 			data: data6,
@@ -182,7 +182,7 @@ $(document).ready(function(){
             iphone: 10,
             ipad: 60,
             itouch: 20
-        }, 
+        },
 		{
             period: 'Feb',
             iphone: 110,
@@ -250,7 +250,7 @@ $(document).ready(function(){
             itouch: 10
         }
 		];
-		
+
 		var lineChart = Morris.Area({
         element: 'area_chart',
         data: data ,
@@ -273,7 +273,7 @@ $(document).ready(function(){
         parseTime: false
     });
 	}
-	
+
 	/* Switchery Init*/
 	var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 	$('#morris_switch').each(function() {
@@ -288,31 +288,39 @@ $(document).ready(function(){
 			lineChart.redraw();
 		}
 	}
-	swichMorris();	
+	swichMorris();
 	$(document).on('change', '#morris_switch', function () {
 		swichMorris();
 	});
-	
+
 });
 /*****Ready function end*****/
 
 /*****Load function start*****/
 $(window).load(function(){
-	window.setTimeout(function(){
-		$.toast({
-			heading: 'Welcome to Philbert',
-			text: 'Use the predefined ones, or specify a custom position object.',
-			position: 'top-right',
-			loaderBg:'#f0c541',
-			icon: 'success',
-			hideAfter: 3500, 
-			stack: 6
-		});
-	}, 3000);
+
+  var message = $('#authMSGS').text();
+  var status = $('#authStatus').text();
+  var person = $('#authPerson').text();
+  // alert(status);
+  if(status == 1){
+    window.setTimeout(function(){
+      $.toast({
+        heading: message,
+        text: 'Welcome '+person+'! to the Dashboard.',
+        position: 'top-right',
+        loaderBg:'#f0c541',
+        icon: 'success',
+        hideAfter: 3500,
+        stack: 6
+      });
+    }, 3000);
+  }
+
 });
 /*****Load function* end*****/
 
-var sparklineLogin = function() { 
+var sparklineLogin = function() {
 	if( $('#sparkline_1').length > 0 ){
 		$("#sparkline_1").sparkline([2,4,4,6,8,5,6,4,8,6,6,2 ], {
 			type: 'line',
@@ -326,7 +334,7 @@ var sparklineLogin = function() {
 			highlightLineColor: 'rgba(0, 0, 0, 0.6)',
 			highlightSpotColor: '#2ecd99'
 		});
-	}	
+	}
 	if( $('#sparkline_2').length > 0 ){
 		$("#sparkline_2").sparkline([0,2,8,6,8], {
 			type: 'line',
@@ -340,7 +348,7 @@ var sparklineLogin = function() {
 			highlightLineColor: 'rgba(0, 0, 0, 0.6)',
 			highlightSpotColor: '#2ecd99'
 		});
-	}	
+	}
 	if( $('#sparkline_3').length > 0 ){
 		$("#sparkline_3").sparkline([0, 23, 43, 35, 44, 45, 56, 37, 40, 45, 56, 7, 10], {
 			type: 'line',
@@ -365,7 +373,7 @@ var sparklineLogin = function() {
 			barColor: '#2ecd99',
 			highlightSpotColor: '#2ecd99'
 		});
-	}	
+	}
 }
 var sparkResize;
 	$(window).resize(function(e) {

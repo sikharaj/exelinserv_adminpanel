@@ -10,14 +10,15 @@
 
     include_once "../includes/db_connect.php"; //DB Connection Script Inclusion
 
+    //Declaration of Variables
+    $email = "";
+    $password = "";
+    $message = "";
+
     if(isset($_SESSION['bazooka'])) { //Check if the session is already set
         header('Location:index.php?message=You are already Logged in.'); // Redirect to dashboard if already logged in
     } else {
         session_start(); //Starting Session
-
-        //Define Variables
-        $email = "";
-        $password = "";
 
         //Get data from POST method and update variables
         if(isset($_POST['email'])) { //get Username
@@ -41,23 +42,30 @@
 
                 // output data of each row
                 while ($selectUserInfoData = $selectUserInfoResult->fetch_assoc()) {
+
                     $passwordDB = $selectUserInfoData['password'];
                     $email = $selectUserInfoData['email'];
+
                    if ($passwordDB !="" && $email !="") { //Login Successful
 
                        $_SESSION['bazooka'] = $email;
-                       header("Location:../admin-dashboard.php?message= Login Success."); //Redirect to Login page
+                       $_SESSION['login_status'] = 1;
+                       $message= "Login Success.";
+                       header("Location:../admin-dashboard.php"); //Redirect to Admin Dashboard
 
 
                    } else { //Login Failed
 
-                       header("Location:../index.php?message=Password Doesn't match. Please try again."); //Redirect to Login page
+                       header("Location:../index.php"); //Redirect to Login page
+                       $message="Password Doesn't match. Please try again.";
 
                    }
                 }
-            } else { // if email Doesn't Exists
 
-                header("Location:../index.php?message=Email Doesn't exits. Please register"); //Redirect to Registration page
+            }else{ // if email Doesn't Exists
+
+                header("Location:../index.php"); //Redirect to Authentication page
+                $message="Email Doesn't exits. Please register";
 
             }
 
